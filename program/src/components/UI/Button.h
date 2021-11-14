@@ -30,7 +30,8 @@ namespace eke
         // If u are using default ctor, u have to set everything manually!!!
         Button();
         Button(const char *label, const sf::Vector2f &pos);
-        Button(const char *label, const sf::Vector2f &pos, const sf::Color &color);
+        Button(const char *label, const sf::Vector2f &pos, const sf::Color &btncolor);
+        // Button(const sf::Vector2f pos, const char *labeltexturepath);
         Button(const char *label, const sf::Vector2f &pos, const char *texturepath);
         Button(const char *label, const sf::Vector2f &pos, const char *texturepath, const char *hovertexturepath);
         Button(const char *label, const sf::Vector2f &pos, const char *texturepath, const char *hovertexturepath, const char *pressedtexturepath);

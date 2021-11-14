@@ -19,7 +19,12 @@ namespace eke
         const sf::Vector2f &getRadius() const;
         virtual size_t getPointCount() const;
         virtual sf::Vector2f getPoint(unsigned int index) const;
+        void Draw();
         ~Ellipse();
+
+        Ellipse() = delete;
+        Ellipse(const eke::Ellipse &other) = delete;
+        Ellipse(Ellipse &&other) = delete;
     };
 
     Ellipse::Ellipse(const sf::Vector2f &radius) : m_radius(radius)
@@ -40,7 +45,7 @@ namespace eke
 
     size_t Ellipse::getPointCount() const
     {
-        return 30; // fixed, but could be an attribute of the class if needed
+        return this->getPointCount();
     }
 
     sf::Vector2f Ellipse::getPoint(unsigned int index) const
@@ -54,5 +59,10 @@ namespace eke
 
     Ellipse::~Ellipse()
     {
+    }
+
+    void Ellipse::Draw()
+    {
+        eke::Globals::RenderWindow->draw(*(this));
     }
 }
