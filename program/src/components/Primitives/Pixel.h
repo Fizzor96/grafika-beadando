@@ -1,8 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include "Globals.h"
-#include "Entity.h"
+#include "Engine/Globals.h"
+#include "Engine/Entity.h"
 
 #include <SFML/Graphics.hpp>
 

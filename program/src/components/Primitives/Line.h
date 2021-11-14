@@ -1,7 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include "Globals.h"
+#include "Engine/Globals.h"
 #include <SFML/Graphics.hpp>
 
 namespace eke

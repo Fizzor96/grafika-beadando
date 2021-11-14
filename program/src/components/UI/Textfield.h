@@ -1,9 +1,8 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
-#include <iostream>
+#include <SFML/Graphics.hpp>
 
-#include "Entity.h"
+#include "Engine/Entity.h"
 
 namespace eke
 {

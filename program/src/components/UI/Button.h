@@ -1,13 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <string>
+#include "Engine/Globals.h"
+#include "Engine/Entity.h"
 
-#include "Globals.h"
-
-#include "Entity.h"
-
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace eke
 {
