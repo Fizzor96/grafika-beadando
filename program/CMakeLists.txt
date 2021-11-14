@@ -12,6 +12,16 @@ IF (WIN32)
 	file(GLOB WinApp_SRC
 		"src/*.h",
 		"src/*.cpp",
+		"src/components/*.h",
+		"src/components/*.cpp",
+		"src/components/Engine/*.h",
+		"src/components/Engine/*.cpp",
+		"src/components/Objects/*.h",
+		"src/components/Objects/*.cpp",
+		"src/components/Primitives/*.h",
+		"src/components/Primitives/*.cpp",
+		"src/components/UI/*.h",
+		"src/components/UI/*.cpp",
 		"deps/win/SFML-2.5.1/include/*.h",
 		"deps/win/SFML-2.5.1/include/*.cpp"
 		)
@@ -21,11 +31,25 @@ IF (WIN32)
 	add_executable(${CMAKE_PROJECT_NAME} ${WinApp_SRC})
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "cmake_modules/SFML/include")
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Engine)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Objects)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Primitives)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/UI)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ELSE()
 	file(GLOB LinuxApp_SRC
 		"src/*.h",
 		"src/*.cpp",
+		"src/components/*.h",
+		"src/components/*.cpp",
+		"src/components/Engine/*.h",
+		"src/components/Engine/*.cpp",
+		"src/components/Objects/*.h",
+		"src/components/Objects/*.cpp",
+		"src/components/Primitives/*.h",
+		"src/components/Primitives/*.cpp",
+		"src/components/UI/*.h",
+		"src/components/UI/*.cpp",
 		"deps/linux/SFML-2.5.1/include/*.h",
 		"deps/linux/SFML-2.5.1/include/*.cpp"
 		)
@@ -34,5 +58,9 @@ ELSE()
 	add_executable(${CMAKE_PROJECT_NAME} ${LinuxApp_SRC})
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "cmake_modules/SFML/include")
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Engine)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Objects)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Primitives)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/UI)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ENDIF()

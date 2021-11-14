@@ -2,9 +2,7 @@
 
 #include <vector>
 
-#include <SFML/Graphics.hpp>
-
-#include "Engine/Globals.h"
+#include "Engine.h"
 
 namespace eke
 {
@@ -32,21 +30,4 @@ namespace eke
         void Update();
         void Draw();
     };
-
-    Scene *Scene::currentscene = nullptr;
-
-    Scene::Scene(const SceneName &name) noexcept
-    {
-        this->scenename = name;
-    }
-
-    Scene::~Scene()
-    {
-    }
-
-    const eke::SceneName Scene::GetSceneName()
-    {
-        return this->scenename;
-    }
-
 }

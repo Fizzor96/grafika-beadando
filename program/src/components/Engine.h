@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 // toplevel includes
 #include "Engine/Globals.h"
 #include "Engine/Entity.h"
@@ -18,4 +20,4 @@
 #include "Primitives/Line.h"
 
 // Objects
-#include "Objects/Animated/Fire.h"
+#include "Objects/Fire.h"

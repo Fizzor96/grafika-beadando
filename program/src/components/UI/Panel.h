@@ -1,8 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include "Engine/Entity.h"
+#include "Engine.h"
 
 namespace eke
 {
@@ -18,13 +16,4 @@ namespace eke
         Panel(const char *title, const char *desc);
         ~Panel();
     };
-
-    Panel::Panel(const char *title, const char *desc)
-    {
-    }
-
-    Panel::~Panel()
-    {
-    }
-
 }
