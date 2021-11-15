@@ -15,8 +15,10 @@ namespace eke
         explicit Ellipse(const sf::Vector2f &radius = sf::Vector2f(0, 0));
         void setRadius(const sf::Vector2f &radius);
         const sf::Vector2f &getRadius() const;
-        virtual size_t getPointCount() const;
-        virtual sf::Vector2f getPoint(unsigned int index) const;
+        // virtual size_t getPointCount() const;
+        // virtual sf::Vector2f getPoint(unsigned int index) const;
+        sf::Vector2f getPoint(std::size_t index) const override;
+        std::size_t getPointCount() const override;
         void Draw();
         ~Ellipse();
 

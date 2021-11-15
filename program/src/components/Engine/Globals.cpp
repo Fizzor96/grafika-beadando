@@ -43,7 +43,7 @@ namespace eke
 
     void Globals::Start()
     {
-        eke::Ellipse ell(sf::Vector2f(9.f, 15.f));
+        // eke::Ellipse ell(sf::Vector2f(9.f, 15.f));
 
         eke::Button *btn1 = new Button("Start", sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x / 2, 100.f));
         btn1->SetOnClickEvent([]()

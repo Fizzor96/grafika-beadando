@@ -24,7 +24,7 @@ namespace eke
         return this->getPointCount();
     }
 
-    sf::Vector2f Ellipse::getPoint(unsigned int index) const
+    sf::Vector2f Ellipse::getPoint(std::size_t index) const
     {
         float angle = index * 2 * M_PI / getPointCount() - M_PI / 2;
         float x = std::cos(angle) * m_radius.x;
