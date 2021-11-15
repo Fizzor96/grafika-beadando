@@ -4,7 +4,7 @@
 
 namespace eke
 {
-    class Animation
+    class Anim
     {
     public:
         sf::IntRect textureRect;
@@ -16,8 +16,11 @@ namespace eke
         float switchTime;
 
     public:
-        Animation(sf::Texture *texture, const sf::Vector2u imgCount, float switchTime);
-        ~Animation();
+        Anim(sf::Texture *texture, const sf::Vector2u imgCount, float switchTime);
+        ~Anim();
         void Update(const int &row, const float &deltatime);
+        Anim() = delete;
+        Anim(const Anim &other) = delete;
+        Anim(Anim &&other) = delete;
     };
 }

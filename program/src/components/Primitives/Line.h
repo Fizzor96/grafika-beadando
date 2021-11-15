@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine.h"
+#include "Engine/Globals.h"
 
 namespace eke
 {

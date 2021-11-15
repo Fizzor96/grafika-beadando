@@ -1,8 +1,8 @@
-#include "Animation.h"
+#include "Anim.h"
 
 namespace eke
 {
-    Animation::Animation(sf::Texture *texture, const sf::Vector2u imgCount, float switchTime)
+    Anim::Anim(sf::Texture *texture, const sf::Vector2u imgCount, float switchTime)
     {
         this->imgCount = imgCount;
         this->switchTime = switchTime;
@@ -13,11 +13,11 @@ namespace eke
         this->textureRect.height = texture->getSize().y / float(imgCount.y);
     }
 
-    Animation::~Animation()
+    Anim::~Anim()
     {
     }
 
-    void Animation::Update(const int &row, const float &deltatime)
+    void Anim::Update(const int &row, const float &deltatime)
     {
         this->currImg.y = row;
         this->totalTime += deltatime;

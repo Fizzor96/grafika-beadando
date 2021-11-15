@@ -47,6 +47,8 @@ namespace eke
         btn1->SetOnClickEvent([]()
                               { printf("Hello World!\n"); });
 
+        eke::Fire *foje = new Fire();
+
         eke::Timer fpstimer(0.5f, true);
         fpstimer.SetExpiredCallback(fpscallback);
         fpstimer.Start();
@@ -64,10 +66,12 @@ namespace eke
             eke::Globals::Update();
             fpstimer.Update(eke::Globals::DeltaTime);
             btn1->Update();
+            foje->Update();
 
             eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
             eke::Globals::Draw();
             btn1->Draw();
+            foje->Draw();
             eke::Globals::RenderWindow->display();
         }
     }

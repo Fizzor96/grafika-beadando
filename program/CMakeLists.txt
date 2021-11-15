@@ -22,6 +22,8 @@ IF (WIN32)
 		"src/components/Primitives/*.cpp",
 		"src/components/UI/*.h",
 		"src/components/UI/*.cpp",
+		"src/components/Scenes/*.h",
+		"src/components/Scenes/*.cpp",
 		"deps/win/SFML-2.5.1/include/*.h",
 		"deps/win/SFML-2.5.1/include/*.cpp"
 		)
@@ -35,6 +37,7 @@ IF (WIN32)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Objects)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Primitives)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/UI)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Scenes)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ELSE()
 	file(GLOB LinuxApp_SRC
@@ -50,6 +53,8 @@ ELSE()
 		"src/components/Primitives/*.cpp",
 		"src/components/UI/*.h",
 		"src/components/UI/*.cpp",
+		"src/components/Scenes/*.h",
+		"src/components/Scenes/*.cpp",
 		"deps/linux/SFML-2.5.1/include/*.h",
 		"deps/linux/SFML-2.5.1/include/*.cpp"
 		)
@@ -62,5 +67,6 @@ ELSE()
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Objects)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Primitives)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/UI)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components/Scenes)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ENDIF()
