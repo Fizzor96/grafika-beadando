@@ -17,7 +17,7 @@ namespace eke
         const sf::Vector2f &getRadius() const;
         virtual size_t getPointCount() const;
         virtual sf::Vector2f getPoint(unsigned int index) const;
-        // void Draw();
+        void Draw();
         ~Ellipse();
 
         Ellipse() = delete;

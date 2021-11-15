@@ -37,8 +37,8 @@ namespace eke
     {
     }
 
-    // void Ellipse::Draw()
-    // {
-    //     eke::Globals::RenderWindow->draw(*(this));
-    // }
+    void Ellipse::Draw()
+    {
+        eke::Globals::RenderWindow->draw(*(this));
+    }
 }
