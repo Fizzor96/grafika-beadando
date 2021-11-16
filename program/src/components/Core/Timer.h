@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "Engine.h"
+#include "Core.h"
 
 namespace eke
 {

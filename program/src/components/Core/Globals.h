@@ -1,7 +1,7 @@
 #pragma once
-#include "Engine.h"
+#include <SFML/Graphics.hpp>
 #include "UI/Button.h"
-#include "Engine/Timer.h"
+#include "Core/Timer.h"
 #include "Objects/Fire.h"
 #include "Primitives/Ellipse.h"
 
@@ -34,8 +34,6 @@ namespace eke
         static float FPS;
         static float DeltaTime;
         static sf::Vector2f MousePosition;
-        // Scenes
-        // static std::vector<eke::Scene *> Scenes;
 
     public:
         Globals() = delete;

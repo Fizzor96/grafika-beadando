@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Engine.h"
-#include "Engine/Globals.h"
-#include "Engine/Entity.h"
+#include "Core.h"
+#include "Core/Globals.h"
+#include "Core/Entity.h"
 
 namespace eke
 {

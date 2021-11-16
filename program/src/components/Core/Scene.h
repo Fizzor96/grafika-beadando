@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine.h"
+#include "Core.h"
 #include <vector>
 
 namespace eke
@@ -22,7 +22,8 @@ namespace eke
         static Scene *currentscene;
 
     public:
-        explicit Scene(const SceneName &name) noexcept;
+        Scene();
+        Scene(const SceneName &name);
         ~Scene();
         const eke::SceneName GetSceneName();
         void PollEvents(const sf::Event &e);

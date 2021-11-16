@@ -5,7 +5,11 @@ namespace eke
 
     Scene *Scene::currentscene = nullptr;
 
-    Scene::Scene(const SceneName &name) noexcept
+    Scene::Scene()
+    {
+    }
+
+    Scene::Scene(const SceneName &name)
     {
         this->scenename = name;
     }
