@@ -31,6 +31,9 @@ namespace eke
         ~Button();
 
         void SetPosition(const sf::Vector2f &pos);
+        sf::Vector2f GetPosition() const;
+
+        sf::Vector2f GetSize() const;
 
         void SetText(const char *str);
         void SetText(const std::string &str);

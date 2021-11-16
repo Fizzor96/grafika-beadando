@@ -12,6 +12,7 @@ namespace eke
         this->repeatonexpire = false;
         this->expiredcallback = nullptr;
         this->startcallback = nullptr;
+        this->Start();
     }
 
     eke::Timer::Timer(const float &timer, const bool &repeatonexpire)
@@ -23,6 +24,7 @@ namespace eke
         this->repeatonexpire = repeatonexpire;
         this->expiredcallback = nullptr;
         this->startcallback = nullptr;
+        this->Start();
     }
 
     void eke::Timer::SetStartCallback(void (*startcallback)())

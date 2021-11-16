@@ -200,6 +200,16 @@ namespace eke
         this->label.setPosition(this->sprite->getPosition());
     }
 
+    sf::Vector2f Button::GetPosition() const
+    {
+        return this->sprite->getPosition();
+    }
+
+    sf::Vector2f Button::GetSize() const
+    {
+        return sf::Vector2f(this->sprite->getTextureRect().width, this->sprite->getTextureRect().height);
+    }
+
     void Button::SetText(const char *str)
     {
         this->label.setString(std::string(str));

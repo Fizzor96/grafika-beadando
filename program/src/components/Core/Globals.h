@@ -1,9 +1,9 @@
 #pragma once
+
+#include <time.h>
+#include <random>
+
 #include <SFML/Graphics.hpp>
-#include "UI/Button.h"
-#include "Core/Timer.h"
-#include "Objects/Fire.h"
-#include "Primitives/Ellipse.h"
 
 namespace eke
 {
@@ -11,17 +11,11 @@ namespace eke
     {
     public:
         static void Init();
-        static void Start();
         static void CleaUp();
 
     public:
         // Helper to create dummy texture
         static sf::Texture CreateDummyTexture(const unsigned int &width, const unsigned int &height, const sf::Color &color);
-
-    private:
-        static void PollEvents();
-        static void Update();
-        static void Draw();
 
     public:
         // Init state
