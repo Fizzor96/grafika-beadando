@@ -14,6 +14,7 @@ namespace eke
     public:
         Entity() {}
         virtual ~Entity() {}
+        virtual void PollEvents() = 0;
         virtual void Update() = 0;
         virtual void Draw() = 0;
     };

@@ -17,9 +17,8 @@ namespace eke
     {
     }
 
-    void Fire::Draw()
+    void Fire::PollEvents()
     {
-        eke::Globals::RenderWindow->draw(*this->sprite);
     }
 
     void Fire::Update()
@@ -27,4 +26,10 @@ namespace eke
         anim->Update(0, eke::Globals::DeltaTime);
         this->sprite->setTextureRect(this->anim->textureRect);
     }
+
+    void Fire::Draw()
+    {
+        eke::Globals::RenderWindow->draw(*this->sprite);
+    }
+
 }

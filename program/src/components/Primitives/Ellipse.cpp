@@ -2,7 +2,6 @@
 
 namespace eke
 {
-
     Ellipse::Ellipse(const sf::Vector2f &radius) : m_radius(radius)
     {
         update();
@@ -19,9 +18,9 @@ namespace eke
         return m_radius;
     }
 
-    size_t Ellipse::getPointCount() const
+    std::size_t Ellipse::getPointCount() const
     {
-        return this->getPointCount();
+        return 30;
     }
 
     sf::Vector2f Ellipse::getPoint(std::size_t index) const
@@ -40,5 +39,11 @@ namespace eke
     void Ellipse::Draw()
     {
         eke::Globals::RenderWindow->draw(*(this));
+    }
+
+    sf::Vector2f Ellipse::getCenter() const
+    {
+
+        return sf::Vector2f(this->getPosition().x + this->getRadius().x, this->getPosition().y + this->getRadius().y);
     }
 }

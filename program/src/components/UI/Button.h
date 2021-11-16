@@ -2,6 +2,8 @@
 
 #include "Core.h"
 
+// TODO: Need of button refactoring!
+
 namespace eke
 {
     class Button : public Entity
@@ -50,8 +52,8 @@ namespace eke
 
         void SetOnClickEvent(void (*clickeventcallback)());
 
-        void Draw() override;
+        void PollEvents() override;
         void Update() override;
-        void PollEvents();
+        void Draw() override;
     };
 }

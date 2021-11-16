@@ -19,7 +19,10 @@ namespace eke
         ~Pixel();
 
         void SetPosition(const sf::Vector2f &pos);
-        void Draw();
-        void Update();
+        void SetScale(const sf::Vector2f &factor);
+
+        void PollEvents() override;
+        void Update() override;
+        void Draw() override;
     };
 }

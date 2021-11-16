@@ -14,7 +14,8 @@ namespace eke
     public:
         Fire();
         ~Fire();
-        void Draw();
+        void PollEvents();
         void Update();
+        void Draw();
     };
 }

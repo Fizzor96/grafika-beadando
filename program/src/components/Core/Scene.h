@@ -5,7 +5,7 @@
 
 namespace eke
 {
-    enum class SceneName
+    enum class SceneId
     {
         Menu,
         Load,
@@ -16,18 +16,15 @@ namespace eke
 
     class Scene
     {
-    private:
-        eke::SceneName scenename;
-        static std::vector<Scene *> scenes;
-        static Scene *currentscene;
+    protected:
+        eke::SceneId sceneid;
 
     public:
         Scene();
-        Scene(const SceneName &name);
-        ~Scene();
-        const eke::SceneName GetSceneName();
-        void PollEvents(const sf::Event &e);
-        void Update();
-        void Draw();
+        virtual ~Scene();
+        virtual eke::SceneId GetSceneId() const;
+        virtual void PollEvents() = 0;
+        virtual void Update() = 0;
+        virtual void Draw() = 0;
     };
 }

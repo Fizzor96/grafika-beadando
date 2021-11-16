@@ -2,14 +2,20 @@
 
 #include "Core.h"
 
+#include <vector>
+
 namespace eke
 {
     class MenuScene : public Scene
     {
     private:
-        /* data */
+        void InitComponents();
+
     public:
         MenuScene();
         ~MenuScene();
+        void PollEvents();
+        void Update();
+        void Draw();
     };
 }

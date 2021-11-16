@@ -16,5 +16,8 @@ namespace eke
     public:
         Panel(const char *title, const char *desc);
         ~Panel();
+        void PollEvents() override;
+        void Update() override;
+        void Draw() override;
     };
 }

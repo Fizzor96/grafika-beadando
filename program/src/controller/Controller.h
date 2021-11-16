@@ -2,14 +2,17 @@
 
 #include "Core.h"
 
+#include <vector>
+
 namespace eke
 {
     class Controller
     {
     private:
-        /* data */
+        std::vector<eke::Scene *> scenes;
+
     public:
-        Controller(/* args */);
+        Controller();
         ~Controller();
     };
 }

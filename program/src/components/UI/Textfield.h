@@ -10,5 +10,8 @@ namespace eke
     public:
         Textfield();
         ~Textfield();
+        void PollEvents() override;
+        void Update() override;
+        void Draw() override;
     };
 }

@@ -2,24 +2,16 @@
 
 namespace eke
 {
-
-    Scene *Scene::currentscene = nullptr;
-
     Scene::Scene()
     {
-    }
-
-    Scene::Scene(const SceneName &name)
-    {
-        this->scenename = name;
     }
 
     Scene::~Scene()
     {
     }
 
-    const eke::SceneName Scene::GetSceneName()
+    eke::SceneId Scene::GetSceneId() const
     {
-        return this->scenename;
+        return this->sceneid;
     }
 }

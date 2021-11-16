@@ -27,11 +27,17 @@ namespace eke
         {
             if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
             {
-                this->sprite->setTexture(*this->pressed);
+                if (this->pressed != nullptr)
+                {
+                    this->sprite->setTexture(*this->pressed);
+                }
             }
             else
             {
-                this->sprite->setTexture(*this->hover);
+                if (this->hover != nullptr)
+                {
+                    this->sprite->setTexture(*this->hover);
+                }
             }
         }
         else
@@ -291,6 +297,9 @@ namespace eke
 
     void Button::PollEvents()
     {
+        if (this->onclickeventcallback == nullptr)
+            return;
+
         if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
         {
             if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
