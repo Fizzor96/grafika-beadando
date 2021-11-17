@@ -50,6 +50,16 @@ namespace eke
         this->sprite->setScale(factor);
     }
 
+    sf::Vector2f Pixel::GetPosition() const
+    {
+        return this->sprite->getPosition();
+    }
+
+    sf::Color Pixel::GetColor() const
+    {
+        return this->color;
+    }
+
     Pixel::~Pixel()
     {
         delete this->sprite;

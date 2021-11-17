@@ -26,6 +26,8 @@ namespace eke
         eke::Globals::RenderWindow->setPosition(sf::Vector2i(0, 0));
         // Framerate
         eke::Globals::RenderWindow->setFramerateLimit(eke::Globals::FPS);
+        // Set keyrepeat
+        eke::Globals::RenderWindow->setKeyRepeatEnabled(false);
         // Gamefont
         eke::Globals::GameFont.loadFromFile("../assets/fonts/monogram.ttf");
         // Global timer

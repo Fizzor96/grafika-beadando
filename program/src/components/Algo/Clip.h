@@ -5,25 +5,33 @@
 
 #include "Core/Globals.h"
 #include "Primitives/Line.h"
-#include <thread>
+#include "Primitives/Pixel.h"
+#include <vector>
 
 namespace eke
 {
     class Line;
+    class Pixel;
 
     class Clip
     {
     private:
-        static const unsigned int TOP;
-        static const unsigned int BOTTOM;
-        static const unsigned int LEFT;
-        static const unsigned int RIGHT;
-        static unsigned int OutCode(const sf::IntRect &rect, const sf::Vector2f &p);
+        typedef unsigned int BYTE;
+        static const BYTE TOP;
+        static const BYTE BOTTOM;
+        static const BYTE LEFT;
+        static const BYTE RIGHT;
+        static BYTE OutCode(const sf::FloatRect &rect, const sf::Vector2f &p);
+        eke::Line *testline;
+        std::vector<eke::Pixel *> verticies;
+        std::vector<sf::Vector2f> matchingcoords;
 
     public:
-        static void Clipp(const sf::IntRect &rect, eke::Line *line);
-        Clip() = delete;
-        ~Clip() = delete;
+        Clip();
+        ~Clip();
+        void Clipp(const sf::FloatRect &rect, sf::Vector2f pf0, sf::Vector2f pf1);
+        void Clipp2(const sf::FloatRect &rect, const eke::Line &line);
+        Clip(const Clip &other) = delete;
     };
 }
 

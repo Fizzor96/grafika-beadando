@@ -11,8 +11,8 @@ namespace eke
         this->c1 = color;
         this->c2 = color;
 
-        std::cout << "class: x1=" << this->p0->x << ", y1=" << this->p0->y;
-        std::cout << " x2=" << this->p1->x << ", y2=" << this->p1->y << "\n";
+        // std::cout << "class: x1=" << this->p0->x << ", y1=" << this->p0->y;
+        // std::cout << " x2=" << this->p1->x << ", y2=" << this->p1->y << "\n";
 
         float dx = p1->x - p0->x;
         float dy = p1->y - p0->y;
@@ -62,6 +62,16 @@ namespace eke
             B += incB;
             this->vertexarr->push_back(new eke::Pixel(sf::Vector2f(x, y), sf::Color(R, G, B, c2.a)));
         }
+    }
+
+    std::vector<eke::Pixel *> Line::GetVerticies() const
+    {
+        return *this->vertexarr;
+    }
+
+    size_t Line::GetVertexCount() const
+    {
+        return this->vertexarr->size();
     }
 
     Line::~Line()

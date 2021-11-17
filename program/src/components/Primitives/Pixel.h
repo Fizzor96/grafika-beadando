@@ -19,6 +19,9 @@ namespace eke
         ~Pixel();
 
         void SetPosition(const sf::Vector2f &pos);
+        sf::Vector2f GetPosition() const;
+        sf::Color GetColor() const;
+
         void SetScale(const sf::Vector2f &factor);
 
         void PollEvents() override;

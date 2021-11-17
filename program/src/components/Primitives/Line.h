@@ -20,10 +20,12 @@ namespace eke
         sf::Vector2f *p0;
         sf::Vector2f *p1;
 
-        // TODO: Issue with eke::Line ctors -> can't pass vector2f as ref or ptr nor value
         Line(const sf::Vector2f &begin, const sf::Vector2f &end, const sf::Color &color = sf::Color::White);
         Line(const sf::Vector2f &begin, const sf::Color &begincolor, const sf::Vector2f &end, const sf::Color &endcolor);
         ~Line();
+
+        std::vector<eke::Pixel *> GetVerticies() const;
+        size_t GetVertexCount() const;
 
         void Draw();
 
