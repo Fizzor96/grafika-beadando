@@ -16,12 +16,15 @@ namespace eke
         ~Ellipse();
         void setRadius(const sf::Vector2f &radius);
         const sf::Vector2f &getRadius() const;
-        std::size_t getPointCount() const override;
-        sf::Vector2f getPoint(std::size_t index) const;
         sf::Vector2f getCenter() const;
 
         void Draw();
 
+    private:
+        std::size_t getPointCount() const override;
+        sf::Vector2f getPoint(std::size_t index) const;
+
+    public:
         Ellipse() = delete;
         Ellipse(const eke::Ellipse &other) = delete;
         Ellipse(Ellipse &&other) = delete;

@@ -16,6 +16,7 @@ namespace eke
     public:
         // Helper to create dummy texture
         static sf::Texture CreateDummyTexture(const unsigned int &width, const unsigned int &height, const sf::Color &color);
+        static void FpsTimerCallback();
 
     public:
         // Init state

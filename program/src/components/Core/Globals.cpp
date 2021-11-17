@@ -50,4 +50,10 @@ namespace eke
         texture.loadFromImage(img, sf::IntRect(0, 0, width, height));
         return texture;
     }
+
+    void Globals::FpsTimerCallback()
+    {
+        float fps = 1.f / eke::Globals::DeltaTime;
+        eke::Globals::RenderWindow->setTitle(std::string("Grafika beadando - Szoke Dominik - fps: " + std::to_string((int)fps)));
+    }
 }

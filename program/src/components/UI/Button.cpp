@@ -53,6 +53,8 @@ namespace eke
         this->hover = nullptr;
         this->pressed = nullptr;
 
+        this->onclickeventcallback = nullptr;
+
         this->label.setFont(eke::Globals::GameFont);
         this->label.setFillColor(Button::TextColor);
         this->label.setString("");
@@ -62,12 +64,14 @@ namespace eke
         ValidateTextLength();
     }
 
-    Button::Button(const char *label, const sf::Vector2f &pos)
+    Button::Button(const char *label)
     {
         this->sprite = new sf::Sprite();
         this->texture = new sf::Texture();
         this->hover = new sf::Texture();
         this->pressed = new sf::Texture();
+
+        this->onclickeventcallback = nullptr;
 
         this->label.setFont(eke::Globals::GameFont);
         this->label.setFillColor(Button::TextColor);
@@ -85,108 +89,63 @@ namespace eke
         this->sprite->setTextureRect(sf::IntRect(this->sprite->getTextureRect().left, this->sprite->getTextureRect().top, this->sprite->getTextureRect().width, this->sprite->getTextureRect().height));
         this->sprite->setOrigin(sf::Vector2f(this->sprite->getTextureRect().width / 2, this->sprite->getTextureRect().height / 2));
 
-        this->sprite->setPosition(pos);
         this->label.setPosition(this->sprite->getPosition());
 
         ValidateTextLength();
     }
 
-    Button::Button(const char *label, const sf::Vector2f &pos, const sf::Color &btncolor)
-    {
-        this->sprite = new sf::Sprite();
-        this->texture = new sf::Texture();
-        this->hover = nullptr;
-        this->pressed = nullptr;
-
-        this->label.setFont(eke::Globals::GameFont);
-        this->label.setString(label);
-        this->lblboundingbox = this->label.getLocalBounds();
-        this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
-
-        sf::Texture temptexture = eke::Globals::CreateDummyTexture(this->lblboundingbox.width, this->lblboundingbox.height, btncolor);
-
-        this->sprite->setTexture(temptexture);
-        this->sprite->setColor(btncolor);
-        this->sprite->setTextureRect(sf::IntRect(this->sprite->getTextureRect().left, this->sprite->getTextureRect().top, this->lblboundingbox.width * 1.2, this->lblboundingbox.height * 3));
-        this->sprite->setOrigin(sf::Vector2f(this->sprite->getTextureRect().width / 2, this->sprite->getTextureRect().height / 2));
-
-        this->sprite->setPosition(pos);
-        this->label.setPosition(this->sprite->getPosition());
-
-        ValidateTextLength();
-    }
-
-    Button::Button(const char *label, const sf::Vector2f &pos, const char *texturepath)
-    {
-        this->sprite = new sf::Sprite();
-        this->texture = new sf::Texture();
-        this->hover = nullptr;
-        this->pressed = nullptr;
-
-        this->label.setFont(eke::Globals::GameFont);
-        this->label.setString(label);
-        this->lblboundingbox = this->label.getLocalBounds();
-        this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
-
-        this->texture->loadFromFile(texturepath);
-
-        this->sprite->setTexture(*this->texture);
-        this->sprite->setTextureRect(sf::IntRect(this->sprite->getTextureRect().left, this->sprite->getTextureRect().top, this->sprite->getTextureRect().width, this->sprite->getTextureRect().height));
-        this->sprite->setOrigin(sf::Vector2f(this->sprite->getTextureRect().width / 2, this->sprite->getTextureRect().height / 2));
-
-        this->sprite->setPosition(pos);
-        this->label.setPosition(this->sprite->getPosition());
-
-        ValidateTextLength();
-    }
-
-    Button::Button(const char *label, const sf::Vector2f &pos, const char *texturepath, const char *hovertexturepath)
-    {
-        this->sprite = new sf::Sprite();
-        this->texture = new sf::Texture();
-        this->hover = new sf::Texture();
-        this->pressed = nullptr;
-
-        this->label.setFont(eke::Globals::GameFont);
-        this->label.setString(label);
-        this->lblboundingbox = this->label.getLocalBounds();
-        this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
-
-        this->texture->loadFromFile(texturepath);
-        this->hover->loadFromFile(hovertexturepath);
-
-        this->sprite->setTexture(*this->texture);
-        this->sprite->setTextureRect(sf::IntRect(this->sprite->getTextureRect().left, this->sprite->getTextureRect().top, this->sprite->getTextureRect().width, this->sprite->getTextureRect().height));
-        this->sprite->setOrigin(sf::Vector2f(this->sprite->getTextureRect().width / 2, this->sprite->getTextureRect().height / 2));
-
-        this->sprite->setPosition(pos);
-        this->label.setPosition(this->sprite->getPosition());
-
-        ValidateTextLength();
-    }
-
-    Button::Button(const char *label, const sf::Vector2f &pos, const char *texturepath, const char *hovertexturepath, const char *pressedtexturepath)
+    Button::Button(const char *label, const sf::Color &btncolor)
     {
         this->sprite = new sf::Sprite();
         this->texture = new sf::Texture();
         this->hover = new sf::Texture();
         this->pressed = new sf::Texture();
 
+        this->onclickeventcallback = nullptr;
+
         this->label.setFont(eke::Globals::GameFont);
         this->label.setString(label);
         this->lblboundingbox = this->label.getLocalBounds();
         this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
 
-        this->texture->loadFromFile(texturepath);
-        this->hover->loadFromFile(hovertexturepath);
-        this->pressed->loadFromFile(pressedtexturepath);
+        *(this->texture) = eke::Globals::CreateDummyTexture(this->lblboundingbox.width, this->lblboundingbox.height, btncolor);
+        *(this->hover) = eke::Globals::CreateDummyTexture(this->lblboundingbox.width, this->lblboundingbox.height, sf::Color(btncolor.r + 30, btncolor.g + 30, btncolor.b + 30, 255));
+        *(this->pressed) = eke::Globals::CreateDummyTexture(this->lblboundingbox.width, this->lblboundingbox.height, sf::Color(btncolor.r - 30, btncolor.g - 30, btncolor.b - 30, 255));
+
+        this->sprite->setTexture(*(this->texture));
+        this->sprite->setColor(btncolor);
+        this->sprite->setTextureRect(sf::IntRect(this->sprite->getTextureRect().left, this->sprite->getTextureRect().top, this->lblboundingbox.width * 1.2, this->lblboundingbox.height * 3));
+        this->sprite->setOrigin(sf::Vector2f(this->sprite->getTextureRect().width / 2, this->sprite->getTextureRect().height / 2));
+
+        this->label.setPosition(this->sprite->getPosition());
+
+        ValidateTextLength();
+    }
+
+    Button::Button(const char *label, const char *texturepath, const char *hovertexturepath, const char *pressedtexturepath)
+    {
+        this->sprite = new sf::Sprite();
+        this->texture = new sf::Texture();
+        this->hover = new sf::Texture();
+        this->pressed = new sf::Texture();
+
+        this->onclickeventcallback = nullptr;
+
+        this->label.setFont(eke::Globals::GameFont);
+        this->label.setString(label);
+        this->lblboundingbox = this->label.getLocalBounds();
+        this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
+
+        if (!(this->texture->loadFromFile(texturepath) && this->hover->loadFromFile(hovertexturepath) && this->pressed->loadFromFile(pressedtexturepath)))
+        {
+            this->~Button();
+        }
 
         this->sprite->setTexture(*this->texture);
 
         this->sprite->setTextureRect(sf::IntRect(this->sprite->getTextureRect().left, this->sprite->getTextureRect().top, this->sprite->getTextureRect().width, this->sprite->getTextureRect().height));
         this->sprite->setOrigin(sf::Vector2f(this->sprite->getTextureRect().width / 2, this->sprite->getTextureRect().height / 2));
 
-        this->sprite->setPosition(pos);
         this->label.setPosition(this->sprite->getPosition());
 
         ValidateTextLength();
@@ -221,6 +180,7 @@ namespace eke
         this->label.setString(std::string(str));
         this->lblboundingbox = this->label.getLocalBounds();
         this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
+        ValidateTextLength();
         this->label.setPosition(this->sprite->getPosition());
     }
 
@@ -229,6 +189,7 @@ namespace eke
         this->label.setString(str);
         this->lblboundingbox = this->label.getLocalBounds();
         this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
+        ValidateTextLength();
         this->label.setPosition(this->sprite->getPosition());
     }
 
@@ -281,12 +242,18 @@ namespace eke
         this->onclickeventcallback = clickeventcallback;
     }
 
-    void Button::Draw()
+    void Button::PollEvents()
     {
-        if (this->sprite != nullptr)
+
+        if (this->onclickeventcallback != nullptr)
         {
-            eke::Globals::RenderWindow->draw(*this->sprite);
-            eke::Globals::RenderWindow->draw(label);
+            if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+            {
+                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+                {
+                    this->onclickeventcallback();
+                }
+            }
         }
     }
 
@@ -295,17 +262,12 @@ namespace eke
         UpdateTextures();
     }
 
-    void Button::PollEvents()
+    void Button::Draw()
     {
-        if (this->onclickeventcallback == nullptr)
-            return;
-
-        if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+        if (this->sprite != nullptr)
         {
-            if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-            {
-                this->onclickeventcallback();
-            }
+            eke::Globals::RenderWindow->draw(*this->sprite);
+            eke::Globals::RenderWindow->draw(label);
         }
     }
 }

@@ -19,3 +19,5 @@
 #include "UI/Button.h"
 #include "UI/Panel.h"
 #include "UI/Textfield.h"
+
+#include "Algo/Clip.h"
