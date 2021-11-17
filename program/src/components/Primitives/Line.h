@@ -17,8 +17,8 @@ namespace eke
         std::vector<eke::Pixel *> *vertexarr;
 
     public:
-        sf::Vector2f p0;
-        sf::Vector2f p1;
+        sf::Vector2f *p0;
+        sf::Vector2f *p1;
 
         // TODO: Issue with eke::Line ctors -> can't pass vector2f as ref or ptr nor value
         Line(const sf::Vector2f &begin, const sf::Vector2f &end, const sf::Color &color = sf::Color::White);

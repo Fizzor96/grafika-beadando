@@ -46,8 +46,10 @@ int main()
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
 
         eke::Globals::RenderWindow->draw(rs);
-        // eke::Clip::Clipp(rs.getTextureRect(), &line);
-        // line.Draw();
+        // std::cout << "line: x1=" << line.p0->x << ", y1=" << line.p0->y;
+        // std::cout << "line: x2=" << line.p1->x << ", y2=" << line.p1->y << "\n";
+        eke::Clip::Clipp(rs.getTextureRect(), &line);
+
         eke::Globals::RenderWindow->display();
     }
     eke::Globals::CleaUp();

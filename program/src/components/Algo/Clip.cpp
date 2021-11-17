@@ -31,9 +31,10 @@ namespace eke
 
     void Clip::Clipp(const sf::IntRect &rect, eke::Line *line)
     {
-        // printf("%d - %d $ %d - %d\n", line->p0.x, line->p0.y, line->p1.x, line->p1.y);
-        sf::Vector2f &v1 = line->p0;
-        sf::Vector2f &v2 = line->p1;
+        std::cout << "clip: x1=" << line->p0->x << ", y1=" << line->p0->y;
+        std::cout << "clip: x2=" << line->p1->x << ", y2=" << line->p1->y << "\n";
+        sf::Vector2f &v1 = *line->p0;
+        sf::Vector2f &v2 = *line->p1;
         unsigned int code0 = OutCode(rect, v1);
         unsigned int code1 = OutCode(rect, v2);
 

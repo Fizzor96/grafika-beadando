@@ -6,6 +6,7 @@
 #include "Core/Globals.h"
 #include "Core/Scene.h"
 #include "Core/Timer.h"
+#include "Core/PointF.h"
 
 // Objects
 #include "Objects/Fire.h"
