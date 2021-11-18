@@ -11,15 +11,13 @@ namespace eke
 
     class Line
     {
-    private:
-        sf::Color c1;
-        sf::Color c2;
-
     public:
         std::vector<eke::Pixel *> *vertexarr;
 
         sf::Vector2f *p0;
         sf::Vector2f *p1;
+        sf::Color c1;
+        sf::Color c2;
 
         Line(const sf::Vector2f &begin, const sf::Vector2f &end, const sf::Color &color = sf::Color::White);
         Line(const sf::Vector2f &begin, const sf::Color &begincolor, const sf::Vector2f &end, const sf::Color &endcolor);

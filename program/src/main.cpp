@@ -27,17 +27,14 @@ int main()
     eke::Button *btn1 = new eke::Button("Grab/Release");
     btn1->SetPosition(sf::Vector2f(btn1->GetPosition().x + btn1->GetSize().x / 2, btn1->GetPosition().y + btn1->GetSize().y / 2));
     btn1->SetOnClickEvent([](void *grabbed)
-                          {
-                              if (*((bool *)grabbed) == true)
-                              {
-                                  *((bool *)grabbed) = false;
-                              }
-                              else
-                              {
-                                  *((bool *)grabbed) = true;
-                              }
-                              //   std::cout << *((bool *)grabbed) << std::endl;
-                          },
+                          { if (*((bool *)grabbed) == true)
+                        {
+                            *((bool *)grabbed) = false;
+                        }
+                        else
+                        {
+                            *((bool *)grabbed) = true;
+                        } },
                           (void *)&isgrabbed);
 
     eke::Timer fpstimer(0.5f, true);
@@ -91,7 +88,8 @@ int main()
 
         btn1->Draw();
         eke::Globals::RenderWindow->draw(rs);
-        clipper->Clipp2(rs.getGlobalBounds(), *line);
+        clipper->Clipp(rs.getGlobalBounds(), *(line->p0), *(line->p1));
+        // clipper->Clipp2(rs.getGlobalBounds(), *line);
 
         eke::Globals::RenderWindow->display();
     }

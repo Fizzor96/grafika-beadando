@@ -22,7 +22,7 @@ namespace eke
         static const BYTE LEFT;
         static const BYTE RIGHT;
         static BYTE OutCode(const sf::FloatRect &rect, const sf::Vector2f &p);
-        eke::Line *testline;
+        // eke::Line *testline;
         std::vector<sf::Vector2f> matchingcoords;
 
     public:

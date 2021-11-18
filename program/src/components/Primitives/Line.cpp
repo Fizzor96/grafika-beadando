@@ -27,7 +27,7 @@ namespace eke
         {
             x += incX;
             y += incY;
-            this->vertexarr->push_back(new eke::Pixel(sf::Vector2f(x, y)));
+            this->vertexarr->push_back(new eke::Pixel(sf::Vector2f(x, y), color));
         }
     }
 

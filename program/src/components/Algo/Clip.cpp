@@ -11,18 +11,18 @@ namespace eke
 
     Clip::Clip()
     {
-        this->testline = new eke::Line(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Black);
+        // this->testline = new eke::Line(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Black);
     }
 
     Clip::~Clip()
     {
-        delete this->testline;
+        // delete this->testline;
     }
 
     BYTE Clip::OutCode(const sf::FloatRect &rect, const sf::Vector2f &p)
     {
         BYTE code = 0;
-        float rectbot = rect.top - rect.height;
+        float rectbot = rect.top + rect.height;
         float rectright = rect.left + rect.width;
         if (p.y < rect.top)
         {
@@ -75,8 +75,8 @@ namespace eke
                 }
                 else if ((code & BOTTOM) != 0)
                 {
-                    x = p0.x + (p1.x - p0.x) * ((rect.top - rect.height) - p0.y) / (p1.y - p0.y);
-                    y = rect.top - rect.height;
+                    x = p0.x + (p1.x - p0.x) * ((rect.top + rect.height) - p0.y) / (p1.y - p0.y);
+                    y = rect.top + rect.height;
                 }
                 else if ((code & LEFT) != 0)
                 {
@@ -105,17 +105,18 @@ namespace eke
         }
         if (accept)
         {
-            testline = new eke::Line(p0, p1, sf::Color::Black);
-            this->testline->Draw();
+            eke::Line(p0, p1, sf::Color::Yellow).Draw();
         }
     }
 
     void Clip::Clipp2(const sf::FloatRect &rect, const eke::Line &line)
     {
-        if (this->matchingcoords.size() > 0)
-        {
-            this->matchingcoords.clear();
-        }
+        // if (this->matchingcoords.size() > 0)
+        // {
+        //     this->matchingcoords.clear();
+        // }
+
+        std::vector<sf::Vector2f> inboundcoords;
 
         // int rectleft, recttop, rectright, rectbottom;
         // rectleft = rect.left;
@@ -129,18 +130,19 @@ namespace eke
             // posx = (int)((*line.vertexarr)[i]->GetPosition().x);
             // posy = (int)((*line.vertexarr)[i]->GetPosition().y);
 
-            if ((int)((*line.vertexarr)[i]->GetPosition().x) >= (int)rect.left && (int)((*line.vertexarr)[i]->GetPosition().x) <= (int)(rect.left + rect.width) && (int)((*line.vertexarr)[i]->GetPosition().y) >= (int)rect.top && (int)((*line.vertexarr)[i]->GetPosition().y) <= (int)(rect.top + rect.height))
+            if (((*line.vertexarr)[i]->GetPosition().x) >= rect.left && ((*line.vertexarr)[i]->GetPosition().x) <= (rect.left + rect.width) && (int)((*line.vertexarr)[i]->GetPosition().y) >= rect.top && ((*line.vertexarr)[i]->GetPosition().y) <= (rect.top + rect.height))
             {
-                this->matchingcoords.push_back(sf::Vector2f((*line.vertexarr)[i]->GetPosition()));
-                // std::cout << posx << " " << posy << std::endl;
+                inboundcoords.push_back(sf::Vector2f((*line.vertexarr)[i]->GetPosition()));
             }
         }
 
         // TODO: create std::vector<Pixel*> inboundpixels to draw instead of line -> make this clip more generic to work with any shape/poly
-        if (this->matchingcoords.size() > 0)
+        if (inboundcoords.size() > 0)
         {
-            this->testline = new eke::Line(sf::Vector2f(matchingcoords.front().x, matchingcoords.front().y), sf::Vector2f(matchingcoords.back().x, matchingcoords.back().y), sf::Color::Black);
-            this->testline->Draw();
+            // this->testline = new eke::Line(sf::Vector2f(inboundcoords.front().x, inboundcoords.front().y), sf::Vector2f(inboundcoords.back().x, inboundcoords.back().y), sf::Color::Black);
+            // this->testline->Draw();
+
+            eke::Line(sf::Vector2f(inboundcoords.front().x, inboundcoords.front().y), sf::Color(line.c1), sf::Vector2f(inboundcoords.back().x, inboundcoords.back().y), sf::Color(line.c2)).Draw();
         }
     }
 }
