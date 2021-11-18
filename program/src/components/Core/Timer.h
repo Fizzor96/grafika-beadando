@@ -1,7 +1,7 @@
-#pragma once
+#ifndef TIMER_HPP
+#define TIMER_HPP 1
 
-#include <iostream>
-#include "Core.h"
+#include <SFML/Graphics.hpp>
 
 namespace eke
 {
@@ -30,3 +30,5 @@ namespace eke
         float GetElapsedTime();
     };
 }
+
+#endif

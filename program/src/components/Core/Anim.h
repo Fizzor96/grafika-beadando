@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ANIM_HPP
+#define ANIM_HPP 1
 
 #include <SFML/Graphics.hpp>
 
@@ -24,3 +25,5 @@ namespace eke
         Anim(Anim &&other) = delete;
     };
 }
+
+#endif

@@ -1,6 +1,6 @@
-#pragma once
+#ifndef PIXEL_HPP
+#define PIXEL_HPP 1
 
-#include "Core.h"
 #include "Core/Globals.h"
 #include "Core/Entity.h"
 
@@ -29,3 +29,5 @@ namespace eke
         void Draw() override;
     };
 }
+
+#endif

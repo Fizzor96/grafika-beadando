@@ -1,6 +1,6 @@
-#pragma once
+#ifndef SCENE_HPP
+#define SCENE_HPP 1
 
-#include "Core.h"
 #include <vector>
 
 namespace eke
@@ -28,3 +28,5 @@ namespace eke
         virtual void Draw() = 0;
     };
 }
+
+#endif

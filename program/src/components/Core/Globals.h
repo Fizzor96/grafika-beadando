@@ -1,9 +1,11 @@
-#pragma once
+#ifndef GLOBALS_HPP
+#define GLOBALS_HPP 1
+
+#include <SFML/Graphics.hpp>
+#include "Core/Timer.h"
 
 #include <time.h>
 #include <random>
-
-#include <SFML/Graphics.hpp>
 
 namespace eke
 {
@@ -37,3 +39,4 @@ namespace eke
         ~Globals() = delete;
     };
 }
+#endif

@@ -14,8 +14,8 @@ namespace eke
     public:
         std::vector<eke::Pixel *> *vertexarr;
 
-        sf::Vector2f *p0;
-        sf::Vector2f *p1;
+        sf::Vector2f p0;
+        sf::Vector2f p1;
         sf::Color c1;
         sf::Color c2;
 
@@ -23,8 +23,9 @@ namespace eke
         Line(const sf::Vector2f &begin, const sf::Color &begincolor, const sf::Vector2f &end, const sf::Color &endcolor);
         ~Line();
 
-        std::vector<eke::Pixel *> GetVerticies() const;
-        size_t GetVertexCount() const;
+        // Translating p0 coords to the given pos
+        void Move(const sf::Vector2f &pos);
+        sf::Color *GetPixelColorByPos(const sf::Vector2f &pixelpos) const;
 
         void Draw();
 

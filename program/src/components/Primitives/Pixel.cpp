@@ -50,6 +50,11 @@ namespace eke
         this->sprite->setScale(factor);
     }
 
+    void Pixel::SetPosition(const sf::Vector2f &pos)
+    {
+        this->sprite->setPosition(pos);
+    }
+
     sf::Vector2f Pixel::GetPosition() const
     {
         return this->sprite->getPosition();

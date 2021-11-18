@@ -1,6 +1,7 @@
-#pragma once
+#ifndef ELLIPSE_HPP
+#define ELLIPSE_HPP 1
 
-#include "Core.h"
+#include <SFML/Graphics.hpp>
 #include "Core/Globals.h"
 #include <math.h>
 
@@ -30,3 +31,5 @@ namespace eke
         Ellipse(Ellipse &&other) = delete;
     };
 }
+
+#endif

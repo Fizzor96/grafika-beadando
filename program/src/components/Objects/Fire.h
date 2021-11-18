@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FIREOBJ_HPP
+#define FIREOBJ_HPP 1
 
 #include "Core/Entity.h"
 #include "Core/Anim.h"
@@ -19,3 +20,5 @@ namespace eke
         void Draw();
     };
 }
+
+#endif

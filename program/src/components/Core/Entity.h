@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENTITY_HPP
+#define ENTITY_HPP 1
 
 #include <SFML/Graphics.hpp>
 
@@ -19,3 +20,5 @@ namespace eke
         virtual void Draw() = 0;
     };
 }
+
+#endif
