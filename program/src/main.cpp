@@ -1,11 +1,17 @@
 #include <SFML/Graphics.hpp>
-#include "Primitives/Pixel.h"
 #include "Core.h"
 
 using namespace std;
 
+void MyRand()
+{
+    std::cout << (rand() % 100) << std::endl;
+}
+
 int main()
 {
+    srand(time(NULL));
+
     eke::Globals::Init();
 
     sf::RectangleShape rs;
@@ -17,21 +23,17 @@ int main()
     rs.setOutlineThickness(1.f);
     rs.setOutlineColor(sf::Color::Red);
 
-    eke::Line *line = new eke::Line(sf::Vector2f(50, 300), sf::Color::Green, sf::Vector2f(750, 300), sf::Color::Red);
-    eke::Line *line2 = new eke::Line(sf::Vector2f(0, 0), sf::Color::Green, sf::Vector2f(800, 600), sf::Color::Red);
+    eke::Line line(sf::Vector2f(300, 100), sf::Color::Green, sf::Vector2f(400, 100), sf::Color::Red);
+    eke::Line line2(sf::Vector2f(100, 500), sf::Color::Red, sf::Vector2f(500, 100), sf::Color::Green);
 
-    eke::Button *btn1 = new eke::Button("Grab/Release");
-    btn1->SetPosition(sf::Vector2f(btn1->GetPosition().x + btn1->GetSize().x / 2, btn1->GetPosition().y + btn1->GetSize().y / 2));
-    btn1->SetOnClickEvent([](void *grabbed)
-                          { if (*((bool *)grabbed) == true)
-                        {
-                            *((bool *)grabbed) = false;
-                        }
-                        else
-                        {
-                            *((bool *)grabbed) = true;
-                        } },
-                          (void *)&isgrabbed);
+    eke::Ellipse2 ell(200, 500, 500, 200);
+    std::vector<sf::Color> colors;
+    for (size_t i = 0; i < ell.positions.size(); i++)
+    {
+        colors.push_back(sf::Color::Yellow);
+    }
+
+    eke::Polygon poli(ell.positions, colors, true);
 
     eke::Timer fpstimer(0.5f, true);
     fpstimer.SetExpiredCallback(eke::Globals::FpsTimerCallback);
@@ -50,47 +52,39 @@ int main()
             {
                 eke::Globals::RenderWindow->close();
             }
-            btn1->PollEvents();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            line2->Move(sf::Vector2f(2, 0));
+            // line2.Move(sf::Vector2f(2, 0));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            line2->Move(sf::Vector2f(-2, 0));
+            // line2.Move(sf::Vector2f(-2, 0));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            line2->Move(sf::Vector2f(0, -2));
+            // line2.Move(sf::Vector2f(0, -2));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            line2->Move(sf::Vector2f(0, 2));
-        }
-
-        if (isgrabbed)
-        {
-            rs.setPosition(eke::Globals::MousePosition);
+            // line2.Move(sf::Vector2f(0, 2));
         }
 
         // Update
         eke::Globals::MousePosition = eke::Globals::RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*eke::Globals::RenderWindow));
         fpstimer.Update(eke::Globals::DeltaTime);
-        btn1->Update();
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
 
-        btn1->Draw();
+        // eke::Globals::RenderWindow->draw(rs);
 
-        eke::Globals::RenderWindow->draw(rs);
+        // ell.Draw();
 
-        // eke::Clip::Clipp2(rs.getGlobalBounds(), *line);
-        // eke::Clip::Clipp2(rs.getGlobalBounds(), *line2);
+        // line.Draw();
+        // line2.Draw();
 
-        eke::Clip::Clipp3(rs.getGlobalBounds(), *line);
-        eke::Clip::Clipp3(rs.getGlobalBounds(), *line2);
+        poli.Draw();
 
         eke::Globals::RenderWindow->display();
     }

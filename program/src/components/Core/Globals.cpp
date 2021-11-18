@@ -16,8 +16,6 @@ namespace eke
 
     void Globals::Init()
     {
-        // Setting seed for rnd
-        srand(time(NULL));
         // Context setting
         eke::Globals::CurrentContextSettings = new sf::ContextSettings(0U, 0U, 3U, 1U, 1U, 0U, false);
         // Renderwindow

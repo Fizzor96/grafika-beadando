@@ -13,6 +13,7 @@
 
 // Primitives
 #include "Primitives/Ellipse.h"
+#include "Primitives/Ellipse2.h"
 #include "Primitives/Line.h"
 #include "Primitives/Pixel.h"
 #include "Primitives/Polygon.h"

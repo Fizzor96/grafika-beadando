@@ -106,14 +106,14 @@ namespace eke
         // int posx, posy;
 
         // std::vector<sf::Vector2f> inboundcoords;
-        for (size_t i = 0; i < line.vertexarr->size(); i++)
+        for (size_t i = 0; i < line.vertexarr.size(); i++)
         {
             // posx = (int)((*line.vertexarr)[i]->GetPosition().x);
             // posy = (int)((*line.vertexarr)[i]->GetPosition().y);
 
-            if (((*line.vertexarr)[i]->GetPosition().x) >= rect.left && ((*line.vertexarr)[i]->GetPosition().x) <= (rect.left + rect.width) && (int)((*line.vertexarr)[i]->GetPosition().y) >= rect.top && ((*line.vertexarr)[i]->GetPosition().y) <= (rect.top + rect.height))
+            if ((line.vertexarr[i]->GetPosition().x) >= rect.left && (line.vertexarr[i]->GetPosition().x) <= (rect.left + rect.width) && (int)(line.vertexarr[i]->GetPosition().y) >= rect.top && (line.vertexarr[i]->GetPosition().y) <= (rect.top + rect.height))
             {
-                (*line.vertexarr)[i]->Draw();
+                line.vertexarr[i]->Draw();
                 // inboundcoords.push_back(sf::Vector2f((*line.vertexarr)[i]->GetPosition()));
             }
         }

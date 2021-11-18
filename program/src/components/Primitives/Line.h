@@ -11,8 +11,11 @@ namespace eke
 
     class Line
     {
+    private:
+        float thickness;
+
     public:
-        std::vector<eke::Pixel *> *vertexarr;
+        std::vector<eke::Pixel *> vertexarr;
 
         sf::Vector2f p0;
         sf::Vector2f p1;
@@ -23,8 +26,13 @@ namespace eke
         Line(const sf::Vector2f &begin, const sf::Color &begincolor, const sf::Vector2f &end, const sf::Color &endcolor);
         ~Line();
 
-        // Translating p0 coords to the given pos
-        void Move(const sf::Vector2f &pos);
+        // Setting the starting point of the line
+        void SetPosition(const sf::Vector2f &pos);
+
+        void SetThickness(const float &factor);
+        float GetThickness() const;
+
+        // Experimental
         sf::Color *GetPixelColorByPos(const sf::Vector2f &pixelpos) const;
 
         void Draw();
