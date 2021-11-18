@@ -54,6 +54,7 @@ namespace eke
         this->pressed = nullptr;
 
         this->onclickeventcallback = nullptr;
+        this->callback = nullptr;
 
         this->label.setFont(eke::Globals::GameFont);
         this->label.setFillColor(Button::TextColor);
@@ -72,6 +73,7 @@ namespace eke
         this->pressed = new sf::Texture();
 
         this->onclickeventcallback = nullptr;
+        this->callback = nullptr;
 
         this->label.setFont(eke::Globals::GameFont);
         this->label.setFillColor(Button::TextColor);
@@ -102,6 +104,7 @@ namespace eke
         this->pressed = new sf::Texture();
 
         this->onclickeventcallback = nullptr;
+        this->callback = nullptr;
 
         this->label.setFont(eke::Globals::GameFont);
         this->label.setString(label);
@@ -130,6 +133,7 @@ namespace eke
         this->pressed = new sf::Texture();
 
         this->onclickeventcallback = nullptr;
+        this->callback = nullptr;
 
         this->label.setFont(eke::Globals::GameFont);
         this->label.setString(label);
@@ -242,6 +246,12 @@ namespace eke
         this->onclickeventcallback = clickeventcallback;
     }
 
+    void Button::SetOnClickEvent(void (*clickeventcallback)(void *), void *arg)
+    {
+        this->callback = clickeventcallback;
+        this->callbackarg = arg;
+    }
+
     void Button::PollEvents()
     {
 
@@ -252,6 +262,17 @@ namespace eke
                 if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
                 {
                     this->onclickeventcallback();
+                }
+            }
+        }
+
+        if (this->callback != nullptr)
+        {
+            if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+            {
+                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+                {
+                    this->callback(this->callbackarg);
                 }
             }
         }

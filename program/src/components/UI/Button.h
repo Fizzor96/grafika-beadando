@@ -14,6 +14,8 @@ namespace eke
         sf::Text label;
         sf::FloatRect lblboundingbox;
         void (*onclickeventcallback)();
+        void (*callback)(void *);
+        void *callbackarg;
         void Hover();
         void Press();
         void ValidateTextLength();
@@ -55,6 +57,7 @@ namespace eke
         void SetPressedTexture(const char *pressedtexturepath);
 
         void SetOnClickEvent(void (*clickeventcallback)());
+        void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
 
         void PollEvents() override;
         void Update() override;

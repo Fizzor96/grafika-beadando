@@ -26,22 +26,18 @@ namespace eke
         float rectright = rect.left + rect.width;
         if (p.y < rect.top)
         {
-            // printf("a\n");
             code |= TOP;
         }
         else if (p.y > rectbot)
         {
-            // printf("b\n");
             code |= BOTTOM;
         }
         if (p.x < rect.left)
         {
-            // printf("c\n");
             code |= LEFT;
         }
         else if (p.x > rectright)
         {
-            // printf("d\n");
             code |= RIGHT;
         }
         return code;
@@ -52,12 +48,8 @@ namespace eke
 
         sf::Vector2f p0(pf0.x, pf0.y);
         sf::Vector2f p1(pf1.x, pf1.y);
-        // std::cout << "rect: left=" << rect.left << ", top=" << rect.top << ", width=" << rect.width << ", height=" << rect.height << "\n";
-        // std::cout << "points: x1=" << pf0.x << ", y1=" << pf0.y << " x2=" << pf1.x << ", y2=" << pf1.y << "\n";
         BYTE code0 = OutCode(rect, p0);
         BYTE code1 = OutCode(rect, p1);
-        // std::cout << "a: " << code0 << std::endl;
-        // std::cout << "b: " << code1 << std::endl;
 
         bool accept = false;
 
@@ -65,19 +57,15 @@ namespace eke
         {
             if ((int)(code0 | code1) == 0)
             {
-                // printf("a\n");
                 accept = true;
                 break;
             }
             else if ((int)(code0 & code1) != 0)
             {
-                // printf("b\n");
-                // std::cout << (int)(code0 & code1) << std::endl;
                 break;
             }
             else
             {
-                // printf("c\n");
                 BYTE code = code0 != 0 ? code0 : code1;
                 float x = 0, y = 0;
                 if ((code & TOP) != 0)
@@ -115,12 +103,8 @@ namespace eke
                 }
             }
         }
-        // std::cout << "clip: x1=" << p0.x << ", y1=" << p0.y << " x2=" << p1.x << ", y2=" << p1.y << "\n";
-        // eke::Globals::RenderWindow->close();
         if (accept)
         {
-            // printf("OK\n");
-            // std::cout << "clip: x1=" << p0.x << ", y1=" << p0.y << " x2=" << p1.x << ", y2=" << p1.y << "\n";
             testline = new eke::Line(p0, p1, sf::Color::Black);
             this->testline->Draw();
         }
@@ -128,28 +112,26 @@ namespace eke
 
     void Clip::Clipp2(const sf::FloatRect &rect, const eke::Line &line)
     {
-        if (this->verticies.size() > 0)
-        {
-            this->verticies.clear();
-        }
         if (this->matchingcoords.size() > 0)
         {
             this->matchingcoords.clear();
         }
-        int rectleft, recttop, rectright, rectbottom;
-        rectleft = rect.left;
-        recttop = rect.top;
-        rectright = rect.left + rect.width;
-        rectbottom = rect.top + rect.height;
-        this->verticies = line.GetVerticies();
-        int posx, posy;
-        for (size_t i = 0; i < line.GetVertexCount(); i++)
+
+        // int rectleft, recttop, rectright, rectbottom;
+        // rectleft = rect.left;
+        // recttop = rect.top;
+        // rectright = rect.left + rect.width;
+        // rectbottom = rect.top + rect.height;
+        // int posx, posy;
+
+        for (size_t i = 0; i < line.vertexarr->size(); i++)
         {
-            posx = (int)(verticies[i]->GetPosition().x);
-            posy = (int)(verticies[i]->GetPosition().y);
-            if (posx >= rectleft && posx <= rectright && posy >= recttop && posy <= rectbottom)
+            // posx = (int)((*line.vertexarr)[i]->GetPosition().x);
+            // posy = (int)((*line.vertexarr)[i]->GetPosition().y);
+
+            if ((int)((*line.vertexarr)[i]->GetPosition().x) >= (int)rect.left && (int)((*line.vertexarr)[i]->GetPosition().x) <= (int)(rect.left + rect.width) && (int)((*line.vertexarr)[i]->GetPosition().y) >= (int)rect.top && (int)((*line.vertexarr)[i]->GetPosition().y) <= (int)(rect.top + rect.height))
             {
-                this->matchingcoords.push_back(sf::Vector2f(verticies[i]->GetPosition()));
+                this->matchingcoords.push_back(sf::Vector2f((*line.vertexarr)[i]->GetPosition()));
                 // std::cout << posx << " " << posy << std::endl;
             }
         }

@@ -23,7 +23,6 @@ namespace eke
         static const BYTE RIGHT;
         static BYTE OutCode(const sf::FloatRect &rect, const sf::Vector2f &p);
         eke::Line *testline;
-        std::vector<eke::Pixel *> verticies;
         std::vector<sf::Vector2f> matchingcoords;
 
     public:

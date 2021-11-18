@@ -14,9 +14,10 @@ namespace eke
     private:
         sf::Color c1;
         sf::Color c2;
-        std::vector<eke::Pixel *> *vertexarr;
 
     public:
+        std::vector<eke::Pixel *> *vertexarr;
+
         sf::Vector2f *p0;
         sf::Vector2f *p1;
 

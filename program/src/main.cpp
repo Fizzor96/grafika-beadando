@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Core.h"
 #include "Controller.h"
+#include <thread>
 
 using namespace std;
 
@@ -22,7 +23,22 @@ int main()
     eke::Clip *clipper = new eke::Clip();
 
     eke::Line *line = new eke::Line(sf::Vector2f(44, 55), sf::Vector2f(444, 555));
-    // std::cout << "clip: x1=" << line->p0->x << ", y1=" << line->p0->y << " x2=" << line->p1->x << ", y2=" << line->p1->y << "\n";
+
+    eke::Button *btn1 = new eke::Button("Grab/Release");
+    btn1->SetPosition(sf::Vector2f(btn1->GetPosition().x + btn1->GetSize().x / 2, btn1->GetPosition().y + btn1->GetSize().y / 2));
+    btn1->SetOnClickEvent([](void *grabbed)
+                          {
+                              if (*((bool *)grabbed) == true)
+                              {
+                                  *((bool *)grabbed) = false;
+                              }
+                              else
+                              {
+                                  *((bool *)grabbed) = true;
+                              }
+                              //   std::cout << *((bool *)grabbed) << std::endl;
+                          },
+                          (void *)&isgrabbed);
 
     eke::Timer fpstimer(0.5f, true);
     fpstimer.SetExpiredCallback(eke::Globals::FpsTimerCallback);
@@ -41,35 +57,24 @@ int main()
             {
                 eke::Globals::RenderWindow->close();
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-            {
-                isgrabbed = !isgrabbed;
-                if (isgrabbed)
-                {
-                    std::cout << "grabbed" << std::endl;
-                }
-                else
-                {
-                    std::cout << "not grabbed" << std::endl;
-                }
-            }
+            btn1->PollEvents();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            rs.setPosition(rs.getPosition().x + 1, rs.getPosition().y);
+            rs.setPosition(rs.getPosition().x + 2, rs.getPosition().y);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            rs.setPosition(rs.getPosition().x - 1, rs.getPosition().y);
+            rs.setPosition(rs.getPosition().x - 2, rs.getPosition().y);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            rs.setPosition(rs.getPosition().x, rs.getPosition().y - 1);
+            rs.setPosition(rs.getPosition().x, rs.getPosition().y - 2);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            rs.setPosition(rs.getPosition().x, rs.getPosition().y + 1);
+            rs.setPosition(rs.getPosition().x, rs.getPosition().y + 2);
         }
 
         if (isgrabbed)
@@ -80,9 +85,11 @@ int main()
         // Update
         eke::Globals::MousePosition = eke::Globals::RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*eke::Globals::RenderWindow));
         fpstimer.Update(eke::Globals::DeltaTime);
+        btn1->Update();
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
 
+        btn1->Draw();
         eke::Globals::RenderWindow->draw(rs);
         clipper->Clipp2(rs.getGlobalBounds(), *line);
 
