@@ -16,6 +16,7 @@ namespace eke
 
     public:
         std::vector<eke::Pixel *> vertexarr;
+        std::vector<sf::Vector2f> positions;
 
         sf::Vector2f p0;
         sf::Vector2f p1;

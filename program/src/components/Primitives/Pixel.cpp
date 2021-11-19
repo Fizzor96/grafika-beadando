@@ -15,12 +15,6 @@ namespace eke
         eke::Globals::RenderWindow->draw(*this->sprite);
     }
 
-    Pixel::Pixel()
-    {
-        this->sprite = new sf::Sprite();
-        this->texture = new sf::Texture();
-    }
-
     Pixel::Pixel(const sf::Vector2f &position)
     {
         this->sprite = new sf::Sprite();
@@ -48,21 +42,6 @@ namespace eke
     void Pixel::SetScale(const sf::Vector2f &factor)
     {
         this->sprite->setScale(factor);
-    }
-
-    void Pixel::SetPosition(const sf::Vector2f &pos)
-    {
-        this->sprite->setPosition(pos);
-    }
-
-    sf::Vector2f Pixel::GetPosition() const
-    {
-        return this->sprite->getPosition();
-    }
-
-    sf::Color Pixel::GetColor() const
-    {
-        return this->color;
     }
 
     Pixel::~Pixel()

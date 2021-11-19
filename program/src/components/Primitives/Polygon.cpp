@@ -2,6 +2,21 @@
 
 namespace eke
 {
+    Polygon::Polygon(const std::vector<sf::Vector2f> &points, const sf::Color &color, bool closed)
+    {
+        outlinecolor = color;
+        for (size_t i = 0; i < points.size() - 1; i++)
+        {
+            this->linearr.push_back(new eke::Line(points[i], color, points[i + 1], color));
+        }
+        if (closed)
+        {
+            this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->p1, this->linearr[this->linearr.size() - 1]->c2, this->linearr[0]->p0, this->linearr[0]->c1));
+        }
+        this->InitInitialImgVals();
+        this->CreateEntity(color);
+    }
+
     Polygon::Polygon(const std::vector<sf::Vector2f> &points, const std::vector<sf::Color> &colors, bool closed)
     {
         if (points.size() == colors.size())
@@ -14,6 +29,8 @@ namespace eke
             {
                 this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->p1, this->linearr[this->linearr.size() - 1]->c2, this->linearr[0]->p0, this->linearr[0]->c1));
             }
+            this->InitInitialImgVals();
+            this->CreateEntity(colors[0]);
         }
         else if (points.size() % 2 == 0 && (points.size() / 2) == colors.size())
         {
@@ -30,22 +47,112 @@ namespace eke
             {
                 this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->p1, this->linearr[this->linearr.size() - 1]->c2, this->linearr[0]->p0, this->linearr[0]->c1));
             }
-        }
-        else if (points.size() % 2 != 0 && ((points.size() / 2) + 1) == colors.size())
-        {
-            // Impl
+            this->InitInitialImgVals();
+            this->CreateEntity(colors[0]);
         }
         else
         {
+            this->sprite = nullptr;
             std::cout << "Invalid args!\n";
         }
     }
 
-    void Polygon::Draw()
+    void Polygon::InitInitialImgVals()
     {
+        this->minx = this->linearr[0]->positions[0].x;
+        this->miny = this->linearr[0]->positions[0].y;
+        this->maxx = this->linearr[0]->positions[0].x;
+        this->maxy = this->linearr[0]->positions[0].y;
+
+        // printf("%i - %i - %i - %i\n", minx, miny, maxx, maxy);
+        // printf("%i\n", this->linearr[0]->positions.size());
+
         for (size_t i = 0; i < this->linearr.size(); i++)
         {
-            this->linearr[i]->Draw();
+            for (size_t j = 0; j < this->linearr[i]->positions.size(); j++)
+            {
+                if (this->linearr[i]->positions[j].x < this->minx)
+                {
+                    this->minx = this->linearr[i]->positions[j].x;
+                }
+                if (this->linearr[i]->positions[j].x > this->maxx)
+                {
+                    this->maxx = this->linearr[i]->positions[j].x;
+                }
+                if (this->linearr[i]->positions[j].y < this->miny)
+                {
+                    this->miny = this->linearr[i]->positions[j].y;
+                }
+                if (this->linearr[i]->positions[j].y > this->maxy)
+                {
+                    this->maxy = this->linearr[i]->positions[j].y;
+                }
+            }
+        }
+
+        this->center.x = (this->minx + this->maxx) / 2;
+        this->center.y = (this->miny + this->maxy) / 2;
+    }
+
+    void Polygon::CreateEntity(const sf::Color &color)
+    {
+        sf::Image img;
+        unsigned int extension = 1;
+        img.create((this->maxx - this->minx) + extension, (this->maxy - this->miny) + extension, sf::Color(0, 0, 0, 0));
+        for (size_t i = 0; i < this->linearr.size(); i++)
+        {
+            for (size_t j = 0; j < this->linearr[i]->positions.size(); j++)
+            {
+                img.setPixel(this->linearr[i]->positions[j].x - this->minx, this->linearr[i]->positions[j].y - this->miny, color);
+            }
+        }
+        // printf("pog\n");
+        this->texture = new sf::Texture();
+        this->texture->loadFromImage(img);
+        this->sprite = new sf::Sprite();
+        this->sprite->setTexture(*this->texture);
+    }
+
+    void Polygon::Fill(const sf::Color &color)
+    {
+        sf::Texture temptexture(*this->sprite->getTexture());
+        auto size = temptexture.getSize();
+        sf::Image tempimg = temptexture.copyToImage();
+        int contain = 0;
+        for (size_t i = 0; i < size.y; i++)
+        {
+            for (size_t j = 0; j < size.x; j++)
+            {
+                if (tempimg.getPixel(i, j) == outlinecolor)
+                {
+                    contain++;
+                }
+            }
+        }
+    }
+
+    void Polygon::ToString()
+    {
+        std::cout << "center: " << this->center.x << " " << this->center.y << " minx: " << this->minx << " maxx: " << this->maxx << " miny: " << this->miny << " maxy: " << this->maxy << std::endl;
+    }
+
+    void Polygon::PollEvents()
+    {
+    }
+
+    void Polygon::Update()
+    {
+    }
+
+    void Polygon::Draw()
+    {
+        // for (size_t i = 0; i < this->linearr.size(); i++)
+        // {
+        //     this->linearr[i]->Draw();
+        // }
+        if (this->sprite != nullptr)
+        {
+            eke::Globals::RenderWindow->draw(*this->sprite);
         }
     }
 

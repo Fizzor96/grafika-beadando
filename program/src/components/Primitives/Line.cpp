@@ -24,11 +24,13 @@ namespace eke
         float y = p0.y;
 
         this->vertexarr.push_back(new eke::Pixel(p0));
+        this->positions.push_back(sf::Vector2f(p0.x, p0.y));
         for (size_t i = 0; i < length; i++)
         {
             x += incX;
             y += incY;
             this->vertexarr.push_back(new eke::Pixel(sf::Vector2f(x, y), color));
+            this->positions.push_back(sf::Vector2f(x, y));
         }
     }
 
@@ -55,6 +57,7 @@ namespace eke
         float R = c1.r, G = c1.g, B = c1.b;
 
         this->vertexarr.push_back(new eke::Pixel(p0, sf::Color(R, G, B, c1.a)));
+        this->positions.push_back(sf::Vector2f(p0.x, p0.y));
         for (size_t i = 0; i < length; i++)
         {
             x += incX;
@@ -63,6 +66,7 @@ namespace eke
             G += incG;
             B += incB;
             this->vertexarr.push_back(new eke::Pixel(sf::Vector2f(x, y), sf::Color(R, G, B, c2.a)));
+            this->positions.push_back(sf::Vector2f(x, y));
         }
     }
 
@@ -70,19 +74,19 @@ namespace eke
     {
         sf::Vector2f diff;
 
-        diff.x = pos.x - this->vertexarr[0]->GetPosition().x;
-        diff.y = pos.y - this->vertexarr[0]->GetPosition().y;
+        diff.x = pos.x - this->vertexarr[0]->pos.x;
+        diff.y = pos.y - this->vertexarr[0]->pos.y;
 
         for (size_t i = 0; i < this->vertexarr.size(); i++)
         {
             auto currpix = this->vertexarr[i];
-            this->vertexarr[i]->SetPosition(currpix->GetPosition() + diff);
+            this->vertexarr[i]->pos = currpix->pos + diff;
         }
 
-        this->p0.x = this->vertexarr[0]->GetPosition().x;
-        this->p0.y = this->vertexarr[0]->GetPosition().y;
-        this->p1.x = this->vertexarr[this->vertexarr.size() - 1]->GetPosition().x;
-        this->p1.y = this->vertexarr[this->vertexarr.size() - 1]->GetPosition().y;
+        this->p0.x = this->vertexarr[0]->pos.x;
+        this->p0.y = this->vertexarr[0]->pos.y;
+        this->p1.x = this->vertexarr[this->vertexarr.size() - 1]->pos.x;
+        this->p1.y = this->vertexarr[this->vertexarr.size() - 1]->pos.y;
     }
 
     sf::Color *Line::GetPixelColorByPos(const sf::Vector2f &pixelpos) const
@@ -91,9 +95,9 @@ namespace eke
         {
             for (size_t i = 0; i < this->vertexarr.size(); i++)
             {
-                if (this->vertexarr[i]->GetPosition().x == pixelpos.x && this->vertexarr[i]->GetPosition().y == pixelpos.y)
+                if (this->vertexarr[i]->pos.x == pixelpos.x && this->vertexarr[i]->pos.y == pixelpos.y)
                 {
-                    return new sf::Color(this->vertexarr[i]->GetColor());
+                    return new sf::Color(this->vertexarr[i]->color);
                 }
                 else
                 {

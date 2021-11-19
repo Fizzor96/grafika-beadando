@@ -8,19 +8,14 @@ namespace eke
 {
     class Pixel : public Entity
     {
-    private:
+    public:
         sf::Vector2f pos;
         sf::Color color;
 
     public:
-        Pixel();
         Pixel(const sf::Vector2f &position);
         Pixel(const sf::Vector2f &position, const sf::Color &color);
         ~Pixel();
-
-        void SetPosition(const sf::Vector2f &pos);
-        sf::Vector2f GetPosition() const;
-        sf::Color GetColor() const;
 
         void SetScale(const sf::Vector2f &factor);
 

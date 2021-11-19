@@ -26,14 +26,20 @@ int main()
     eke::Line line(sf::Vector2f(300, 100), sf::Color::Green, sf::Vector2f(400, 100), sf::Color::Red);
     eke::Line line2(sf::Vector2f(100, 500), sf::Color::Red, sf::Vector2f(500, 100), sf::Color::Green);
 
-    eke::Ellipse2 ell(200, 500, 500, 200);
-    std::vector<sf::Color> colors;
-    for (size_t i = 0; i < ell.positions.size(); i++)
-    {
-        colors.push_back(sf::Color::Yellow);
-    }
+    eke::Ellipse2 ell(200, 300, 400, 100);
 
-    eke::Polygon poli(ell.positions, colors, true);
+    eke::Polygon poli(ell.positions, sf::Color::Yellow, true);
+    poli.ToString();
+
+    // sf::Image img;
+    // unsigned int imgwidth = 50;
+    // unsigned int imgheight = 50;
+    // sf::Color imgcolor(0, 0, 0, 0);
+    // img.create(imgwidth, imgheight, imgcolor);
+    // unsigned int pixelx = 0;
+    // unsigned int pixely = 0;
+    // sf::Color pixelcolor(100, 100, 100, 255);
+    // img.setPixel(pixelx, pixely, pixelcolor);
 
     eke::Timer fpstimer(0.5f, true);
     fpstimer.SetExpiredCallback(eke::Globals::FpsTimerCallback);
@@ -72,17 +78,15 @@ int main()
         }
 
         // Update
-        eke::Globals::MousePosition = eke::Globals::RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*eke::Globals::RenderWindow));
+        eke::Globals::UpdateMousePos();
+        // eke::Globals::MousePosition = eke::Globals::RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*eke::Globals::RenderWindow));
         fpstimer.Update(eke::Globals::DeltaTime);
+
+        rs.setPosition(eke::Globals::MousePosition);
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
 
-        // eke::Globals::RenderWindow->draw(rs);
-
-        // ell.Draw();
-
-        // line.Draw();
-        // line2.Draw();
+        eke::Globals::RenderWindow->draw(rs);
 
         poli.Draw();
 

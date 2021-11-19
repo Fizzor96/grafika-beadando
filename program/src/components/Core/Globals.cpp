@@ -17,7 +17,7 @@ namespace eke
     void Globals::Init()
     {
         // Context setting
-        eke::Globals::CurrentContextSettings = new sf::ContextSettings(0U, 0U, 3U, 1U, 1U, 0U, false);
+        eke::Globals::CurrentContextSettings = new sf::ContextSettings(0U, 0U, 0U, 1U, 1U, 0U, false);
         // Renderwindow
         eke::Globals::RenderWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "Grafika beadando - Szoke Dominik - FPS: 0", sf::Style::Default, *CurrentContextSettings);
         // Window position
@@ -55,5 +55,10 @@ namespace eke
     {
         float fps = 1.f / eke::Globals::DeltaTime;
         eke::Globals::RenderWindow->setTitle(std::string("Grafika beadando - Szoke Dominik - fps: " + std::to_string((int)fps)));
+    }
+
+    void Globals::UpdateMousePos()
+    {
+        eke::Globals::MousePosition = eke::Globals::RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*eke::Globals::RenderWindow));
     }
 }
