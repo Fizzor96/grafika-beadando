@@ -15,6 +15,8 @@ namespace eke
         Crosshair(const sf::Vector2f &size, const bool &isgrabbed = false);
         ~Crosshair();
 
+        sf::FloatRect GetGlobalBounds() const;
+
         void PollEvents();
         void Update();
         void Draw();

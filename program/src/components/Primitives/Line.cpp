@@ -70,42 +70,35 @@ namespace eke
         }
     }
 
+    void Line::Move(const float &diffx, const float &diffy)
+    {
+        for (size_t i = 0; i < this->vertexarr.size(); i++)
+        {
+            this->vertexarr[i]->SetPosition(sf::Vector2f(this->vertexarr[i]->GetPosition().x + diffx, this->vertexarr[i]->GetPosition().y + diffy));
+        }
+        this->p0.x = this->vertexarr[0]->GetPosition().x;
+        this->p0.y = this->vertexarr[0]->GetPosition().y;
+        this->p1.x = (this->vertexarr[this->vertexarr.size() - 1])->GetPosition().x;
+        this->p1.y = (this->vertexarr[this->vertexarr.size() - 1])->GetPosition().y;
+    }
+
     void Line::SetPosition(const sf::Vector2f &pos)
     {
         sf::Vector2f diff;
 
-        diff.x = pos.x - this->vertexarr[0]->pos.x;
-        diff.y = pos.y - this->vertexarr[0]->pos.y;
+        diff.x = pos.x - this->vertexarr[0]->GetPosition().x;
+        diff.y = pos.y - this->vertexarr[0]->GetPosition().y;
 
         for (size_t i = 0; i < this->vertexarr.size(); i++)
         {
             auto currpix = this->vertexarr[i];
-            this->vertexarr[i]->pos = currpix->pos + diff;
+            this->vertexarr[i]->SetPosition(this->vertexarr[i]->GetPosition() + diff);
         }
 
-        this->p0.x = this->vertexarr[0]->pos.x;
-        this->p0.y = this->vertexarr[0]->pos.y;
-        this->p1.x = this->vertexarr[this->vertexarr.size() - 1]->pos.x;
-        this->p1.y = this->vertexarr[this->vertexarr.size() - 1]->pos.y;
-    }
-
-    sf::Color *Line::GetPixelColorByPos(const sf::Vector2f &pixelpos) const
-    {
-        if (this->vertexarr.size() > 0)
-        {
-            for (size_t i = 0; i < this->vertexarr.size(); i++)
-            {
-                if (this->vertexarr[i]->pos.x == pixelpos.x && this->vertexarr[i]->pos.y == pixelpos.y)
-                {
-                    return new sf::Color(this->vertexarr[i]->color);
-                }
-                else
-                {
-                    return nullptr;
-                }
-            }
-        }
-        return nullptr;
+        this->p0.x = this->vertexarr[0]->GetPosition().x;
+        this->p0.y = this->vertexarr[0]->GetPosition().y;
+        this->p1.x = this->vertexarr[this->vertexarr.size() - 1]->GetPosition().x;
+        this->p1.y = this->vertexarr[this->vertexarr.size() - 1]->GetPosition().y;
     }
 
     void Line::SetThickness(const float &factor)

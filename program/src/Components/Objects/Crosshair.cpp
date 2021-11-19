@@ -13,6 +13,11 @@ namespace eke
         rs.setOutlineColor(sf::Color::Black);
     }
 
+    sf::FloatRect Crosshair::GetGlobalBounds() const
+    {
+        return this->rs.getGlobalBounds();
+    }
+
     Crosshair::~Crosshair()
     {
     }

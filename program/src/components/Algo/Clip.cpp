@@ -111,10 +111,10 @@ namespace eke
             // posx = (int)((*line.vertexarr)[i]->GetPosition().x);
             // posy = (int)((*line.vertexarr)[i]->GetPosition().y);
 
-            if ((line.vertexarr[i]->pos.x) >= rect.left && (line.vertexarr[i]->pos.x) <= (rect.left + rect.width) && (int)(line.vertexarr[i]->pos.y) >= rect.top && (line.vertexarr[i]->pos.y) <= (rect.top + rect.height))
+            if ((line.vertexarr[i]->GetPosition().x) >= rect.left && (line.vertexarr[i]->GetPosition().x) <= (rect.left + rect.width) && (int)(line.vertexarr[i]->GetPosition().y) >= rect.top && (line.vertexarr[i]->GetPosition().y) <= (rect.top + rect.height))
             {
                 line.vertexarr[i]->Draw();
-                // inboundcoords.push_back(sf::Vector2f((*line.vertexarr)[i]->GetPosition()));
+                // inboundcoords.push_back(sf::Vector2f(line.vertexarr[i]->pos));
             }
         }
         // if (inboundcoords.size() > 0)
@@ -185,14 +185,15 @@ namespace eke
         }
         if (accept)
         {
-            if (line.GetPixelColorByPos(p0) != nullptr)
-            {
-                eke::Line(p0, *line.GetPixelColorByPos(p0), p1, *line.GetPixelColorByPos(p1)).Draw();
-            }
-            else
-            {
-                eke::Line(p0, line.c1, p1, line.c2).Draw();
-            }
+            eke::Line(p0, line.c1, p1, line.c2).Draw();
+            // if (line.GetPixelColorByPos(p0) != nullptr)
+            // {
+            //     eke::Line(p0, *line.GetPixelColorByPos(p0), p1, *line.GetPixelColorByPos(p1)).Draw();
+            // }
+            // else
+            // {
+            //     eke::Line(p0, line.c1, p1, line.c2).Draw();
+            // }
         }
     }
 }

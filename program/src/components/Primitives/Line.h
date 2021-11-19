@@ -29,18 +29,17 @@ namespace eke
 
         // Setting the starting point of the line
         void SetPosition(const sf::Vector2f &pos);
-
+        void Move(const float &posx, const float &posy);
         void SetThickness(const float &factor);
         float GetThickness() const;
-
-        // Experimental
-        sf::Color *GetPixelColorByPos(const sf::Vector2f &pixelpos) const;
 
         void Draw();
 
         Line() = delete;
         Line(const eke::Line &other) = delete;
         Line(eke::Line &&other) = delete;
+        Line &operator=(const Line &other) = delete;
+        Line &operator=(Line &&other) = delete;
     };
 }
 

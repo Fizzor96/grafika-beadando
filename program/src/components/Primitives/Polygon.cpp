@@ -111,6 +111,46 @@ namespace eke
         this->texture->loadFromImage(img);
         this->sprite = new sf::Sprite();
         this->sprite->setTexture(*this->texture);
+        this->sprite->setOrigin(this->sprite->getGlobalBounds().width / 2, this->sprite->getGlobalBounds().height / 2);
+    }
+
+    void Polygon::SetPosition(const sf::Vector2f &pos)
+    {
+        this->sprite->setPosition(pos);
+
+        if (this->center != pos)
+        {
+            sf::Vector2f diff;
+            diff.x = pos.x - this->center.x;
+            diff.y = pos.y - this->center.y;
+            for (size_t i = 0; i < this->linearr.size(); i++)
+            {
+                this->linearr[i]->Move(diff.x, diff.y);
+            }
+            this->center.x = pos.x;
+            this->center.y = pos.y;
+        }
+    }
+
+    void Polygon::SetPosition(const float &posx, const float &posy)
+    {
+        this->sprite->setPosition(sf::Vector2f(posx, posy));
+
+        if (this->center.x != posx && this->center.y != posy)
+        {
+            sf::Vector2f diff;
+            diff.x = posx - this->center.x;
+            diff.y = posy - this->center.y;
+            // std::cout << diff.x << " " << diff.y << std::endl;
+            // std::cout << this->linearr[0]->vertexarr[0]->GetPosition().x << " " << this->linearr[0]->vertexarr[0]->GetPosition().y << std::endl;
+            for (size_t i = 0; i < this->linearr.size(); i++)
+            {
+                this->linearr[i]->Move(diff.x, diff.y);
+            }
+            // std::cout << this->linearr[0]->vertexarr[0]->GetPosition().x << " " << this->linearr[0]->vertexarr[0]->GetPosition().y << std::endl;
+            this->center.x = posx;
+            this->center.y = posy;
+        }
     }
 
     void Polygon::Fill(const sf::Color &color)
@@ -172,14 +212,14 @@ namespace eke
 
     void Polygon::Draw()
     {
-        // for (size_t i = 0; i < this->linearr.size(); i++)
-        // {
-        //     this->linearr[i]->Draw();
-        // }
-        if (this->sprite != nullptr)
+        for (size_t i = 0; i < this->linearr.size(); i++)
         {
-            eke::Globals::RenderWindow->draw(*this->sprite);
+            this->linearr[i]->Draw();
         }
+        // if (this->sprite != nullptr)
+        // {
+        //     eke::Globals::RenderWindow->draw(*this->sprite);
+        // }
     }
 
     Polygon::~Polygon()

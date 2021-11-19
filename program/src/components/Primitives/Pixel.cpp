@@ -2,19 +2,6 @@
 
 namespace eke
 {
-    void Pixel::PollEvents()
-    {
-    }
-
-    void Pixel::Update()
-    {
-    }
-
-    void Pixel::Draw()
-    {
-        eke::Globals::RenderWindow->draw(*this->sprite);
-    }
-
     Pixel::Pixel(const sf::Vector2f &position)
     {
         this->sprite = new sf::Sprite();
@@ -39,14 +26,42 @@ namespace eke
         sprite->setPosition(position);
     }
 
+    Pixel::~Pixel()
+    {
+        delete this->sprite;
+        delete this->texture;
+    }
+
+    void Pixel::SetPosition(const sf::Vector2f &pos)
+    {
+        this->sprite->setPosition(pos);
+    }
+
+    void Pixel::SetPosition(const float &posx, const float &posy)
+    {
+        this->sprite->setPosition(posx, posy);
+    }
+
+    sf::Vector2f Pixel::GetPosition() const
+    {
+        return this->sprite->getPosition();
+    }
+
     void Pixel::SetScale(const sf::Vector2f &factor)
     {
         this->sprite->setScale(factor);
     }
 
-    Pixel::~Pixel()
+    void Pixel::PollEvents()
     {
-        delete this->sprite;
-        delete this->texture;
+    }
+
+    void Pixel::Update()
+    {
+    }
+
+    void Pixel::Draw()
+    {
+        eke::Globals::RenderWindow->draw(*this->sprite);
     }
 }

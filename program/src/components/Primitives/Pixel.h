@@ -9,7 +9,7 @@ namespace eke
     class Pixel : public Entity
     {
     public:
-        sf::Vector2f pos;
+        // sf::Vector2f pos;
         sf::Color color;
 
     public:
@@ -18,6 +18,10 @@ namespace eke
         ~Pixel();
 
         void SetScale(const sf::Vector2f &factor);
+
+        void SetPosition(const sf::Vector2f &pos);
+        void SetPosition(const float &posx, const float &posy);
+        sf::Vector2f GetPosition() const;
 
         void PollEvents() override;
         void Update() override;
