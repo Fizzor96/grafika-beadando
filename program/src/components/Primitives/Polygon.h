@@ -7,6 +7,7 @@
 #include "Pixel.h"
 #include <vector>
 #include <iostream>
+#include <thread>
 
 namespace eke
 {
@@ -22,6 +23,7 @@ namespace eke
         unsigned int miny;
         unsigned int maxy;
         sf::Color outlinecolor;
+        sf::Color fillcolor;
         sf::Vector2f center;
         std::vector<eke::Line *> linearr;
         void CreateEntity(const sf::Color &color);

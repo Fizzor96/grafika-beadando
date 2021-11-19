@@ -46,24 +46,24 @@ namespace eke
         }
     }
 
-    Button::Button()
-    {
-        this->sprite = new sf::Sprite();
-        this->texture = nullptr;
-        this->hover = nullptr;
-        this->pressed = nullptr;
+    // Button::Button()
+    // {
+    //     this->sprite = new sf::Sprite();
+    //     this->texture = nullptr;
+    //     this->hover = nullptr;
+    //     this->pressed = nullptr;
 
-        this->onclickeventcallback = nullptr;
-        this->callback = nullptr;
+    //     this->onclickeventcallback = nullptr;
+    //     this->callback = nullptr;
 
-        this->label.setFont(eke::Globals::GameFont);
-        this->label.setFillColor(Button::TextColor);
-        this->label.setString("");
-        this->lblboundingbox = this->label.getLocalBounds();
-        this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
+    //     this->label.setFont(eke::Globals::GameFont);
+    //     this->label.setFillColor(Button::TextColor);
+    //     this->label.setString("");
+    //     this->lblboundingbox = this->label.getLocalBounds();
+    //     this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
 
-        ValidateTextLength();
-    }
+    //     ValidateTextLength();
+    // }
 
     Button::Button(const char *label)
     {
@@ -161,6 +161,7 @@ namespace eke
         delete this->texture;
         delete this->hover;
         delete this->pressed;
+        free(callbackarg);
     }
 
     void Button::SetPosition(const sf::Vector2f &pos)

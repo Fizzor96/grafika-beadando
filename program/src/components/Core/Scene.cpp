@@ -9,9 +9,4 @@ namespace eke
     Scene::~Scene()
     {
     }
-
-    eke::SceneId Scene::GetSceneId() const
-    {
-        return this->sceneid;
-    }
 }

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Core.h"
+#include <SFML/Graphics.hpp>
+#include "Core/Globals.h"
+#include "Core/Entity.h"
 
 namespace eke
 {
@@ -22,11 +24,6 @@ namespace eke
         void UpdateTextures();
 
     public:
-        Button(const Button &other) = delete;
-
-        // If u are using default ctor, u have to set everything manually!!!
-        Button();
-
         // Ctor with predifined texture (from assets)
         Button(const char *label);
 
@@ -38,6 +35,8 @@ namespace eke
 
         ~Button();
 
+    public:
+        // Public Member Functions
         void SetPosition(const sf::Vector2f &pos);
         sf::Vector2f GetPosition() const;
 
@@ -59,8 +58,15 @@ namespace eke
         void SetOnClickEvent(void (*clickeventcallback)());
         void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
 
+        // Entity
         void PollEvents() override;
         void Update() override;
         void Draw() override;
+
+        Button() = delete;
+        Button(const Button &other) = delete;
+        Button(Button &&other) = delete;
+        Button &operator=(const Button &other) = delete;
+        Button &operator=(Button &&other) = delete;
     };
 }

@@ -8,6 +8,7 @@ namespace eke
     sf::Clock *Globals::Clock;
     sf::Event *Globals::Event;
     sf::Font Globals::GameFont;
+    eke::Timer *Globals::fpstimer;
 
     // Update state
     sf::Vector2f Globals::MousePosition;
@@ -32,6 +33,27 @@ namespace eke
         eke::Globals::Clock = new sf::Clock();
         // Event
         eke::Globals::Event = new sf::Event();
+        // Fps timer
+        eke::Globals::fpstimer = new eke::Timer(0.5f, true);
+        eke::Globals::fpstimer->SetExpiredCallback(eke::Globals::FpsTimerCallback);
+    }
+
+    void Globals::Update()
+    {
+        eke::Globals::fpstimer->Update(eke::Globals::DeltaTime);
+        eke::Globals::UpdateMousePos();
+    }
+
+    void Globals::PollEvents()
+    {
+        if ((*eke::Globals::Event).type == sf::Event::Closed)
+        {
+            eke::Globals::RenderWindow->close();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            eke::Globals::RenderWindow->close();
+        }
     }
 
     void Globals::CleaUp()
@@ -40,6 +62,8 @@ namespace eke
         delete eke::Globals::RenderWindow;
         delete eke::Globals::Event;
         delete eke::Globals::Clock;
+        delete eke::Globals::fpstimer;
+        std::cout << "Terminated Succesfully!\n";
     }
 
     sf::Texture Globals::CreateDummyTexture(const unsigned int &width, const unsigned int &height, const sf::Color &color)

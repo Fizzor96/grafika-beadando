@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Core/Timer.h"
 
+#include <iostream>
 #include <time.h>
 #include <random>
 
@@ -14,12 +15,12 @@ namespace eke
     public:
         static void Init();
         static void CleaUp();
+        static void Update();
+        static void PollEvents();
 
     public:
         // Helper to create dummy texture
         static sf::Texture CreateDummyTexture(const unsigned int &width, const unsigned int &height, const sf::Color &color);
-        static void FpsTimerCallback();
-        static void UpdateMousePos();
 
     public:
         // Init state
@@ -32,6 +33,11 @@ namespace eke
         static float FPS;
         static float DeltaTime;
         static sf::Vector2f MousePosition;
+
+    private:
+        static eke::Timer *fpstimer;
+        static void FpsTimerCallback();
+        static void UpdateMousePos();
 
     public:
         Globals() = delete;

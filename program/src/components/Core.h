@@ -10,6 +10,7 @@
 
 // Objects
 #include "Objects/Fire.h"
+#include "Objects/Crosshair.h"
 
 // Primitives
 #include "Primitives/Ellipse.h"

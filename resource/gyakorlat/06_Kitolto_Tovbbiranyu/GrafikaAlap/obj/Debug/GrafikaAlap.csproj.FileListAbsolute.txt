@@ -31,3 +31,16 @@ d:\Troll\2021_22 I - BevGraf - B\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\Gr
 d:\Troll\2021_22 I - BevGraf - B\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.Form1.resources
 d:\Troll\2021_22 I - BevGraf - B\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.Properties.Resources.resources
 d:\Troll\2021_22 I - BevGraf - B\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.csproj.GenerateResource.Cache
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\bin\Debug\GrafikaAlap.exe.config
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\bin\Debug\GrafikaAlap.exe
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\bin\Debug\GrafikaAlap.pdb
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\bin\Debug\GrafikaDLL.dll
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\bin\Debug\GrafikaDLL.pdb
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.csprojAssemblyReference.cache
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.Form1.resources
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.Properties.Resources.resources
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.csproj.GenerateResource.cache
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.csproj.CoreCompileInputs.cache
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.csproj.CopyComplete
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.exe
+C:\Users\szoke\Downloads\GitHub\grafika-beadando\resource\gyakorlat\06_Kitolto_Tovbbiranyu\GrafikaAlap\obj\Debug\GrafikaAlap.pdb

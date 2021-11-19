@@ -10,22 +10,22 @@ set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS} 
 file(GLOB App_SRC
 		"src/*.h",
 		"src/*.cpp",
-		"src/components/*.h",
-		"src/components/*.cpp",
-		"src/components/Algo/*.h",
-		"src/components/Algo/*.cpp",
-		"src/components/Core/*.h",
-		"src/components/Core/*.cpp",
-		"src/components/Objects/*.h",
-		"src/components/Objects/*.cpp",
-		"src/components/Primitives/*.h",
-		"src/components/Primitives/*.cpp",
-		"src/components/UI/*.h",
-		"src/components/UI/*.cpp",
-		"src/controller/*.h",
-		"src/controller/*.cpp",
-		"src/view/*.h",
-		"src/view/*.cpp"
+		"src/Components/*.h",
+		"src/Components/*.cpp",
+		"src/Components/Algo/*.h",
+		"src/Components/Algo/*.cpp",
+		"src/Components/Core/*.h",
+		"src/Components/Core/*.cpp",
+		"src/Components/Objects/*.h",
+		"src/Components/Objects/*.cpp",
+		"src/Components/Primitives/*.h",
+		"src/Components/Primitives/*.cpp",
+		"src/Components/UI/*.h",
+		"src/Components/UI/*.cpp",
+		"src/Controllers/*.h",
+		"src/Controllers/*.cpp",
+		"src/Views/*.h",
+		"src/Views/*.cpp"
 		)
 
 
@@ -35,17 +35,17 @@ IF (WIN32)
 	find_package (SFML 2.5 COMPONENTS system window graphics audio REQUIRED)
 	add_executable(${CMAKE_PROJECT_NAME} ${App_SRC})
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "cmake_modules/SFML/include")
-	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components)
-	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/view)
-	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/controller)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Components)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Views)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Controllers)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ELSE()
 	set(SFML_DIR "deps/linux/SFML-2.5.1/lib/cmake/SFML")
 	find_package (SFML 2.5 COMPONENTS system window graphics audio REQUIRED)
 	add_executable(${CMAKE_PROJECT_NAME} ${App_SRC})
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "cmake_modules/SFML/include")
-	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/components)
-	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/view)
-	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/controller)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Components)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Views)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Controllers)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ENDIF()

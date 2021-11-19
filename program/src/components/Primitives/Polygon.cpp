@@ -117,18 +117,44 @@ namespace eke
     {
         sf::Texture temptexture(*this->sprite->getTexture());
         auto size = temptexture.getSize();
-        sf::Image tempimg = temptexture.copyToImage();
-        int contain = 0;
-        for (size_t i = 0; i < size.y; i++)
+        // std::cout << size.x << " " << size.y << std::endl;
+        sf::Image img = temptexture.copyToImage();
+
+        int dx[] = {0, 1, 0, -1};
+        int dy[] = {1, 0, -1, 0};
+
+        std::vector<sf::Vector2f> stack;
+
+        stack.push_back(sf::Vector2f((int)(size.x / 2), (int)(size.y / 2)));
+
+        sf::Vector2f p0, p1;
+
+        while (stack.size() > 0)
         {
-            for (size_t j = 0; j < size.x; j++)
+            p0 = stack[stack.size() - 1];
+            stack.pop_back();
+            // printf("stack size: %i\n", stack.size());
+
+            img.setPixel(p0.x, p0.y, color);
+            std::cout << "p0: " << p0.x << " " << p0.y << std::endl;
+
+            for (size_t i = 0; i < 4; i++)
             {
-                if (tempimg.getPixel(i, j) == outlinecolor)
+                p1.x = (int)(p0.x + dx[i]);
+                p1.y = (int)(p0.y + dy[i]);
+                std::cout << "p1: " << p1.x << " " << p1.y << std::endl;
+                // p1 = sf::Vector2f(p0.x + dx[i], p0.y + dy[i]);
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+                if (img.getPixel(p1.x, p1.y) != color)
                 {
-                    contain++;
+                    stack.push_back(p1);
                 }
             }
         }
+        this->texture->loadFromImage(img);
+        this->sprite->setTexture(*this->texture);
     }
 
     void Polygon::ToString()

@@ -22,7 +22,7 @@ namespace eke
     public:
         Scene();
         virtual ~Scene();
-        virtual eke::SceneId GetSceneId() const;
+        virtual eke::SceneId GetSceneId() const = 0;
         virtual void PollEvents() = 0;
         virtual void Update() = 0;
         virtual void Draw() = 0;
