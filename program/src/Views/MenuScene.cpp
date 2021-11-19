@@ -7,11 +7,17 @@ namespace eke
 
     void MenuScene::InitComponents()
     {
-        eke::Button *btn1 = new eke::Button("Start");
-        btn1->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btn1->GetPosition().y + btn1->GetSize().y));
-        btn1->SetOnClickEvent([]()
-                              { eke::Controller::LoadScene(eke::SceneId::Main); });
-        this->entities.push_back(btn1);
+        eke::Button *btnStart = new eke::Button("Start");
+        btnStart->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + btnStart->GetSize().y));
+        btnStart->SetOnClickEvent([]()
+                                  { eke::Controller::LoadScene(eke::SceneId::Main); });
+        this->entities.push_back(btnStart);
+
+        eke::Button *btnExit = new eke::Button("Exit");
+        btnExit->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, eke::Globals::RenderWindow->getView().getSize().y - btnExit->GetSize().y));
+        btnExit->SetOnClickEvent([]()
+                                 { eke::Globals::RenderWindow->close(); });
+        this->entities.push_back(btnExit);
     }
 
     void MenuScene::PollEvents()

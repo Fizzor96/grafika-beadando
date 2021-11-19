@@ -22,7 +22,7 @@ namespace eke
         // Renderwindow
         eke::Globals::RenderWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "Grafika beadando - Szoke Dominik - FPS: 0", sf::Style::Default, *CurrentContextSettings);
         // Window position
-        eke::Globals::RenderWindow->setPosition(sf::Vector2i(0, 0));
+        // eke::Globals::RenderWindow->setPosition(sf::Vector2i(0, 0));
         // Framerate
         eke::Globals::RenderWindow->setFramerateLimit(eke::Globals::FPS);
         // Set keyrepeat
@@ -63,7 +63,6 @@ namespace eke
         delete eke::Globals::Event;
         delete eke::Globals::Clock;
         delete eke::Globals::fpstimer;
-        std::cout << "Terminated Succesfully!\n";
     }
 
     sf::Texture Globals::CreateDummyTexture(const unsigned int &width, const unsigned int &height, const sf::Color &color)

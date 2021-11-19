@@ -6,6 +6,7 @@ using namespace std;
 int main()
 {
     eke::Globals::Init();
+    eke::Controller::Init();
 
     while (eke::Globals::RenderWindow->isOpen())
     {
@@ -14,13 +15,16 @@ int main()
         while (eke::Globals::RenderWindow->pollEvent(*eke::Globals::Event))
         {
             eke::Globals::PollEvents();
+            eke::Controller::PollEvents();
         }
 
         eke::Globals::Update();
+        eke::Controller::Update();
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
 
         // Draw
+        eke::Controller::Draw();
 
         eke::Globals::RenderWindow->display();
     }

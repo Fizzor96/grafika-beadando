@@ -15,11 +15,14 @@ namespace eke
     {
     private:
         static std::vector<eke::Scene *> Scenes;
-        static eke::Scene *current;
+        static eke::Scene *Current;
 
     public:
         static void Init();
         static void LoadScene(const eke::SceneId &sceneid);
+        static void PollEvents();
+        static void Update();
+        static void Draw();
 
     public:
         Controller() = delete;
