@@ -44,14 +44,13 @@ int main()
 
         for (size_t i = 0; i < poli.linearr.size(); i++)
         {
-            // eke::Clip::Clipp3(cr.GetGlobalBounds(), *poli.linearr[i]);
-            eke::Clip::Clipp2(cr.GetGlobalBounds(), *poli.linearr[i]);
+            eke::Clip::Clipp3(cr.GetGlobalBounds(), *poli.linearr[i]);
+            // eke::Clip::Clipp2(cr.GetGlobalBounds(), *poli.linearr[i]);
         }
 
         // poli.Draw();
-
-        cr.Draw();
         eke::Globals::RenderWindow->draw(circle);
+        cr.Draw();
 
         eke::Globals::RenderWindow->display();
     }
