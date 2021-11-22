@@ -2,8 +2,6 @@
 
 namespace eke
 {
-    // typedef unsigned int BYTE;
-
     const BYTE Clip::TOP = 1;
     const BYTE Clip::BOTTOM = 2;
     const BYTE Clip::LEFT = 4;

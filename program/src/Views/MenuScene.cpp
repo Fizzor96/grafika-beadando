@@ -104,8 +104,8 @@ namespace eke
             delete this->entities[i];
         }
 
-        this->fires.empty();
-        this->entities.empty();
+        this->fires.clear();
+        this->entities.clear();
 
         delete eke::MenuScene::Instance;
     }

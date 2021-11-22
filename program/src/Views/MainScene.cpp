@@ -116,9 +116,9 @@ namespace eke
             delete this->drawables[i];
         }
 
-        this->entities.empty();
-        this->rectangles.empty();
-        this->drawables.empty();
+        this->entities.clear();
+        this->rectangles.clear();
+        this->drawables.clear();
 
         delete eke::MainScene::Instance;
     }

@@ -201,7 +201,7 @@ namespace eke
         {
             delete this->vertexarr[i];
         }
-        this->vertexarr.empty();
+        this->vertexarr.clear();
 
         float dx = p1.x - p0.x;
         float dy = p1.y - p0.y;

@@ -30,7 +30,7 @@ namespace eke
         {
             delete eke::Controller::Scenes[i];
         }
-        eke::Controller::Scenes.empty();
+        eke::Controller::Scenes.clear();
         delete eke::Controller::Current;
     }
 
