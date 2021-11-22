@@ -24,18 +24,23 @@ namespace eke
     public:
         // Experimental
         void Fill(const sf::Color &color);
+        // Set poli position by calling Move on each line in linearr
         void SetPosition(const sf::Vector2f &pos);
+        // Set poli position by calling Move on each line in linearr
         void SetPosition(const float &posx, const float &posy);
+        // Simple ToString :)
         void ToString();
         void PollEvents();
         void Update();
         void Draw();
 
     private:
+        // Basic methods to create sprite and texture from existing verticies
         void InitInitialImgVals();
         void CreateEntity(const sf::Color &color);
 
     private:
+        // Initial entity values
         unsigned int minx;
         unsigned int maxx;
         unsigned int miny;

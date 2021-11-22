@@ -24,6 +24,9 @@ namespace eke
     private:
         static eke::MainScene *Instance;
         std::vector<eke::Entity *> entities;
+        std::vector<eke::Polygon *> drawables;
+        std::vector<sf::RectangleShape *> rectangles;
+        eke::Crosshair *cr;
 
     private:
         void InitComponents();

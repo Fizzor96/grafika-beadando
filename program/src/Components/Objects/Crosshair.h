@@ -3,10 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include "Core/Globals.h"
+#include "Core/Entity.h"
 
 namespace eke
 {
-    class Crosshair
+    class Crosshair : public Entity
     {
     public:
         sf::RectangleShape rs;

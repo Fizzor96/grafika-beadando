@@ -46,25 +46,6 @@ namespace eke
         }
     }
 
-    // Button::Button()
-    // {
-    //     this->sprite = new sf::Sprite();
-    //     this->texture = nullptr;
-    //     this->hover = nullptr;
-    //     this->pressed = nullptr;
-
-    //     this->onclickeventcallback = nullptr;
-    //     this->callback = nullptr;
-
-    //     this->label.setFont(eke::Globals::GameFont);
-    //     this->label.setFillColor(Button::TextColor);
-    //     this->label.setString("");
-    //     this->lblboundingbox = this->label.getLocalBounds();
-    //     this->label.setOrigin(sf::Vector2f(this->lblboundingbox.width / 2, this->lblboundingbox.height * 1.5));
-
-    //     ValidateTextLength();
-    // }
-
     Button::Button(const char *label)
     {
         this->sprite = new sf::Sprite();
@@ -142,6 +123,7 @@ namespace eke
 
         if (!(this->texture->loadFromFile(texturepath) && this->hover->loadFromFile(hovertexturepath) && this->pressed->loadFromFile(pressedtexturepath)))
         {
+            std::cout << "Error loading button textures!\n";
             this->~Button();
         }
 

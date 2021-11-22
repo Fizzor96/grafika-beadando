@@ -24,6 +24,16 @@ namespace eke
         }
     }
 
+    void Controller::CleanUp()
+    {
+        for (size_t i = 0; i < eke::Controller::Scenes.size(); i++)
+        {
+            delete eke::Controller::Scenes[i];
+        }
+        eke::Controller::Scenes.empty();
+        delete eke::Controller::Current;
+    }
+
     void Controller::PollEvents()
     {
         Controller::Current->PollEvents();

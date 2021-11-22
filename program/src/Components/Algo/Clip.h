@@ -27,12 +27,10 @@ namespace eke
         static BYTE OutCode(const sf::FloatRect &rect, const sf::Vector2f &p);
 
     public:
-        // DON'T USE THIS!
-        static void Clipp(const sf::FloatRect &rect, sf::Vector2f p0, sf::Vector2f p1);
+        // Cohen-Shutter
+        static void CohenShutter(const sf::FloatRect &rect, const eke::Line &line);
         // Better Solution?
-        static void Clipp2(const sf::FloatRect &rect, const eke::Line &line);
-        // True Cohen-Shutter
-        static void Clipp3(const sf::FloatRect &rect, const eke::Line &line);
+        static void Clipp(const sf::FloatRect &rect, const eke::Line &line);
 
         Clip() = delete;
         Clip(const Clip &other) = delete;

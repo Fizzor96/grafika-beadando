@@ -13,6 +13,21 @@ namespace eke
         this->textureRect.height = texture->getSize().y / float(imgCount.y);
     }
 
+    void Anim::SetSwitchTime(const float &time)
+    {
+        this->switchTime = time;
+    }
+
+    void Anim::SetAnimationRow(const unsigned int &row)
+    {
+        this->currImg.y = row;
+    }
+
+    sf::IntRect Anim::GetAnimRect() const
+    {
+        return this->textureRect;
+    }
+
     Anim::~Anim()
     {
     }

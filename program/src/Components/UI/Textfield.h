@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TEXTFIELD_HPP
+#define TEXTFIELD_HPP 1
 
 #include "Core/Entity.h"
 
@@ -14,3 +15,5 @@ namespace eke
         void Draw() override;
     };
 }
+
+#endif

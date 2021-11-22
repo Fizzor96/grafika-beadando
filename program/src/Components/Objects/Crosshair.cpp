@@ -4,6 +4,8 @@ namespace eke
 {
     Crosshair::Crosshair(const sf::Vector2f &size, const bool &isgrabbed)
     {
+        this->sprite = nullptr;
+        this->texture = nullptr;
         this->isgrabbed = isgrabbed;
         rs.setSize(size);
         rs.setPosition(sf::Vector2f(100, 100));
@@ -20,6 +22,8 @@ namespace eke
 
     Crosshair::~Crosshair()
     {
+        delete this->sprite;
+        delete this->texture;
     }
 
     void Crosshair::PollEvents()

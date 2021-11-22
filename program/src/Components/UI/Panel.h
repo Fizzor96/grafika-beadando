@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PANEL_HPP
+#define PANEL_HPP 1
 
 #include "Core.h"
 #include "Core/Entity.h"
@@ -21,3 +22,5 @@ namespace eke
         void Draw() override;
     };
 }
+
+#endif

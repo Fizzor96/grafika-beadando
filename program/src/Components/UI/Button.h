@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BUTTON_HPP
+#define BUTTON_HPP 1
 
 #include <SFML/Graphics.hpp>
 #include "Core/Globals.h"
@@ -36,7 +37,6 @@ namespace eke
         ~Button();
 
     public:
-        // Public Member Functions
         void SetPosition(const sf::Vector2f &pos);
         sf::Vector2f GetPosition() const;
 
@@ -58,7 +58,6 @@ namespace eke
         void SetOnClickEvent(void (*clickeventcallback)());
         void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
 
-        // Entity
         void PollEvents() override;
         void Update() override;
         void Draw() override;
@@ -70,3 +69,5 @@ namespace eke
         Button &operator=(Button &&other) = delete;
     };
 }
+
+#endif

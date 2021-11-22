@@ -20,7 +20,7 @@ namespace eke
         // Context setting
         eke::Globals::CurrentContextSettings = new sf::ContextSettings(0U, 0U, 0U, 1U, 1U, 0U, false);
         // Renderwindow
-        eke::Globals::RenderWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "Grafika beadando - Szoke Dominik - FPS: 0", sf::Style::Default, *CurrentContextSettings);
+        eke::Globals::RenderWindow = new sf::RenderWindow(sf::VideoMode(1024, 768), "Grafika beadando - Szoke Dominik - FPS: 0", sf::Style::Default, *CurrentContextSettings);
         // Window position
         // eke::Globals::RenderWindow->setPosition(sf::Vector2i(0, 0));
         // Framerate
@@ -34,7 +34,7 @@ namespace eke
         // Event
         eke::Globals::Event = new sf::Event();
         // Fps timer
-        eke::Globals::fpstimer = new eke::Timer(0.5f, true);
+        eke::Globals::fpstimer = new eke::Timer(0.2f, true);
         eke::Globals::fpstimer->SetExpiredCallback(eke::Globals::FpsTimerCallback);
     }
 

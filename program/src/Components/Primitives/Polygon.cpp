@@ -11,7 +11,7 @@ namespace eke
         }
         if (closed)
         {
-            this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->p1, this->linearr[this->linearr.size() - 1]->c2, this->linearr[0]->p0, this->linearr[0]->c1));
+            this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->GetEndPos(), this->linearr[this->linearr.size() - 1]->GetEndColor(), this->linearr[0]->GetBeginPos(), this->linearr[0]->GetBeginColor()));
         }
         this->InitInitialImgVals();
         this->CreateEntity(color);
@@ -27,7 +27,7 @@ namespace eke
             }
             if (closed)
             {
-                this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->p1, this->linearr[this->linearr.size() - 1]->c2, this->linearr[0]->p0, this->linearr[0]->c1));
+                this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->GetEndPos(), this->linearr[this->linearr.size() - 1]->GetEndColor(), this->linearr[0]->GetBeginPos(), this->linearr[0]->GetBeginColor()));
             }
             this->InitInitialImgVals();
             this->CreateEntity(colors[0]);
@@ -45,7 +45,7 @@ namespace eke
             }
             if (closed)
             {
-                this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->p1, this->linearr[this->linearr.size() - 1]->c2, this->linearr[0]->p0, this->linearr[0]->c1));
+                this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->GetEndPos(), this->linearr[this->linearr.size() - 1]->GetEndColor(), this->linearr[0]->GetBeginPos(), this->linearr[0]->GetBeginColor()));
             }
             this->InitInitialImgVals();
             this->CreateEntity(colors[0]);

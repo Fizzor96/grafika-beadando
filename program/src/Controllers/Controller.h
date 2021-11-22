@@ -19,6 +19,7 @@ namespace eke
 
     public:
         static void Init();
+        static void CleanUp();
         static void LoadScene(const eke::SceneId &sceneid);
         static void PollEvents();
         static void Update();

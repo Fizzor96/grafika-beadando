@@ -24,6 +24,7 @@ namespace eke
     private:
         static eke::MenuScene *Instance;
         std::vector<eke::Entity *> entities;
+        std::vector<eke::Fire *> fires;
 
     private:
         void InitComponents();
