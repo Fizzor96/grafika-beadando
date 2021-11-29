@@ -1,8 +1,8 @@
 #ifndef MENUSCENE_HPP
 #define MENUSCENE_HPP 1
 
-#include "Core.h"
 #include "Controller.h"
+#include "Core.h"
 
 #include <vector>
 
@@ -17,6 +17,7 @@ namespace eke
         ~MenuScene();
 
         eke::SceneId GetSceneId() const;
+        // TODO: polling events in reverse order of drawing then break
         void PollEvents();
         void Update();
         void Draw();

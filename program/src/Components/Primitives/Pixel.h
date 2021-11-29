@@ -1,8 +1,8 @@
 #ifndef PIXEL_HPP
 #define PIXEL_HPP 1
 
-#include "Core/Globals.h"
 #include "Core/Entity.h"
+#include "Core/Globals.h"
 
 namespace eke
 {
@@ -29,6 +29,8 @@ namespace eke
         void PollEvents() override;
         void Update() override;
         void Draw() override;
+
+        bool operator==(const Pixel &other);
 
         Pixel() = delete;
         Pixel(const Pixel &other) = delete;

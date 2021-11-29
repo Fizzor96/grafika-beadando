@@ -98,4 +98,13 @@ namespace eke
     {
         eke::Globals::RenderWindow->draw(*this->sprite);
     }
+
+    bool Pixel::operator==(const Pixel &other)
+    {
+        if ((int)other.GetPosition().x == (int)this->GetPosition().x && (int)other.GetPosition().y == (int)this->GetPosition().y)
+        {
+            return true;
+        }
+        return false;
+    }
 }

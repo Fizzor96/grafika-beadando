@@ -12,9 +12,6 @@ namespace eke
         this->c1 = color;
         this->c2 = color;
 
-        // std::cout << "class: x1=" << this->p0->x << ", y1=" << this->p0->y;
-        // std::cout << " x2=" << this->p1->x << ", y2=" << this->p1->y << "\n";
-
         float dx = p1.x - p0.x;
         float dy = p1.y - p0.y;
         float length = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
@@ -42,9 +39,6 @@ namespace eke
         this->p1.y = endy;
         this->c1 = color;
         this->c2 = color;
-
-        // std::cout << "class: x1=" << this->p0->x << ", y1=" << this->p0->y;
-        // std::cout << " x2=" << this->p1->x << ", y2=" << this->p1->y << "\n";
 
         float dx = p1.x - p0.x;
         float dy = p1.y - p0.y;
@@ -215,7 +209,6 @@ namespace eke
         float R = c1.r, G = c1.g, B = c1.b;
 
         this->vertexarr.push_back(new eke::Pixel(p0, sf::Color(R, G, B, c1.a)));
-        // this->positions.push_back(sf::Vector2f(p0.x, p0.y));
         for (size_t i = 0; i < length; i++)
         {
             x += incX;
@@ -224,7 +217,6 @@ namespace eke
             G += incG;
             B += incB;
             this->vertexarr.push_back(new eke::Pixel(sf::Vector2f(x, y), sf::Color(R, G, B, c2.a)));
-            // this->positions.push_back(sf::Vector2f(x, y));
         }
     }
 

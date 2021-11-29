@@ -1,5 +1,5 @@
-#include <SFML/Graphics.hpp>
 #include "Engine.h"
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -8,7 +8,8 @@ int main()
     eke::Globals::Init();
     eke::Controller::Init();
 
-    std::exception ex;
+    eke::Ellipse ell(180, 50, 200, 200, sf::Color::Yellow);
+    eke::Pixel pix(200, 200);
 
     while (eke::Globals::RenderWindow->isOpen())
     {
@@ -25,6 +26,8 @@ int main()
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
         eke::Controller::Draw();
+        ell.Draw();
+        pix.Draw();
         eke::Globals::RenderWindow->display();
     }
 

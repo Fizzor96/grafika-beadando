@@ -9,8 +9,8 @@
 #include "Core/Timer.h"
 
 // Objects
-#include "Objects/Fire.h"
 #include "Objects/Crosshair.h"
+#include "Objects/Fire.h"
 
 // Primitives
 #include "Primitives/Ellipse.h"

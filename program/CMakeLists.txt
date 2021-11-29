@@ -28,9 +28,8 @@ file(GLOB App_SRC
 		"src/Views/*.cpp"
 		)
 
-
 IF (WIN32 AND MINGW)
-	add_compile_options(-Wall -O3 -g)
+	add_compile_options(-O3 -g -Wall)
 	set(SFML_STATIC_LIBRARIES TRUE)
 	set(SFML_DIR "deps/win/SFML-2.5.1/lib/cmake/SFML")
 	find_package (SFML 2.5 COMPONENTS system window graphics audio REQUIRED)
@@ -42,7 +41,7 @@ IF (WIN32 AND MINGW)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Controllers)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ELSE()
-	add_compile_options(-Wall -O3 -g)
+	add_compile_options(-O3 -g -Wall)
 	set(SFML_DIR "deps/linux/SFML-2.5.1/lib/cmake/SFML")
 	find_package (SFML 2.5 COMPONENTS system window graphics audio REQUIRED)
 	add_executable(${CMAKE_PROJECT_NAME} ${App_SRC})

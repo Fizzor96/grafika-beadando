@@ -153,53 +153,19 @@ namespace eke
         }
     }
 
-    void Polygon::Fill2(const sf::Color &color)
-    {
-        // if (bmp.GetPixel(p.X, p.Y).IsTheSameAs(background))
-        //     {
-        //         bmp.SetPixel(p.X, p.Y, fillcolor);
-        //         bmp.FillRec4(background, fillcolor, new Point(p.X + 1, p.Y));
-        //         bmp.FillRec4(background, fillcolor, new Point(p.X - 1, p.Y));
-        //         bmp.FillRec4(background, fillcolor, new Point(p.X, p.Y + 1));
-        //         bmp.FillRec4(background, fillcolor, new Point(p.X, p.Y - 1));
-        //     }
-
-        sf::Image img = this->sprite->getTexture()->copyToImage();
-        for (size_t i = 0; i < img.getSize().y; i++)
-        {
-            for (size_t j = 0; j < img.getSize().x; j++)
-            {
-                img.setPixel(i, j, sf::Color::Magenta);
-            }
-        }
-        img.setPixel(50, 50, sf::Color::Yellow);
-        delete this->texture;
-        this->texture = new sf::Texture();
-        this->texture->loadFromImage(img);
-        this->sprite->setTexture(*this->texture);
-
-        // for (size_t i = 0; i < this->sprite->getTextureRect().width; i++)
-        // {
-        //     for (size_t j = 0; j < this->sprite->getTextureRect().height; j++)
-        //     {
-        //         this->sprite->getTexture()->copyToImage().setPixel();
-        //     }
-        // }
-    }
-
     void Polygon::Fill(const sf::Color &color)
     {
-        sf::Image img = this->sprite->getTexture()->copyToImage();
-        // img.saveToFile("WTF.png");
-
-        // std::cout << img.getSize().x << " " << img.getSize().y << std::endl;
+        sf::Texture temptexture(*this->sprite->getTexture());
+        auto size = temptexture.getSize();
+        // std::cout << size.x << " " << size.y << std::endl;
+        sf::Image img = temptexture.copyToImage();
 
         int dx[] = {0, 1, 0, -1};
         int dy[] = {1, 0, -1, 0};
 
         std::vector<sf::Vector2f> stack;
 
-        stack.push_back(sf::Vector2f(img.getSize().x / 2, img.getSize().y / 2));
+        stack.push_back(sf::Vector2f((int)(size.x / 2), (int)(size.y / 2)));
 
         sf::Vector2f p0, p1;
 
@@ -207,36 +173,28 @@ namespace eke
         {
             p0 = stack[stack.size() - 1];
             stack.pop_back();
+            // printf("stack size: %i\n", stack.size());
 
-            if (!(p0.x < 0 || p0.x > img.getSize().x || p0.y > img.getSize().y || p0.y < 0))
-            {
-                img.setPixel(p0.x, p0.y, color);
-            }
-
-            printf("POG\n");
+            img.setPixel(p0.x, p0.y, color);
+            std::cout << "p0: " << p0.x << " " << p0.y << std::endl;
 
             for (size_t i = 0; i < 4; i++)
             {
-                p1 = sf::Vector2f(p0.x + dx[i], p0.y + dy[i]);
+                p1.x = (int)(p0.x + dx[i]);
+                p1.y = (int)(p0.y + dy[i]);
+                std::cout << "p1: " << p1.x << " " << p1.y << std::endl;
+                // p1 = sf::Vector2f(p0.x + dx[i], p0.y + dy[i]);
 
-                if (!(p1.x < 0 || p1.x > img.getSize().x || p1.y > img.getSize().y || p1.y < 0))
+                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+                if (img.getPixel(p1.x, p1.y) != color)
                 {
-                    if (img.getPixel(p1.x, p1.y) != color)
-                    {
-                        stack.push_back(p1);
-                    }
+                    stack.push_back(p1);
                 }
             }
         }
-        delete this->texture;
-        this->texture = new sf::Texture();
         this->texture->loadFromImage(img);
         this->sprite->setTexture(*this->texture);
-    }
-
-    sf::Vector2f Polygon::GetPosition() const
-    {
-        return this->sprite->getPosition();
     }
 
     void Polygon::ToString()
@@ -254,14 +212,14 @@ namespace eke
 
     void Polygon::Draw()
     {
-        // for (size_t i = 0; i < this->linearr.size(); i++)
-        // {
-        //     this->linearr[i]->Draw();
-        // }
-        if (this->sprite != nullptr)
+        for (size_t i = 0; i < this->linearr.size(); i++)
         {
-            eke::Globals::RenderWindow->draw(*this->sprite);
+            this->linearr[i]->Draw();
         }
+        // if (this->sprite != nullptr)
+        // {
+        //     eke::Globals::RenderWindow->draw(*this->sprite);
+        // }
     }
 
     Polygon::~Polygon()

@@ -237,7 +237,6 @@ namespace eke
 
     void Button::PollEvents()
     {
-
         if (this->onclickeventcallback != nullptr)
         {
             if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))

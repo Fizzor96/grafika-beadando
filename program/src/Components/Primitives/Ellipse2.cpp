@@ -52,25 +52,6 @@ namespace eke
         CalculateEllipse(posx - (r1 / 2), posy + (r2 / 2), posx + (r1 / 2), posy - (r2 / 2));
     }
 
-    void Ellipse2::Make()
-    {
-        for (size_t i = 0; i < this->positions.size(); i++)
-        {
-            if (this->positions[i].x != 0 && this->positions[i].y != 0)
-            {
-                this->lines.push_back(new eke::Line(this->positions[i], this->positions[i + 1], sf::Color::Yellow));
-            }
-        }
-    }
-
-    void Ellipse2::DrawEllipse()
-    {
-        for (size_t i = 0; i < this->lines.size(); i++)
-        {
-            this->lines[i]->Draw();
-        }
-    }
-
     Ellipse2::~Ellipse2()
     {
     }
