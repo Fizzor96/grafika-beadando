@@ -8,28 +8,29 @@ set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "${CMAKE_SHARED_LIBRARY_LINK_C_FLAGS} -sta
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS} -static-libgcc -static-libstdc++ -s")
 
 file(GLOB App_SRC
-		"src/*.h",
-		"src/*.cpp",
-		"src/Components/*.h",
-		"src/Components/*.cpp",
-		"src/Components/Algo/*.h",
-		"src/Components/Algo/*.cpp",
-		"src/Components/Core/*.h",
-		"src/Components/Core/*.cpp",
-		"src/Components/Objects/*.h",
-		"src/Components/Objects/*.cpp",
-		"src/Components/Primitives/*.h",
-		"src/Components/Primitives/*.cpp",
-		"src/Components/UI/*.h",
-		"src/Components/UI/*.cpp",
-		"src/Controllers/*.h",
-		"src/Controllers/*.cpp",
-		"src/Views/*.h",
+		"src/*.h"
+		"src/*.cpp"
+		"src/Components/*.h"
+		"src/Components/*.cpp"
+		"src/Components/Algo/*.h"
+		"src/Components/Algo/*.cpp"
+		"src/Components/Core/*.h"
+		"src/Components/Core/*.cpp"
+		"src/Components/Objects/*.h"
+		"src/Components/Objects/*.cpp"
+		"src/Components/Primitives/*.h"
+		"src/Components/Primitives/*.cpp"
+		"src/Components/UI/*.h"
+		"src/Components/UI/*.cpp"
+		"src/Controllers/*.h"
+		"src/Controllers/*.cpp"
+		"src/Views/*.h"
 		"src/Views/*.cpp"
 		)
 
 
-IF (WIN32)
+IF (WIN32 AND MINGW)
+	add_compile_options(-Wall -O3 -g)
 	set(SFML_STATIC_LIBRARIES TRUE)
 	set(SFML_DIR "deps/win/SFML-2.5.1/lib/cmake/SFML")
 	find_package (SFML 2.5 COMPONENTS system window graphics audio REQUIRED)
@@ -41,6 +42,7 @@ IF (WIN32)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Controllers)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ELSE()
+	add_compile_options(-Wall -O3 -g)
 	set(SFML_DIR "deps/linux/SFML-2.5.1/lib/cmake/SFML")
 	find_package (SFML 2.5 COMPONENTS system window graphics audio REQUIRED)
 	add_executable(${CMAKE_PROJECT_NAME} ${App_SRC})

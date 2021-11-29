@@ -8,6 +8,8 @@ int main()
     eke::Globals::Init();
     eke::Controller::Init();
 
+    std::exception ex;
+
     while (eke::Globals::RenderWindow->isOpen())
     {
         eke::Globals::DeltaTime = eke::Globals::Clock->restart().asSeconds();

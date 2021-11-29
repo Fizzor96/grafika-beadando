@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Core/Globals.h"
+#include "Primitives/Line.h"
 #include "Pixel.h"
 #include <math.h>
 #include <vector>
@@ -20,10 +21,13 @@ namespace eke
         std::vector<sf::Vector2f> positions;
         sf::Vector2f position;
         float r1, r2;
+        std::vector<eke::Line *> lines;
 
     public:
         Ellipse2(float posx, float posy, float r1, float r2);
         ~Ellipse2();
+        void Make();
+        void DrawEllipse();
         void Draw();
 
     private:

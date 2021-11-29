@@ -24,10 +24,13 @@ namespace eke
     public:
         // Experimental
         void Fill(const sf::Color &color);
+        void Fill2(const sf::Color &color);
         // Set poli position by calling Move on each line in linearr
         void SetPosition(const sf::Vector2f &pos);
         // Set poli position by calling Move on each line in linearr
         void SetPosition(const float &posx, const float &posy);
+        // Get poli position
+        sf::Vector2f GetPosition() const;
         // Simple ToString :)
         void ToString();
         void PollEvents();

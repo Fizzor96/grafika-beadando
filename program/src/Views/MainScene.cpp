@@ -24,7 +24,18 @@ namespace eke
         this->rectangles.push_back(rect1);
 
         eke::Polygon *poli = new eke::Polygon(eke::Ellipse2(200.f, 200.f, 100.f, 100.f).positions, sf::Color::Yellow, true);
-        this->drawables.push_back(poli);
+        poli->SetPosition(300, 300);
+        // poli->Fill(sf::Color::Red);
+        // this->drawables.push_back(poli);
+
+        std::vector<sf::Vector2f> points;
+        points.push_back(sf::Vector2f(100, 100));
+        points.push_back(sf::Vector2f(200, 100));
+        points.push_back(sf::Vector2f(150, 200));
+        eke::Polygon *test = new eke::Polygon(points, sf::Color::Red, true);
+        test->SetPosition(500, 300);
+        // test->Fill2(sf::Color::Magenta);
+        // this->drawables.push_back(test);
 
         this->cr = new eke::Crosshair(sf::Vector2f(75, 75), true);
     }
@@ -66,20 +77,20 @@ namespace eke
         {
             this->entities[i]->Draw();
         }
-        // for (size_t i = 0; i < this->drawables.size(); i++)
-        // {
-        //     this->drawables[i]->Draw();
-        // }
         for (size_t i = 0; i < this->drawables.size(); i++)
         {
-            for (size_t j = 0; j < this->drawables[i]->linearr.size(); j++)
-            {
-                eke::Clip::CohenShutter(cr->GetGlobalBounds(), *this->drawables[i]->linearr[j]);
-            }
-
-            // eke::Clip::Clipp(cr->GetGlobalBounds(), *poli.linearr[i]);
-            // eke::Clip::Clipp2(cr.GetGlobalBounds(), *poli.linearr[i]);
+            this->drawables[i]->Draw();
         }
+        // for (size_t i = 0; i < this->drawables.size(); i++)
+        // {
+        //     for (size_t j = 0; j < this->drawables[i]->linearr.size(); j++)
+        //     {
+        //         eke::Clip::CohenShutter(cr->GetGlobalBounds(), *this->drawables[i]->linearr[j]);
+        //     }
+
+        //     // eke::Clip::Clipp(cr->GetGlobalBounds(), *poli.linearr[i]);
+        //     // eke::Clip::Clipp2(cr.GetGlobalBounds(), *poli.linearr[i]);
+        // }
 
         cr->Draw();
     }

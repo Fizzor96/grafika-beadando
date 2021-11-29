@@ -157,7 +157,6 @@ namespace eke
 
         for (size_t i = 0; i < this->vertexarr.size(); i++)
         {
-            auto currpix = this->vertexarr[i];
             this->vertexarr[i]->SetPosition(this->vertexarr[i]->GetPosition() + diff);
         }
 
@@ -176,7 +175,6 @@ namespace eke
 
         for (size_t i = 0; i < this->vertexarr.size(); i++)
         {
-            auto currpix = this->vertexarr[i];
             this->vertexarr[i]->SetPosition(this->vertexarr[i]->GetPosition() + diff);
         }
 

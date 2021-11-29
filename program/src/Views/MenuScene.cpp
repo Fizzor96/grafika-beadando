@@ -24,13 +24,13 @@ namespace eke
         eke::Button *btnOptions = new eke::Button("Options");
         btnOptions->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + separator));
         btnOptions->SetOnClickEvent([]()
-                                    { std::cout << " OPTIONS PLACEHODLER!\n"; });
+                                    { std::cout << "OPTIONS PLACEHODLER!\n"; });
         this->entities.push_back(btnOptions);
 
         eke::Button *btnHelp = new eke::Button("Help");
         btnHelp->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnOptions->GetPosition().y + separator));
         btnHelp->SetOnClickEvent([]()
-                                 { std::cout << " HELP PLACEHODLER!\n"; });
+                                 { std::cout << "HELP PLACEHODLER!\n"; });
         this->entities.push_back(btnHelp);
 
         eke::Fire *fire1 = new eke::Fire();
