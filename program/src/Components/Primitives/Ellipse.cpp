@@ -70,6 +70,11 @@ namespace eke
 
     Ellipse::~Ellipse()
     {
+        for (size_t i = 0; i < this->vertexarr.size(); i++)
+        {
+            delete this->vertexarr[i];
+        }
+        this->vertexarr.clear();
     }
 
     void Ellipse::Draw()
