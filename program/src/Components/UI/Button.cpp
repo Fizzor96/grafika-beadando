@@ -23,10 +23,9 @@ namespace eke
 
     void Button::InitNullCallbacks()
     {
-        // this->onclickeventcallback = nullptr;
-        // this->callback = nullptr;
-        // this->callbackarg = nullptr;
+        this->onclickeventcallback = nullptr;
         this->callback = nullptr;
+        this->callbackarg = nullptr;
     }
 
     void Button::UpdateTextures()
@@ -148,7 +147,7 @@ namespace eke
         delete this->texture;
         delete this->hover;
         delete this->pressed;
-        // free(callbackarg);
+        free(callbackarg);
     }
 
     void Button::SetPosition(const sf::Vector2f &pos)
@@ -229,53 +228,53 @@ namespace eke
         this->pressed->loadFromFile(pressedtexturepath);
     }
 
-    // void Button::SetOnClickEvent(void (*clickeventcallback)())
-    // {
-    //     this->onclickeventcallback = clickeventcallback;
-    // }
-
-    // void Button::SetOnClickEvent(void (*clickeventcallback)(void *), void *arg)
-    // {
-    //     this->callback = clickeventcallback;
-    //     this->callbackarg = arg;
-    // }
-
-    void Button::SetOnClickEvent(std::function<void()> &callback)
+    void Button::SetOnClickEvent(void (*clickeventcallback)())
     {
-        this->callback = &callback;
+        this->onclickeventcallback = clickeventcallback;
     }
+
+    void Button::SetOnClickEvent(void (*clickeventcallback)(void *), void *arg)
+    {
+        this->callback = clickeventcallback;
+        this->callbackarg = arg;
+    }
+
+    // void Button::SetOnClickEvent(std::function<void()> &callback)
+    // {
+    //     this->callback = &callback;
+    // }
 
     void Button::PollEvents()
     {
-        // if (this->onclickeventcallback != nullptr)
-        // {
-        //     if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
-        //     {
-        //         if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-        //         {
-        //             this->onclickeventcallback();
-        //         }
-        //     }
-        // }
-
-        if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+        if (this->onclickeventcallback != nullptr)
         {
-            if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+            if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
             {
-                (*this->callback)();
+                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+                {
+                    this->onclickeventcallback();
+                }
             }
         }
 
-        // if (this->callback != nullptr)
+        // if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
         // {
-        //     if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+        //     if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
         //     {
-        //         if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-        //         {
-        //             this->callback(this->callbackarg);
-        //         }
+        //         (*this->callback)();
         //     }
         // }
+
+        if (this->callback != nullptr)
+        {
+            if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+            {
+                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+                {
+                    this->callback(this->callbackarg);
+                }
+            }
+        }
     }
 
     void Button::Update()

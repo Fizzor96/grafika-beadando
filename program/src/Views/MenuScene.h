@@ -15,23 +15,27 @@ namespace eke
         MenuScene();
         ~MenuScene();
 
+        eke::MenuScene *GetInstance() const;
         eke::SceneId GetSceneId() const;
         // TODO: polling events in reverse order of drawing then break
         void PollEvents();
         void Update();
         void Draw();
 
-    private:
-        static eke::MenuScene *Instance;
+    public:
         std::vector<eke::Entity *> entities;
         std::vector<eke::Fire *> fires;
+        std::vector<eke::Entity *> logo;
         eke::Label *info_lbl;
+        eke::Crosshair *cr;
         bool helpisvisible;
-        eke::Timer *helptimer;
+
+    private:
+        static eke::MenuScene *Instance;
 
     private:
         void InitComponents();
-        void HelpBtnCallback();
+        void InitLogo();
 
     public:
         MenuScene(const MenuScene &other) = delete;

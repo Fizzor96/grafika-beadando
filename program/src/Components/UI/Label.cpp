@@ -65,6 +65,11 @@ namespace eke
         this->text.setPosition(position);
     }
 
+    sf::Vector2f Label::GetPosition() const
+    {
+        return this->text.getPosition();
+    }
+
     void Label::SetColor(const sf::Color &color)
     {
         this->text.setFillColor(color);

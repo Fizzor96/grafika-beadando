@@ -20,6 +20,7 @@ namespace eke
         Label(const char *str, const sf::Vector2f &position, const sf::Color &textcolor);
         void SetPosition(const float &posx, const float &posy);
         void SetPosition(const sf::Vector2f &position);
+        sf::Vector2f GetPosition() const;
         void SetColor(const sf::Color &color);
         void SetText(const char *str);
         void Draw();

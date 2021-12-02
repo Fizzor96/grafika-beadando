@@ -1,20 +1,20 @@
 #ifndef POLYGON_HPP
 #define POLYGON_HPP 1
 
-#include <SFML/Graphics.hpp>
 #include "Core/Entity.h"
 #include "Line.h"
 #include "Pixel.h"
-#include <vector>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <thread>
+#include <vector>
 
 namespace eke
 {
     class Polygon : public Entity
     {
     public:
-        std::vector<eke::Line *> linearr;
+        // std::vector<eke::Line *> lines;
 
     public:
         Polygon(const std::vector<sf::Vector2f> &points, const sf::Color &color, bool closed = false);
@@ -30,9 +30,9 @@ namespace eke
         void SetPosition(const float &posx, const float &posy);
         // Simple ToString :)
         void ToString();
-        void PollEvents();
-        void Update();
-        void Draw();
+        void PollEvents() override;
+        void Update() override;
+        void Draw() override;
 
     private:
         // Basic methods to create sprite and texture from existing verticies

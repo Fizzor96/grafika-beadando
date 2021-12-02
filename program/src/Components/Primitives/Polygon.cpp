@@ -7,11 +7,11 @@ namespace eke
         outlinecolor = color;
         for (size_t i = 0; i < points.size() - 1; i++)
         {
-            this->linearr.push_back(new eke::Line(points[i], color, points[i + 1], color));
+            this->lines.push_back(new eke::Line(points[i], color, points[i + 1], color));
         }
         if (closed)
         {
-            this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->GetEndPos(), this->linearr[this->linearr.size() - 1]->GetEndColor(), this->linearr[0]->GetBeginPos(), this->linearr[0]->GetBeginColor()));
+            this->lines.push_back(new eke::Line(this->lines[this->lines.size() - 1]->GetEndPos(), this->lines[this->lines.size() - 1]->GetEndColor(), this->lines[0]->GetBeginPos(), this->lines[0]->GetBeginColor()));
         }
         this->InitInitialImgVals();
         this->CreateEntity(color);
@@ -23,11 +23,11 @@ namespace eke
         {
             for (size_t i = 0; i < points.size() - 1; i++)
             {
-                this->linearr.push_back(new eke::Line(points[i], colors[i], points[i + 1], colors[i + 1]));
+                this->lines.push_back(new eke::Line(points[i], colors[i], points[i + 1], colors[i + 1]));
             }
             if (closed)
             {
-                this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->GetEndPos(), this->linearr[this->linearr.size() - 1]->GetEndColor(), this->linearr[0]->GetBeginPos(), this->linearr[0]->GetBeginColor()));
+                this->lines.push_back(new eke::Line(this->lines[this->lines.size() - 1]->GetEndPos(), this->lines[this->lines.size() - 1]->GetEndColor(), this->lines[0]->GetBeginPos(), this->lines[0]->GetBeginColor()));
             }
             this->InitInitialImgVals();
             this->CreateEntity(colors[0]);
@@ -37,7 +37,7 @@ namespace eke
             size_t j = 0;
             for (size_t i = 0; i < points.size(); i++)
             {
-                this->linearr.push_back(new eke::Line(points[i], colors[j], points[i + 1], colors[j]));
+                this->lines.push_back(new eke::Line(points[i], colors[j], points[i + 1], colors[j]));
                 if (j < colors.size())
                 {
                     j++;
@@ -45,7 +45,7 @@ namespace eke
             }
             if (closed)
             {
-                this->linearr.push_back(new eke::Line(this->linearr[this->linearr.size() - 1]->GetEndPos(), this->linearr[this->linearr.size() - 1]->GetEndColor(), this->linearr[0]->GetBeginPos(), this->linearr[0]->GetBeginColor()));
+                this->lines.push_back(new eke::Line(this->lines[this->lines.size() - 1]->GetEndPos(), this->lines[this->lines.size() - 1]->GetEndColor(), this->lines[0]->GetBeginPos(), this->lines[0]->GetBeginColor()));
             }
             this->InitInitialImgVals();
             this->CreateEntity(colors[0]);
@@ -59,33 +59,33 @@ namespace eke
 
     void Polygon::InitInitialImgVals()
     {
-        this->minx = this->linearr[0]->positions[0].x;
-        this->miny = this->linearr[0]->positions[0].y;
-        this->maxx = this->linearr[0]->positions[0].x;
-        this->maxy = this->linearr[0]->positions[0].y;
+        this->minx = this->lines[0]->positions[0].x;
+        this->miny = this->lines[0]->positions[0].y;
+        this->maxx = this->lines[0]->positions[0].x;
+        this->maxy = this->lines[0]->positions[0].y;
 
         // printf("%i - %i - %i - %i\n", minx, miny, maxx, maxy);
         // printf("%i\n", this->linearr[0]->positions.size());
 
-        for (size_t i = 0; i < this->linearr.size(); i++)
+        for (size_t i = 0; i < this->lines.size(); i++)
         {
-            for (size_t j = 0; j < this->linearr[i]->positions.size(); j++)
+            for (size_t j = 0; j < this->lines[i]->positions.size(); j++)
             {
-                if (this->linearr[i]->positions[j].x < this->minx)
+                if (this->lines[i]->positions[j].x < this->minx)
                 {
-                    this->minx = this->linearr[i]->positions[j].x;
+                    this->minx = this->lines[i]->positions[j].x;
                 }
-                if (this->linearr[i]->positions[j].x > this->maxx)
+                if (this->lines[i]->positions[j].x > this->maxx)
                 {
-                    this->maxx = this->linearr[i]->positions[j].x;
+                    this->maxx = this->lines[i]->positions[j].x;
                 }
-                if (this->linearr[i]->positions[j].y < this->miny)
+                if (this->lines[i]->positions[j].y < this->miny)
                 {
-                    this->miny = this->linearr[i]->positions[j].y;
+                    this->miny = this->lines[i]->positions[j].y;
                 }
-                if (this->linearr[i]->positions[j].y > this->maxy)
+                if (this->lines[i]->positions[j].y > this->maxy)
                 {
-                    this->maxy = this->linearr[i]->positions[j].y;
+                    this->maxy = this->lines[i]->positions[j].y;
                 }
             }
         }
@@ -99,11 +99,11 @@ namespace eke
         sf::Image img;
         unsigned int extension = 1;
         img.create((this->maxx - this->minx) + extension, (this->maxy - this->miny) + extension, sf::Color(0, 0, 0, 0));
-        for (size_t i = 0; i < this->linearr.size(); i++)
+        for (size_t i = 0; i < this->lines.size(); i++)
         {
-            for (size_t j = 0; j < this->linearr[i]->positions.size(); j++)
+            for (size_t j = 0; j < this->lines[i]->positions.size(); j++)
             {
-                img.setPixel(this->linearr[i]->positions[j].x - this->minx, this->linearr[i]->positions[j].y - this->miny, color);
+                img.setPixel(this->lines[i]->positions[j].x - this->minx, this->lines[i]->positions[j].y - this->miny, color);
             }
         }
         // printf("pog\n");
@@ -123,9 +123,9 @@ namespace eke
             sf::Vector2f diff;
             diff.x = pos.x - this->center.x;
             diff.y = pos.y - this->center.y;
-            for (size_t i = 0; i < this->linearr.size(); i++)
+            for (size_t i = 0; i < this->lines.size(); i++)
             {
-                this->linearr[i]->Move(diff.x, diff.y);
+                this->lines[i]->Move(diff.x, diff.y);
             }
             this->center.x = pos.x;
             this->center.y = pos.y;
@@ -143,9 +143,9 @@ namespace eke
             diff.y = posy - this->center.y;
             // std::cout << diff.x << " " << diff.y << std::endl;
             // std::cout << this->linearr[0]->vertexarr[0]->GetPosition().x << " " << this->linearr[0]->vertexarr[0]->GetPosition().y << std::endl;
-            for (size_t i = 0; i < this->linearr.size(); i++)
+            for (size_t i = 0; i < this->lines.size(); i++)
             {
-                this->linearr[i]->Move(diff.x, diff.y);
+                this->lines[i]->Move(diff.x, diff.y);
             }
             // std::cout << this->linearr[0]->vertexarr[0]->GetPosition().x << " " << this->linearr[0]->vertexarr[0]->GetPosition().y << std::endl;
             this->center.x = posx;
@@ -212,9 +212,9 @@ namespace eke
 
     void Polygon::Draw()
     {
-        for (size_t i = 0; i < this->linearr.size(); i++)
+        for (size_t i = 0; i < this->lines.size(); i++)
         {
-            this->linearr[i]->Draw();
+            this->lines[i]->Draw();
         }
         // if (this->sprite != nullptr)
         // {
@@ -224,9 +224,9 @@ namespace eke
 
     Polygon::~Polygon()
     {
-        for (size_t i = 0; i < this->linearr.size(); i++)
+        for (size_t i = 0; i < this->lines.size(); i++)
         {
-            delete this->linearr[i];
+            delete this->lines[i];
         }
     }
 }

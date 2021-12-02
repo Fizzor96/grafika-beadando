@@ -2,9 +2,11 @@
 #define ENTITY_HPP 1
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 namespace eke
 {
+    class Line;
     // Basic Entity decl
     class Entity
     {
@@ -13,6 +15,7 @@ namespace eke
         sf::Texture *texture;
 
     public:
+        std::vector<eke::Line *> lines;
         Entity() {}
         virtual ~Entity() {}
         virtual void PollEvents() = 0;

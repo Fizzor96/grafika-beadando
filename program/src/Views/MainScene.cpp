@@ -75,9 +75,9 @@ namespace eke
         // }
         for (size_t i = 0; i < this->drawables.size(); i++)
         {
-            for (size_t j = 0; j < this->drawables[i]->linearr.size(); j++)
+            for (size_t j = 0; j < this->drawables[i]->lines.size(); j++)
             {
-                eke::Clip::CohenShutter(cr->GetGlobalBounds(), *this->drawables[i]->linearr[j]);
+                eke::Clip::CohenShutter(cr->GetGlobalBounds(), *this->drawables[i]->lines[j]);
             }
 
             // eke::Clip::Clipp(cr->GetGlobalBounds(), *poli.linearr[i]);

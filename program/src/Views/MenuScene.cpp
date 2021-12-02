@@ -5,9 +5,23 @@ namespace eke
 
     MenuScene *MenuScene::Instance = nullptr;
 
-    void MenuScene::HelpBtnCallback()
+    eke::MenuScene *MenuScene::GetInstance() const
     {
-        this->helptimer->Start();
+        return eke::MenuScene::Instance;
+    }
+
+    void MenuScene::InitLogo()
+    {
+        this->logo.push_back(new eke::Ellipse(120, 50, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Green));
+        this->logo.push_back(new eke::Ellipse(50, 50, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Blue));
+        eke::Rectangle *rect = new eke::Rectangle(75, 75, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Red);
+        this->logo.push_back(rect);
+        std::vector<sf::Vector2f> points;
+        points.push_back(rect->GetPosition());
+        points.push_back(sf::Vector2f(rect->GetPosition().x + rect->GetSize().x, rect->GetPosition().y));
+        points.push_back(sf::Vector2f(points[1].x - rect->GetSize().x / 2, rect->GetPosition().y + rect->GetSize().y));
+        eke::Polygon *poli = new eke::Polygon(points, sf::Color::Yellow, true);
+        this->logo.push_back(poli);
     }
 
     void MenuScene::InitComponents()
@@ -20,26 +34,18 @@ namespace eke
 
         const float separator = btnStart->GetSize().y * 1.5;
 
+        this->helpisvisible = false;
+        eke::Button *btnHelp = new eke::Button("Help");
+        btnHelp->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + separator));
+        btnHelp->SetOnClickEvent([&Instance]()
+                                 { Instance->helpisvisible = !Instance->helpisvisible; });
+        this->entities.push_back(btnHelp);
+
         eke::Button *btnExit = new eke::Button("Exit");
         btnExit->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, eke::Globals::RenderWindow->getView().getSize().y - btnExit->GetSize().y));
         btnExit->SetOnClickEvent([]()
                                  { eke::Globals::RenderWindow->close(); });
         this->entities.push_back(btnExit);
-
-        // eke::Button *btnOptions = new eke::Button("Options");
-        // btnOptions->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + separator));
-        // btnOptions->SetOnClickEvent([]()
-        //                             { std::cout << "OPTIONS PLACEHODLER!\n"; });
-        // this->entities.push_back(btnOptions);
-
-        this->helpisvisible = false;
-        this->helptimer = new eke::Timer(5.f, false);
-
-        eke::Button *btnHelp = new eke::Button("Help");
-        btnHelp->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + separator));
-        btnHelp->SetOnClickEvent([&]()
-                                 { helptimer->Start(); });
-        this->entities.push_back(btnHelp);
 
         // eke::Fire *fire1 = new eke::Fire();
         // fire1->SetScale(sf::Vector2f(10, 20));
@@ -52,6 +58,9 @@ namespace eke
         // this->fires.push_back(fire2);
 
         this->info_lbl = new eke::Label("Find as many shapes as you can within the given time limit!", eke::Globals::RenderWindow->getView().getSize().x / 2, eke::Globals::RenderWindow->getView().getSize().y / 2);
+
+        this->cr = new eke::Crosshair(sf::Vector2f(75, 75), true);
+        InitLogo();
     }
 
     void MenuScene::PollEvents()
@@ -60,11 +69,15 @@ namespace eke
         {
             this->entities[i]->PollEvents();
         }
+        for (size_t i = 0; i < this->logo.size(); i++)
+        {
+            this->logo[i]->PollEvents();
+        }
+        cr->PollEvents();
     }
 
     void MenuScene::Update()
     {
-        this->helptimer->Update(eke::Globals::DeltaTime);
         for (size_t i = 0; i < this->entities.size(); i++)
         {
             this->entities[i]->Update();
@@ -73,11 +86,19 @@ namespace eke
         {
             this->fires[i]->Update();
         }
+        for (size_t i = 0; i < this->logo.size(); i++)
+        {
+            this->logo[i]->Update();
+        }
+        cr->Update();
     }
 
     void MenuScene::Draw()
     {
-        this->info_lbl->Draw();
+        if (this->helpisvisible)
+        {
+            this->info_lbl->Draw();
+        }
         for (size_t i = 0; i < this->entities.size(); i++)
         {
             this->entities[i]->Draw();
@@ -85,6 +106,18 @@ namespace eke
         for (size_t i = 0; i < this->fires.size(); i++)
         {
             this->fires[i]->Draw();
+        }
+        // for (size_t i = 0; i < this->logo.size(); i++)
+        // {
+        //     this->logo[i]->Draw();
+        // }
+
+        for (size_t i = 0; i < this->logo.size(); i++)
+        {
+            for (size_t j = 0; j < this->logo[i]->lines.size(); j++)
+            {
+                eke::Clip::CohenShutter(cr->GetGlobalBounds(), *this->logo[i]->lines[j]);
+            }
         }
     }
 

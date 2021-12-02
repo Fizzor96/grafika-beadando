@@ -4,6 +4,9 @@ namespace eke
 {
     Ellipse::Ellipse(int rx, int ry, int xc, int yc, sf::Color color)
     {
+        this->texture = nullptr;
+        this->sprite = nullptr;
+
         this->center.x = xc;
         this->center.y = yc;
 
@@ -133,6 +136,14 @@ namespace eke
             this->center.x = pos.x;
             this->center.y = pos.y;
         }
+    }
+
+    void Ellipse::PollEvents()
+    {
+    }
+
+    void Ellipse::Update()
+    {
     }
 
     void Ellipse::Draw()

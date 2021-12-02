@@ -4,6 +4,12 @@ namespace eke
 {
     Rectangle::Rectangle(const sf::Vector2f &size, const sf::Vector2f &centerpos, const sf::Color &color)
     {
+        this->boundingbox.left = centerpos.x - size.x / 2;
+        this->boundingbox.top = centerpos.y - size.y / 2;
+        this->boundingbox.width = size.x;
+        this->boundingbox.height = size.y;
+        this->texture = nullptr;
+        this->sprite = nullptr;
         sf::Vector2f startpos;
         startpos.x = centerpos.x - size.x / 2;
         startpos.y = centerpos.y - size.y / 2;
@@ -15,6 +21,12 @@ namespace eke
 
     Rectangle::Rectangle(const float &width, const float &height, const float &centerx, const float &centery, const sf::Color &color)
     {
+        this->boundingbox.left = centerx - width / 2;
+        this->boundingbox.top = centery - height / 2;
+        this->boundingbox.width = width;
+        this->boundingbox.height = height;
+        this->texture = nullptr;
+        this->sprite = nullptr;
         sf::Vector2f startpos;
         startpos.x = centerx - width / 2;
         startpos.y = centery - height / 2;
@@ -33,11 +45,35 @@ namespace eke
         this->lines.clear();
     }
 
+    sf::Vector2f Rectangle::GetPosition() const
+    {
+        sf::Vector2f pos;
+        pos.x = this->boundingbox.left;
+        pos.y = this->boundingbox.top;
+        return pos;
+    }
+
+    sf::Vector2f Rectangle::GetSize() const
+    {
+        sf::Vector2f size;
+        size.x = this->boundingbox.width;
+        size.y = this->boundingbox.height;
+        return size;
+    }
+
     void Rectangle::Draw()
     {
         for (size_t i = 0; i < lines.size(); i++)
         {
             this->lines[i]->Draw();
         }
+    }
+
+    void Rectangle::PollEvents()
+    {
+    }
+
+    void Rectangle::Update()
+    {
     }
 }

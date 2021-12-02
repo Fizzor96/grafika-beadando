@@ -35,6 +35,7 @@ namespace eke
         eke::Globals::Event = new sf::Event();
         // Fps timer
         eke::Globals::fpstimer = new eke::Timer(0.2f, true);
+        eke::Globals::fpstimer->Start();
         eke::Globals::fpstimer->SetExpiredCallback(eke::Globals::FpsTimerCallback);
     }
 
