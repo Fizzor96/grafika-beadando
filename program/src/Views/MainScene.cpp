@@ -8,8 +8,9 @@ namespace eke
     {
         eke::Button *menuBtn = new eke::Button("Menu");
         menuBtn->SetPosition(sf::Vector2f(menuBtn->GetPosition().x + menuBtn->GetSize().x / 2, menuBtn->GetPosition().y + menuBtn->GetSize().y / 2));
-        menuBtn->SetOnClickEvent([]()
-                                 { eke::Controller::LoadScene(eke::SceneId::Menu); });
+        auto lambda1 = []()
+        { eke::Controller::LoadScene(eke::SceneId::Menu); };
+        menuBtn->SetOnClickEvent(lambda1);
         this->entities.push_back(menuBtn);
 
         eke::Button *restartBtn = new eke::Button("Restart");
@@ -54,6 +55,8 @@ namespace eke
             this->drawables[i]->Update();
         }
         cr->Update();
+        // sf::FloatRect crbb = this->cr->GetGlobalBounds();
+        // std::cout << "top: " << crbb.top << " left:" << crbb.left << " width:" << crbb.width << " height: " << crbb.height << std::endl;
     }
 
     void MainScene::Draw()

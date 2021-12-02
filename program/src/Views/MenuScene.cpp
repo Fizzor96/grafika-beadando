@@ -5,6 +5,11 @@ namespace eke
 
     MenuScene *MenuScene::Instance = nullptr;
 
+    void MenuScene::HelpBtnCallback()
+    {
+        this->helptimer->Start();
+    }
+
     void MenuScene::InitComponents()
     {
         eke::Button *btnStart = new eke::Button("Start");
@@ -27,21 +32,26 @@ namespace eke
         //                             { std::cout << "OPTIONS PLACEHODLER!\n"; });
         // this->entities.push_back(btnOptions);
 
+        this->helpisvisible = false;
+        this->helptimer = new eke::Timer(5.f, false);
+
         eke::Button *btnHelp = new eke::Button("Help");
-        btnHelp->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnExit->GetPosition().y + separator));
-        btnHelp->SetOnClickEvent([]()
-                                 { std::cout << "HELP PLACEHODLER!\n"; });
+        btnHelp->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + separator));
+        btnHelp->SetOnClickEvent([&]()
+                                 { helptimer->Start(); });
         this->entities.push_back(btnHelp);
 
-        eke::Fire *fire1 = new eke::Fire();
-        fire1->SetScale(sf::Vector2f(10, 20));
-        fire1->SetPosition(eke::Globals::RenderWindow->getView().getSize().x / 6, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2);
+        // eke::Fire *fire1 = new eke::Fire();
+        // fire1->SetScale(sf::Vector2f(10, 20));
+        // fire1->SetPosition(eke::Globals::RenderWindow->getView().getSize().x / 6, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2);
         // this->fires.push_back(fire1);
 
-        eke::Fire *fire2 = new eke::Fire();
-        fire2->SetScale(sf::Vector2f(10, 20));
-        fire2->SetPosition((eke::Globals::RenderWindow->getView().getSize().x / 6) * 5, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2);
+        // eke::Fire *fire2 = new eke::Fire();
+        // fire2->SetScale(sf::Vector2f(10, 20));
+        // fire2->SetPosition((eke::Globals::RenderWindow->getView().getSize().x / 6) * 5, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2);
         // this->fires.push_back(fire2);
+
+        this->info_lbl = new eke::Label("Find as many shapes as you can within the given time limit!", eke::Globals::RenderWindow->getView().getSize().x / 2, eke::Globals::RenderWindow->getView().getSize().y / 2);
     }
 
     void MenuScene::PollEvents()
@@ -54,6 +64,7 @@ namespace eke
 
     void MenuScene::Update()
     {
+        this->helptimer->Update(eke::Globals::DeltaTime);
         for (size_t i = 0; i < this->entities.size(); i++)
         {
             this->entities[i]->Update();
@@ -66,6 +77,7 @@ namespace eke
 
     void MenuScene::Draw()
     {
+        this->info_lbl->Draw();
         for (size_t i = 0; i < this->entities.size(); i++)
         {
             this->entities[i]->Draw();

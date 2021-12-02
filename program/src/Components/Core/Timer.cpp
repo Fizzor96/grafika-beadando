@@ -24,7 +24,7 @@ namespace eke
         this->repeatonexpire = repeatonexpire;
         this->expiredcallback = nullptr;
         this->startcallback = nullptr;
-        this->Start();
+        // this->Start();
     }
 
     void eke::Timer::SetStartCallback(void (*startcallback)())

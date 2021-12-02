@@ -1,9 +1,10 @@
 #ifndef BUTTON_HPP
 #define BUTTON_HPP 1
 
-#include <SFML/Graphics.hpp>
-#include "Core/Globals.h"
 #include "Core/Entity.h"
+#include "Core/Globals.h"
+#include <SFML/Graphics.hpp>
+#include <functional>
 
 namespace eke
 {
@@ -16,13 +17,15 @@ namespace eke
         sf::Texture *pressed;
         sf::Text label;
         sf::FloatRect lblboundingbox;
-        void (*onclickeventcallback)();
-        void (*callback)(void *);
-        void *callbackarg;
+        // void (*onclickeventcallback)();
+        // void (*callback)(void *);
+        // void *callbackarg;
+        std::function<void()> *callback;
         void Hover();
         void Press();
         void ValidateTextLength();
         void UpdateTextures();
+        void InitNullCallbacks();
 
     public:
         // Ctor with predifined texture (from assets)
@@ -55,8 +58,9 @@ namespace eke
         void SetHoverTexture(const char *hovertexturepath);
         void SetPressedTexture(const char *pressedtexturepath);
 
-        void SetOnClickEvent(void (*clickeventcallback)());
-        void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
+        // void SetOnClickEvent(void (*clickeventcallback)());
+        // void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
+        void SetOnClickEvent(std::function<void()> &callback);
 
         void PollEvents() override;
         void Update() override;

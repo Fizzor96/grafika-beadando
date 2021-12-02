@@ -15,13 +15,13 @@ namespace eke
         bool repeatonexpire;
         void (*expiredcallback)();
         void (*startcallback)();
-        void Start();
 
     public:
         Timer(const float &timer);
         Timer(const float &timer, const bool &repeatonexpire);
         ~Timer();
         void Update(const float &delta);
+        void Start();
         void Restart();
         void SetStartCallback(void (*startcallback)());
         void SetExpiredCallback(void (*expiredcallback)());

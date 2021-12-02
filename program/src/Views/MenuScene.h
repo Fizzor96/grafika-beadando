@@ -3,7 +3,6 @@
 
 #include "Controller.h"
 #include "Core.h"
-
 #include <vector>
 
 namespace eke
@@ -26,9 +25,13 @@ namespace eke
         static eke::MenuScene *Instance;
         std::vector<eke::Entity *> entities;
         std::vector<eke::Fire *> fires;
+        eke::Label *info_lbl;
+        bool helpisvisible;
+        eke::Timer *helptimer;
 
     private:
         void InitComponents();
+        void HelpBtnCallback();
 
     public:
         MenuScene(const MenuScene &other) = delete;
