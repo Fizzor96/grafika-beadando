@@ -1,15 +1,16 @@
 #ifndef GLOBALS_HPP
 #define GLOBALS_HPP 1
 
-#include <SFML/Graphics.hpp>
 #include "Core/Timer.h"
+#include <SFML/Graphics.hpp>
 
 #include <iostream>
-#include <time.h>
 #include <random>
+#include <time.h>
 
 namespace eke
 {
+    class Timer;
     class Globals
     {
     public:

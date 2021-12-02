@@ -29,6 +29,7 @@ namespace eke
         eke::Label *info_lbl;
         eke::Crosshair *cr;
         bool helpisvisible;
+        eke::Timer *tracker;
 
     private:
         static eke::MenuScene *Instance;

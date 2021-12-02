@@ -12,7 +12,7 @@ namespace eke
 
     void MenuScene::InitLogo()
     {
-        this->logo.push_back(new eke::Ellipse(120, 50, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Green));
+        this->logo.push_back(new eke::Ellipse(75, 50, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Green));
         this->logo.push_back(new eke::Ellipse(50, 50, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Blue));
         eke::Rectangle *rect = new eke::Rectangle(75, 75, info_lbl->GetPosition().x, info_lbl->GetPosition().y + 70, sf::Color::Red);
         this->logo.push_back(rect);
@@ -47,20 +47,34 @@ namespace eke
                                  { eke::Globals::RenderWindow->close(); });
         this->entities.push_back(btnExit);
 
-        // eke::Fire *fire1 = new eke::Fire();
-        // fire1->SetScale(sf::Vector2f(10, 20));
-        // fire1->SetPosition(eke::Globals::RenderWindow->getView().getSize().x / 6, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2);
-        // this->fires.push_back(fire1);
+        eke::Fire *fire1 = new eke::Fire();
+        fire1->SetScale(sf::Vector2f(10, 20));
+        fire1->SetPosition(eke::Globals::RenderWindow->getView().getSize().x / 6, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2.5);
+        this->fires.push_back(fire1);
 
-        // eke::Fire *fire2 = new eke::Fire();
-        // fire2->SetScale(sf::Vector2f(10, 20));
-        // fire2->SetPosition((eke::Globals::RenderWindow->getView().getSize().x / 6) * 5, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2);
-        // this->fires.push_back(fire2);
+        eke::Fire *fire2 = new eke::Fire();
+        fire2->SetScale(sf::Vector2f(10, 20));
+        fire2->SetPosition((eke::Globals::RenderWindow->getView().getSize().x / 6) * 5, (eke::Globals::RenderWindow->getView().getSize().y / 3) * 2.5);
+        this->fires.push_back(fire2);
 
-        this->info_lbl = new eke::Label("Find as many shapes as you can within the given time limit!", eke::Globals::RenderWindow->getView().getSize().x / 2, eke::Globals::RenderWindow->getView().getSize().y / 2);
+        this->info_lbl = new eke::Label("Find as many shapes as you can\n within the given time limit!", eke::Globals::RenderWindow->getView().getSize().x / 2, eke::Globals::RenderWindow->getView().getSize().y / 2);
 
-        this->cr = new eke::Crosshair(sf::Vector2f(75, 75), true);
         InitLogo();
+
+        this->cr = new eke::Crosshair(sf::Vector2f(75, 75), false);
+        std::vector<sf::Vector2f> track;
+        for (size_t i = 0; i < this->logo[2]->lines.size(); i++)
+        {
+            for (size_t j = 0; j < this->logo[2]->lines[i]->positions.size(); j++)
+            {
+                track.push_back(this->logo[2]->lines[i]->positions[j]);
+            }
+        }
+        this->cr->SetTrack(track);
+
+        this->tracker = new eke::Timer(0.01, true);
+        this->tracker->Start();
+        this->tracker->SetExiredCallback(this->cr);
     }
 
     void MenuScene::PollEvents()
@@ -90,6 +104,7 @@ namespace eke
         {
             this->logo[i]->Update();
         }
+        tracker->Update(eke::Globals::DeltaTime);
         cr->Update();
     }
 
@@ -107,11 +122,6 @@ namespace eke
         {
             this->fires[i]->Draw();
         }
-        // for (size_t i = 0; i < this->logo.size(); i++)
-        // {
-        //     this->logo[i]->Draw();
-        // }
-
         for (size_t i = 0; i < this->logo.size(); i++)
         {
             for (size_t j = 0; j < this->logo[i]->lines.size(); j++)

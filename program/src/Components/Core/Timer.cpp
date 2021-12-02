@@ -2,6 +2,12 @@
 
 namespace eke
 {
+    void Timer::InitCallbackPtrs()
+    {
+        this->expiredcallback = nullptr;
+        this->startcallback = nullptr;
+        this->crosshairptr = nullptr;
+    }
 
     eke::Timer::Timer(const float &timer)
     {
@@ -10,8 +16,7 @@ namespace eke
         this->expired = false;
         this->started = false;
         this->repeatonexpire = false;
-        this->expiredcallback = nullptr;
-        this->startcallback = nullptr;
+        InitCallbackPtrs();
         this->Start();
     }
 
@@ -22,19 +27,23 @@ namespace eke
         this->expired = false;
         this->started = false;
         this->repeatonexpire = repeatonexpire;
-        this->expiredcallback = nullptr;
-        this->startcallback = nullptr;
+        InitCallbackPtrs();
         // this->Start();
     }
 
-    void eke::Timer::SetStartCallback(void (*startcallback)())
+    void Timer::SetStartCallback(void (*startcallback)())
     {
         this->startcallback = startcallback;
     }
 
-    void eke::Timer::SetExpiredCallback(void (*expiredcallback)())
+    void Timer::SetExpiredCallback(void (*expiredcallback)())
     {
         this->expiredcallback = expiredcallback;
+    }
+
+    void Timer::SetExiredCallback(eke::Crosshair *obj)
+    {
+        this->crosshairptr = obj;
     }
 
     // Starts the timer if it is not started yet
@@ -72,6 +81,15 @@ namespace eke
                 {
                     this->expiredcallback();
                 }
+                if (this->crosshairptr != nullptr)
+                {
+                    if (this->crosshairptr->posindicator == this->crosshairptr->track.size() - 1)
+                    {
+                        this->crosshairptr->posindicator = 0;
+                    }
+                    this->crosshairptr->posindicator++;
+                }
+
                 if (this->repeatonexpire)
                 {
                     this->Restart();
@@ -84,6 +102,7 @@ namespace eke
     {
         return this->timer;
     }
+
     float Timer::GetElapsedTime()
     {
         return this->originaltimer - this->timer;

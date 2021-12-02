@@ -4,6 +4,7 @@ namespace eke
 {
     Crosshair::Crosshair(const sf::Vector2f &size, const bool &isgrabbed)
     {
+        this->posindicator = 0;
         this->sprite = nullptr;
         this->texture = nullptr;
         this->isgrabbed = isgrabbed;
@@ -26,6 +27,11 @@ namespace eke
         delete this->texture;
     }
 
+    void Crosshair::SetTrack(const std::vector<sf::Vector2f> &track)
+    {
+        this->track = track;
+    }
+
     void Crosshair::PollEvents()
     {
     }
@@ -35,6 +41,10 @@ namespace eke
         if (isgrabbed)
         {
             rs.setPosition(eke::Globals::MousePosition);
+        }
+        else
+        {
+            rs.setPosition(this->track[this->posindicator]);
         }
     }
 
