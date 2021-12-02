@@ -253,10 +253,11 @@ namespace eke
             {
                 if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
                 {
+                    this->scene->isplaying = true;
                     this->scene->entities.clear();
                     this->scene->score = 0;
                     this->scene->gametimer->Restart();
-                    this->scene->isplaying = true;
+                    this->scene->generatetimer->Restart();
                 }
             }
 

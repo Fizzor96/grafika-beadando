@@ -23,6 +23,7 @@ namespace eke
         eke::Crosshair *crosshairptr;
         eke::MainScene *mainscene;
         eke::MainScene *generator;
+        eke::MainScene *scored;
 
     private:
         void
@@ -35,6 +36,7 @@ namespace eke
         ~Timer();
         void Update(const float &delta);
         void Start();
+        void Stop();
         void Restart();
         void SetStartCallback(void (*startcallback)());
         void SetExpiredCallback(void (*expiredcallback)());

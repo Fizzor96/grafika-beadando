@@ -18,6 +18,15 @@ namespace eke
         {
             if (Controller::Scenes[i]->GetSceneId() == sceneid)
             {
+                if (sceneid == eke::SceneId::Menu)
+                {
+                    eke::MainScene *temp = reinterpret_cast<eke::MainScene *>(Controller::Scenes[1]);
+                    temp->score = 0;
+                    temp->gametimer->Stop();
+                    temp->isplaying = false;
+                    temp->entities.clear();
+                }
+
                 Controller::Current = Controller::Scenes[i];
                 std::cout << "Scene: no " << i << " loaded Succesfully!\n";
             }

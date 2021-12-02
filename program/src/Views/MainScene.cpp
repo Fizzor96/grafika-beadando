@@ -10,8 +10,8 @@ namespace eke
         if (rnd == 0)
         {
             this->entities.push_back(new Ellipse(
-                rand() % 60 + 50,
-                rand() % 60 + 50,
+                rand() % 30 + 18,
+                rand() % 30 + 18,
                 rand() % (int)eke::Globals::RenderWindow->getView().getSize().x,
                 rand() % (int)eke::Globals::RenderWindow->getView().getSize().y + 80,
                 sf::Color::Yellow));
@@ -33,8 +33,12 @@ namespace eke
         this->score = 0;
         this->isplaying = false;
 
-        this->generatetimer = new eke::Timer(2.f, true);
+        this->generatetimer = new eke::Timer(0.3f, true);
+        this->generatetimer->SetMainSceneGeneratorExpiredCallback(this);
+
         this->gametimer = new eke::Timer(60.f, false);
+        this->gametimer->SetMainSceneRestartBtnExpiredCallback(this);
+
         this->timerlbl = new eke::Label("", sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x / 2, 0));
         this->scorelbl = new eke::Label("", sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x / 2, 30));
 
@@ -74,6 +78,7 @@ namespace eke
                 this->score++;
                 delete this->entities[i];
                 this->entities.erase(this->entities.begin() + i);
+                break;
             }
         }
         this->cr->PollEvents();
@@ -90,20 +95,21 @@ namespace eke
             this->entities[i]->Update();
         }
 
-        if (this->isplaying && this->entities.size() < 20)
-        {
-            GenEntities();
-        }
+        // if (this->isplaying && this->entities.size() < 20)
+        // {
+        //     GenEntities();
+        // }
 
         this->gametimer->Update(eke::Globals::DeltaTime);
+        this->generatetimer->Update(eke::Globals::DeltaTime);
         std::ostringstream os1;
         os1 << (int)this->gametimer->GetRemainingTime();
 
         std::ostringstream os2;
         os2 << this->score;
 
-        this->timerlbl->SetText(os1.str().c_str());
-        this->scorelbl->SetText(os2.str().c_str());
+        this->timerlbl->SetText(("Time: " + os1.str()).c_str());
+        this->scorelbl->SetText(("Score: " + os2.str()).c_str());
 
         this->cr->Update();
     }

@@ -71,6 +71,13 @@ namespace eke
         }
     }
 
+    void Timer::Stop()
+    {
+        this->timer = this->originaltimer;
+        this->expired = false;
+        this->started = false;
+    }
+
     void Timer::Restart()
     {
         this->timer = this->originaltimer;
@@ -95,15 +102,19 @@ namespace eke
                 }
                 if (this->mainscene != nullptr)
                 {
+                    this->mainscene->entities.clear();
                     this->mainscene->isplaying = false;
                 }
                 if (this->generator != nullptr)
                 {
-                    this->generator->GenEntities();
+                    if (this->generator->isplaying && this->generator->entities.size() < 20)
+                    {
+                        this->generator->GenEntities();
+                    }
                 }
                 if (this->crosshairptr != nullptr)
                 {
-                    if (this->crosshairptr->posindicator == this->crosshairptr->track.size() - 1)
+                    if ((unsigned int)this->crosshairptr->posindicator == this->crosshairptr->track.size() - 1)
                     {
                         this->crosshairptr->posindicator = 0;
                     }
