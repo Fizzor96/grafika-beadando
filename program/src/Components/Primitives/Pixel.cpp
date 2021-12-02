@@ -107,4 +107,10 @@ namespace eke
         }
         return false;
     }
+
+    sf::FloatRect Pixel::GetGlobalBounds() const
+    {
+        sf::FloatRect temp(0, 0, 0, 0);
+        return temp;
+    }
 }

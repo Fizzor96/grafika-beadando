@@ -4,6 +4,8 @@ namespace eke
 {
     Rectangle::Rectangle(const sf::Vector2f &size, const sf::Vector2f &centerpos, const sf::Color &color)
     {
+        this->position.x = centerpos.x;
+        this->position.y = centerpos.y;
         this->boundingbox.left = centerpos.x - size.x / 2;
         this->boundingbox.top = centerpos.y - size.y / 2;
         this->boundingbox.width = size.x;
@@ -59,6 +61,47 @@ namespace eke
         size.x = this->boundingbox.width;
         size.y = this->boundingbox.height;
         return size;
+    }
+
+    void Rectangle::SetPosition(const float &posx, const float &posy)
+    {
+        sf::Vector2f diff;
+        if (this->position.x != posx && this->position.y != posy)
+        {
+            diff.x = posx - this->position.x;
+            diff.y = posy - this->position.y;
+            for (size_t i = 0; i < this->lines.size(); i++)
+            {
+                this->lines[i]->Move(diff.x, diff.y);
+            }
+        }
+        this->position.x = posx;
+        this->position.y = posy;
+        this->boundingbox.left += diff.x;
+        this->boundingbox.top += diff.y;
+    }
+
+    void Rectangle::SetPosition(const sf::Vector2f &pos)
+    {
+        sf::Vector2f diff;
+        if (this->position != pos)
+        {
+            diff.x = pos.x - this->position.x;
+            diff.y = pos.y - this->position.y;
+            for (size_t i = 0; i < this->lines.size(); i++)
+            {
+                this->lines[i]->Move(diff.x, diff.y);
+            }
+        }
+        this->position.x = pos.x;
+        this->position.y = pos.y;
+        this->boundingbox.left += diff.x;
+        this->boundingbox.top += diff.y;
+    }
+
+    sf::FloatRect Rectangle::GetGlobalBounds() const
+    {
+        return this->boundingbox;
     }
 
     void Rectangle::Draw()

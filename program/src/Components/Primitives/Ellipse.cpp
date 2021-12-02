@@ -10,6 +10,11 @@ namespace eke
         this->center.x = xc;
         this->center.y = yc;
 
+        this->boundingbox.left = xc - rx;
+        this->boundingbox.top = yc - ry;
+        this->boundingbox.width = 2 * rx;
+        this->boundingbox.height = 2 * ry;
+
         float dx, dy, d1, d2, x, y;
         x = 0;
         y = ry;
@@ -106,6 +111,11 @@ namespace eke
         this->lines.clear();
     }
 
+    sf::FloatRect Ellipse::GetGlobalBounds() const
+    {
+        return this->boundingbox;
+    }
+
     void Ellipse::SetPosition(const float &x, const float &y)
     {
         if (this->center.x != x && this->center.y != y)
@@ -119,6 +129,8 @@ namespace eke
             }
             this->center.x = x;
             this->center.y = y;
+            this->boundingbox.left = this->boundingbox.left + diff.x;
+            this->boundingbox.top = this->boundingbox.top + diff.y;
         }
     }
 
@@ -135,6 +147,8 @@ namespace eke
             }
             this->center.x = pos.x;
             this->center.y = pos.y;
+            this->boundingbox.left += diff.x;
+            this->boundingbox.top += diff.y;
         }
     }
 

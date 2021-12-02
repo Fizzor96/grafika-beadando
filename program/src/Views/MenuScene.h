@@ -8,6 +8,10 @@
 namespace eke
 {
     enum class SceneId;
+    class Fire;
+    class Crosshair;
+    class Timer;
+    class Label;
 
     class MenuScene : public Scene
     {

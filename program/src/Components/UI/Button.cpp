@@ -26,6 +26,7 @@ namespace eke
         this->onclickeventcallback = nullptr;
         this->callback = nullptr;
         this->callbackarg = nullptr;
+        this->scene = nullptr;
     }
 
     void Button::UpdateTextures()
@@ -239,35 +240,36 @@ namespace eke
         this->callbackarg = arg;
     }
 
-    // void Button::SetOnClickEvent(std::function<void()> &callback)
-    // {
-    //     this->callback = &callback;
-    // }
+    void Button::SetOnClickMainSceneFnc(eke::MainScene *obj)
+    {
+        this->scene = obj;
+    }
 
     void Button::PollEvents()
     {
-        if (this->onclickeventcallback != nullptr)
+        if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
         {
-            if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+            if (this->scene != nullptr)
             {
+                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+                {
+                    this->scene->entities.clear();
+                    this->scene->score = 0;
+                    this->scene->gametimer->Restart();
+                    this->scene->isplaying = true;
+                }
+            }
+
+            if (this->onclickeventcallback != nullptr)
+            {
+
                 if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
                 {
                     this->onclickeventcallback();
                 }
             }
-        }
 
-        // if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
-        // {
-        //     if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-        //     {
-        //         (*this->callback)();
-        //     }
-        // }
-
-        if (this->callback != nullptr)
-        {
-            if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+            if (this->callback != nullptr)
             {
                 if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
                 {
@@ -289,5 +291,10 @@ namespace eke
             eke::Globals::RenderWindow->draw(*this->sprite);
             eke::Globals::RenderWindow->draw(label);
         }
+    }
+
+    sf::FloatRect Button::GetGlobalBounds() const
+    {
+        return sf::FloatRect(0, 0, 0, 0);
     }
 }

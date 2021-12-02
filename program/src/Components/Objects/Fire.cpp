@@ -55,4 +55,9 @@ namespace eke
         eke::Globals::RenderWindow->draw(*this->sprite);
     }
 
+    sf::FloatRect Fire::GetGlobalBounds() const
+    {
+        return sf::FloatRect(0, 0, 0, 0);
+    }
+
 }

@@ -1,6 +1,7 @@
 #ifndef CONTROLLER_HPP
 #define CONTROLLER_HPP 1
 
+#include "Core/Scene.h"
 #include "Views.h"
 
 #include <vector>

@@ -229,4 +229,9 @@ namespace eke
             delete this->lines[i];
         }
     }
+
+    sf::FloatRect Polygon::GetGlobalBounds() const
+    {
+        return sf::FloatRect(0, 0, 0, 0);
+    }
 }

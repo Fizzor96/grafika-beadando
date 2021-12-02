@@ -19,7 +19,7 @@ namespace eke
             if (Controller::Scenes[i]->GetSceneId() == sceneid)
             {
                 Controller::Current = Controller::Scenes[i];
-                std::cout << "Scene Loaded Succesfully!\n";
+                std::cout << "Scene: no " << i << " loaded Succesfully!\n";
             }
         }
     }

@@ -30,8 +30,6 @@
 #include "UI/Textfield.h"
 
 // Algorithms
-// TODO: Beziel implementation
-#include "Algo/Bezier.h"
 #include "Algo/Clip.h"
 
 #endif

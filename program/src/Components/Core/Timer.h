@@ -2,11 +2,13 @@
 #define TIMER_HPP 1
 
 #include "Objects/Crosshair.h"
+#include "Views/MainScene.h"
 #include <SFML/Graphics.hpp>
 
 namespace eke
 {
     class Crosshair;
+    class MainScene;
     // class Crosshair;
     class Timer
     {
@@ -19,9 +21,12 @@ namespace eke
         void (*startcallback)();
         // do not invoke delete on crosshairptr!!!
         eke::Crosshair *crosshairptr;
+        eke::MainScene *mainscene;
+        eke::MainScene *generator;
 
     private:
-        void InitCallbackPtrs();
+        void
+        InitCallbackPtrs();
 
     public:
         float timer;
@@ -34,6 +39,9 @@ namespace eke
         void SetStartCallback(void (*startcallback)());
         void SetExpiredCallback(void (*expiredcallback)());
         void SetExiredCallback(eke::Crosshair *obj);
+        void SetMainSceneRestartBtnExpiredCallback(eke::MainScene *obj);
+        void SetMainSceneGeneratorExpiredCallback(eke::MainScene *obj);
+        void MainSceneCallback();
         float GetRemainingTime();
         float GetElapsedTime();
     };

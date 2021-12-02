@@ -1,8 +1,8 @@
 #ifndef FIREOBJ_HPP
 #define FIREOBJ_HPP 1
 
-#include "Core/Entity.h"
 #include "Core/Anim.h"
+#include "Core/Entity.h"
 #include "Core/Globals.h"
 
 namespace eke
@@ -19,6 +19,7 @@ namespace eke
         void SetPosition(const sf::Vector2f &pos);
         void SetScale(const sf::Vector2f &scale);
         void SetScale(const float &scalex, const float &scaley);
+        sf::FloatRect GetGlobalBounds() const override;
         void PollEvents();
         void Update();
         void Draw();

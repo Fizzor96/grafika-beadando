@@ -25,6 +25,7 @@ namespace eke
         void SetColor(const sf::Color &color);
         sf::Vector2f GetPosition() const;
         sf::Color GetColor() const;
+        sf::FloatRect GetGlobalBounds() const override;
 
         void PollEvents() override;
         void Update() override;

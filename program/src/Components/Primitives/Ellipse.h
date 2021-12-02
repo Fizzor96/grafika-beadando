@@ -15,6 +15,7 @@ namespace eke
     {
     private:
         sf::Vector2f center;
+        sf::FloatRect boundingbox;
         std::vector<eke::Pixel *> vertexarr;
         // Filled removed due to performance issues
         // std::vector<eke::Line *> filled;
@@ -22,6 +23,7 @@ namespace eke
     public:
         Ellipse(int rx, int ry, int xc, int yc, sf::Color color);
         ~Ellipse();
+        sf::FloatRect GetGlobalBounds() const override;
         void SetPosition(const float &x, const float &y);
         void SetPosition(const sf::Vector2f pos);
         // void Fill();

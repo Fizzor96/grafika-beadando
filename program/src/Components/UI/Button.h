@@ -3,14 +3,16 @@
 
 #include "Core/Entity.h"
 #include "Core/Globals.h"
+#include "Views/MainScene.h"
 #include <SFML/Graphics.hpp>
 #include <functional>
 
 namespace eke
 {
+    class MainScene;
+
     class Button : public Entity
     {
-
     private:
         static sf::Color TextColor;
         sf::Texture *hover;
@@ -20,6 +22,7 @@ namespace eke
         void (*onclickeventcallback)();
         void (*callback)(void *);
         void *callbackarg;
+        eke::MainScene *scene;
         void Hover();
         void Press();
         void ValidateTextLength();
@@ -59,6 +62,9 @@ namespace eke
 
         void SetOnClickEvent(void (*clickeventcallback)());
         void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
+        void SetOnClickMainSceneFnc(eke::MainScene *obj);
+
+        sf::FloatRect GetGlobalBounds() const override;
 
         void PollEvents() override;
         void Update() override;

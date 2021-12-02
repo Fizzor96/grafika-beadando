@@ -28,6 +28,7 @@ namespace eke
         void SetPosition(const sf::Vector2f &pos);
         // Set poli position by calling Move on each line in linearr
         void SetPosition(const float &posx, const float &posy);
+        sf::FloatRect GetGlobalBounds() const override;
         // Simple ToString :)
         void ToString();
         void PollEvents() override;

@@ -7,6 +7,8 @@ namespace eke
         this->expiredcallback = nullptr;
         this->startcallback = nullptr;
         this->crosshairptr = nullptr;
+        this->mainscene = nullptr;
+        this->generator = nullptr;
     }
 
     eke::Timer::Timer(const float &timer)
@@ -46,6 +48,16 @@ namespace eke
         this->crosshairptr = obj;
     }
 
+    void Timer::SetMainSceneRestartBtnExpiredCallback(eke::MainScene *obj)
+    {
+        this->mainscene = obj;
+    }
+
+    void Timer::SetMainSceneGeneratorExpiredCallback(eke::MainScene *obj)
+    {
+        this->generator = obj;
+    }
+
     // Starts the timer if it is not started yet
     void Timer::Start()
     {
@@ -72,7 +84,7 @@ namespace eke
         if (this->started == true)
         {
             timer -= delta;
-            // std::cout << (int)this->timer << std::endl;
+            // On expiration
             if (this->timer <= 0)
             {
                 this->started = false;
@@ -80,6 +92,14 @@ namespace eke
                 if (this->expiredcallback != nullptr)
                 {
                     this->expiredcallback();
+                }
+                if (this->mainscene != nullptr)
+                {
+                    this->mainscene->isplaying = false;
+                }
+                if (this->generator != nullptr)
+                {
+                    this->generator->GenEntities();
                 }
                 if (this->crosshairptr != nullptr)
                 {
@@ -89,7 +109,6 @@ namespace eke
                     }
                     this->crosshairptr->posindicator++;
                 }
-
                 if (this->repeatonexpire)
                 {
                     this->Restart();
