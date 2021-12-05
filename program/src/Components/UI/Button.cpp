@@ -5,55 +5,6 @@ namespace eke
     // Default color of the label shown in the button
     sf::Color Button::TextColor = sf::Color::White;
 
-    void Button::ValidateTextLength()
-    {
-        if (this->lblboundingbox.width > this->sprite->getTextureRect().width)
-        {
-            float tempx = (this->lblboundingbox.width / this->sprite->getTextureRect().width) * 1.2;
-            this->sprite->setScale(sf::Vector2f(tempx, this->sprite->getScale().y));
-            this->label.setPosition(this->sprite->getPosition());
-        }
-        if (this->lblboundingbox.height > this->sprite->getTextureRect().height)
-        {
-            float tempy = this->lblboundingbox.height * 3;
-            this->sprite->setScale(sf::Vector2f(this->sprite->getScale().x, tempy));
-            this->label.setPosition(this->sprite->getPosition());
-        }
-    }
-
-    void Button::InitNullCallbacks()
-    {
-        this->onclickeventcallback = nullptr;
-        this->callback = nullptr;
-        this->callbackarg = nullptr;
-        this->scene = nullptr;
-    }
-
-    void Button::UpdateTextures()
-    {
-        if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
-        {
-            if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-            {
-                if (this->pressed != nullptr)
-                {
-                    this->sprite->setTexture(*this->pressed);
-                }
-            }
-            else
-            {
-                if (this->hover != nullptr)
-                {
-                    this->sprite->setTexture(*this->hover);
-                }
-            }
-        }
-        else
-        {
-            this->sprite->setTexture(*this->texture);
-        }
-    }
-
     Button::Button(const char *label)
     {
         this->sprite = new sf::Sprite();
@@ -148,7 +99,53 @@ namespace eke
         delete this->texture;
         delete this->hover;
         delete this->pressed;
-        free(callbackarg);
+        delete this->callback;
+    }
+
+    void Button::ValidateTextLength()
+    {
+        if (this->lblboundingbox.width > this->sprite->getTextureRect().width)
+        {
+            float tempx = (this->lblboundingbox.width / this->sprite->getTextureRect().width) * 1.2;
+            this->sprite->setScale(sf::Vector2f(tempx, this->sprite->getScale().y));
+            this->label.setPosition(this->sprite->getPosition());
+        }
+        if (this->lblboundingbox.height > this->sprite->getTextureRect().height)
+        {
+            float tempy = this->lblboundingbox.height * 3;
+            this->sprite->setScale(sf::Vector2f(this->sprite->getScale().x, tempy));
+            this->label.setPosition(this->sprite->getPosition());
+        }
+    }
+
+    void Button::InitNullCallbacks()
+    {
+        this->callback = nullptr;
+    }
+
+    void Button::UpdateTextures()
+    {
+        if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
+        {
+            if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
+            {
+                if (this->pressed != nullptr)
+                {
+                    this->sprite->setTexture(*this->pressed);
+                }
+            }
+            else
+            {
+                if (this->hover != nullptr)
+                {
+                    this->sprite->setTexture(*this->hover);
+                }
+            }
+        }
+        else
+        {
+            this->sprite->setTexture(*this->texture);
+        }
     }
 
     void Button::SetPosition(const sf::Vector2f &pos)
@@ -229,52 +226,20 @@ namespace eke
         this->pressed->loadFromFile(pressedtexturepath);
     }
 
-    void Button::SetOnClickEvent(void (*clickeventcallback)())
+    void Button::SetOnClickEvent(std::function<void()> *callback)
     {
-        this->onclickeventcallback = clickeventcallback;
-    }
-
-    void Button::SetOnClickEvent(void (*clickeventcallback)(void *), void *arg)
-    {
-        this->callback = clickeventcallback;
-        this->callbackarg = arg;
-    }
-
-    void Button::SetOnClickMainSceneFnc(eke::MainScene *obj)
-    {
-        this->scene = obj;
+        this->callback = callback;
     }
 
     void Button::PollEvents()
     {
         if (this->sprite->getGlobalBounds().contains(eke::Globals::MousePosition))
         {
-            if (this->scene != nullptr)
-            {
-                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-                {
-                    this->scene->isplaying = true;
-                    this->scene->entities.clear();
-                    this->scene->score = 0;
-                    this->scene->gametimer->Restart();
-                    this->scene->generatetimer->Restart();
-                }
-            }
-
-            if (this->onclickeventcallback != nullptr)
-            {
-
-                if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
-                {
-                    this->onclickeventcallback();
-                }
-            }
-
             if (this->callback != nullptr)
             {
                 if (eke::Globals::Event->type == sf::Event::MouseButtonPressed && eke::Globals::Event->mouseButton.button == sf::Mouse::Left)
                 {
-                    this->callback(this->callbackarg);
+                    (*this->callback)();
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace eke
                 rand() % 30 + 18,
                 rand() % 30 + 18,
                 rand() % (int)eke::Globals::RenderWindow->getView().getSize().x,
-                rand() % (int)eke::Globals::RenderWindow->getView().getSize().y + 80,
+                rand() % (int)eke::Globals::RenderWindow->getView().getSize().y + this->buttons[0]->GetGlobalBounds().height + 48 * 2,
                 sf::Color::Yellow));
         }
         else
@@ -22,7 +22,7 @@ namespace eke
                 rand() % 60 + 30,
                 rand() % 60 + 30,
                 rand() % (int)eke::Globals::RenderWindow->getView().getSize().x,
-                rand() % (int)eke::Globals::RenderWindow->getView().getSize().y,
+                rand() % (int)eke::Globals::RenderWindow->getView().getSize().y + this->buttons[0]->GetGlobalBounds().height + 120,
                 sf::Color::Green));
         }
     }
@@ -34,23 +34,32 @@ namespace eke
         this->isplaying = false;
 
         this->generatetimer = new eke::Timer(0.3f, true);
-        this->generatetimer->SetMainSceneGeneratorExpiredCallback(this);
+        this->generatetimer->SetExpiredCallback(new std::function<void()>([this]()
+                                                                          { this->GenEntities(); }));
 
         this->gametimer = new eke::Timer(60.f, false);
-        this->gametimer->SetMainSceneRestartBtnExpiredCallback(this);
+        this->gametimer->SetExpiredCallback(new std::function<void()>([this]()
+                                                                      { this->entities.clear();
+                                                                      this->isplaying = false; }));
 
         this->timerlbl = new eke::Label("", sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x / 2, 0));
         this->scorelbl = new eke::Label("", sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x / 2, 30));
 
         eke::Button *menuBtn = new eke::Button("Menu");
         menuBtn->SetPosition(sf::Vector2f(menuBtn->GetPosition().x + menuBtn->GetSize().x / 2, menuBtn->GetPosition().y + menuBtn->GetSize().y / 2));
-        menuBtn->SetOnClickEvent([]()
-                                 { eke::Controller::LoadScene(eke::SceneId::Menu); });
+        menuBtn->SetOnClickEvent(new std::function<void()>([]()
+                                                           { eke::Controller::LoadScene(eke::SceneId::Menu); }));
         this->buttons.push_back(menuBtn);
 
         eke::Button *restartBtn = new eke::Button("Begin");
         restartBtn->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x - restartBtn->GetSize().x / 2, restartBtn->GetPosition().y + restartBtn->GetSize().y / 2));
-        restartBtn->SetOnClickMainSceneFnc(this);
+        restartBtn->SetOnClickEvent(new std::function<void()>([this]()
+                                                              {
+                    this->isplaying = true;
+                    this->entities.clear();
+                    this->score = 0;
+                    this->gametimer->Restart();
+                    this->generatetimer->Restart(); }));
         this->buttons.push_back(restartBtn);
 
         sf::RectangleShape *header = new sf::RectangleShape(sf::Vector2f(eke::Globals::RenderWindow->getView().getSize().x, menuBtn->GetSize().y));
@@ -94,11 +103,6 @@ namespace eke
         {
             this->entities[i]->Update();
         }
-
-        // if (this->isplaying && this->entities.size() < 20)
-        // {
-        //     GenEntities();
-        // }
 
         this->gametimer->Update(eke::Globals::DeltaTime);
         this->generatetimer->Update(eke::Globals::DeltaTime);

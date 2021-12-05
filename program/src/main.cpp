@@ -1,18 +1,13 @@
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 using namespace std;
 
 int main()
 {
     eke::Globals::Init();
-    eke::Controller::Init();
-
-    // eke::Ellipse ell(180, 50, 200, 200, sf::Color::Yellow);
-    // eke::Pixel pix(200, 200);
-    // eke::Line line(sf::Vector2f(200, 200), sf::Vector2f(200, 200), sf::Color::Green);
-    // eke::Crosshair *cr = new eke::Crosshair(sf::Vector2f(75, 75), true);
-    // eke::Rectangle rect(50, 50, 100, 100, sf::Color::Red);
+    // eke::Controller::Init();
 
     while (eke::Globals::RenderWindow->isOpen())
     {
@@ -21,14 +16,14 @@ int main()
         while (eke::Globals::RenderWindow->pollEvent(*eke::Globals::Event))
         {
             eke::Globals::PollEvents();
-            eke::Controller::PollEvents();
+            // eke::Controller::PollEvents();
         }
 
         eke::Globals::Update();
-        eke::Controller::Update();
+        // eke::Controller::Update();
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
-        eke::Controller::Draw();
+        // eke::Controller::Draw();
         eke::Globals::RenderWindow->display();
     }
 

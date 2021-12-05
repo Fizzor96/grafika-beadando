@@ -21,6 +21,7 @@ namespace eke
         points.push_back(sf::Vector2f(rect->GetPosition().x + rect->GetSize().x, rect->GetPosition().y));
         points.push_back(sf::Vector2f(points[1].x - rect->GetSize().x / 2, rect->GetPosition().y + rect->GetSize().y));
         eke::Polygon *poli = new eke::Polygon(points, sf::Color::Yellow, true);
+        // poli->Fill(sf::Color::Red);
         this->logo.push_back(poli);
     }
 
@@ -28,8 +29,8 @@ namespace eke
     {
         eke::Button *btnStart = new eke::Button("Start");
         btnStart->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + btnStart->GetSize().y));
-        btnStart->SetOnClickEvent([]()
-                                  { eke::Controller::LoadScene(eke::SceneId::Main); });
+        btnStart->SetOnClickEvent(new std::function<void()>([]()
+                                                            { eke::Controller::LoadScene(eke::SceneId::Main); }));
         this->entities.push_back(btnStart);
 
         const float separator = btnStart->GetSize().y * 1.5;
@@ -37,14 +38,14 @@ namespace eke
         this->helpisvisible = false;
         eke::Button *btnHelp = new eke::Button("Help");
         btnHelp->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, btnStart->GetPosition().y + separator));
-        btnHelp->SetOnClickEvent([&Instance]()
-                                 { Instance->helpisvisible = !Instance->helpisvisible; });
+        btnHelp->SetOnClickEvent(new std::function<void()>([this]()
+                                                           { this->helpisvisible = !this->helpisvisible; }));
         this->entities.push_back(btnHelp);
 
         eke::Button *btnExit = new eke::Button("Exit");
         btnExit->SetPosition(sf::Vector2f(eke::Globals::RenderWindow->getView().getCenter().x, eke::Globals::RenderWindow->getView().getSize().y - btnExit->GetSize().y));
-        btnExit->SetOnClickEvent([]()
-                                 { eke::Globals::RenderWindow->close(); });
+        btnExit->SetOnClickEvent(new std::function<void()>([]()
+                                                           { eke::Globals::RenderWindow->close(); }));
         this->entities.push_back(btnExit);
 
         eke::Fire *fire1 = new eke::Fire();
@@ -74,7 +75,13 @@ namespace eke
 
         this->tracker = new eke::Timer(0.01, true);
         this->tracker->Start();
-        this->tracker->SetExiredCallback(this->cr);
+        this->tracker->SetExpiredCallback(new std::function<void()>([this]()
+                                                                    {
+                if ((unsigned int)this->cr->posindicator == this->cr->track.size() - 1)
+                {
+                    this->cr->posindicator = 0;
+                }
+                this->cr->posindicator++; }));
     }
 
     void MenuScene::PollEvents()
@@ -159,8 +166,18 @@ namespace eke
             delete this->entities[i];
         }
 
+        for (size_t i = 0; i < this->logo.size(); i++)
+        {
+            delete this->logo[i];
+        }
+
+        this->logo.clear();
         this->fires.clear();
         this->entities.clear();
+
+        delete this->info_lbl;
+        delete this->cr;
+        delete this->tracker;
 
         delete eke::MenuScene::Instance;
     }

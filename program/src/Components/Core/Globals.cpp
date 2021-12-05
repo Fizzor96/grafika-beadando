@@ -36,7 +36,9 @@ namespace eke
         // Fps timer
         eke::Globals::fpstimer = new eke::Timer(0.2f, true);
         eke::Globals::fpstimer->Start();
-        eke::Globals::fpstimer->SetExpiredCallback(eke::Globals::FpsTimerCallback);
+        eke::Globals::fpstimer->SetExpiredCallback(new std::function<void()>([]()
+                                                                             { float fps = 1.f / eke::Globals::DeltaTime;
+        eke::Globals::RenderWindow->setTitle(std::string("Grafika beadando - Szoke Dominik - fps: " + std::to_string((int)fps))); }));
     }
 
     void Globals::Update()

@@ -19,10 +19,7 @@ namespace eke
         sf::Texture *pressed;
         sf::Text label;
         sf::FloatRect lblboundingbox;
-        void (*onclickeventcallback)();
-        void (*callback)(void *);
-        void *callbackarg;
-        eke::MainScene *scene;
+        std::function<void()> *callback;
         void Hover();
         void Press();
         void ValidateTextLength();
@@ -60,9 +57,7 @@ namespace eke
         void SetHoverTexture(const char *hovertexturepath);
         void SetPressedTexture(const char *pressedtexturepath);
 
-        void SetOnClickEvent(void (*clickeventcallback)());
-        void SetOnClickEvent(void (*clickeventcallback)(void *), void *arg);
-        void SetOnClickMainSceneFnc(eke::MainScene *obj);
+        void SetOnClickEvent(std::function<void()> *callback);
 
         sf::FloatRect GetGlobalBounds() const override;
 

@@ -4,6 +4,7 @@
 #include "Controller.h"
 #include "Core.h"
 #include "UI/Label.h"
+#include <functional>
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>

@@ -13,9 +13,9 @@
 #include "Objects/Fire.h"
 
 // Primitives
+#include "Primitives/Curve2.h"
 #include "Primitives/Ellipse.h"
-// Ellipse2 experimental
-#include "Primitives/Ellipse2.h"
+#include "Primitives/Hermite2.h"
 #include "Primitives/Line.h"
 #include "Primitives/Pixel.h"
 #include "Primitives/Polygon.h"

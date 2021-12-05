@@ -141,13 +141,10 @@ namespace eke
             sf::Vector2f diff;
             diff.x = posx - this->center.x;
             diff.y = posy - this->center.y;
-            // std::cout << diff.x << " " << diff.y << std::endl;
-            // std::cout << this->linearr[0]->vertexarr[0]->GetPosition().x << " " << this->linearr[0]->vertexarr[0]->GetPosition().y << std::endl;
             for (size_t i = 0; i < this->lines.size(); i++)
             {
                 this->lines[i]->Move(diff.x, diff.y);
             }
-            // std::cout << this->linearr[0]->vertexarr[0]->GetPosition().x << " " << this->linearr[0]->vertexarr[0]->GetPosition().y << std::endl;
             this->center.x = posx;
             this->center.y = posy;
         }
@@ -174,19 +171,13 @@ namespace eke
             p0 = stack[stack.size() - 1];
             stack.pop_back();
             // printf("stack size: %i\n", stack.size());
-
             img.setPixel(p0.x, p0.y, color);
-            std::cout << "p0: " << p0.x << " " << p0.y << std::endl;
-
+            // std::cout << "p0: " << p0.x << " " << p0.y << std::endl;
             for (size_t i = 0; i < 4; i++)
             {
                 p1.x = (int)(p0.x + dx[i]);
                 p1.y = (int)(p0.y + dy[i]);
                 std::cout << "p1: " << p1.x << " " << p1.y << std::endl;
-                // p1 = sf::Vector2f(p0.x + dx[i], p0.y + dy[i]);
-
-                std::this_thread::sleep_for(std::chrono::milliseconds(200));
-
                 if (img.getPixel(p1.x, p1.y) != color)
                 {
                     stack.push_back(p1);
@@ -195,11 +186,6 @@ namespace eke
         }
         this->texture->loadFromImage(img);
         this->sprite->setTexture(*this->texture);
-    }
-
-    void Polygon::ToString()
-    {
-        std::cout << "center: " << this->center.x << " " << this->center.y << " minx: " << this->minx << " maxx: " << this->maxx << " miny: " << this->miny << " maxy: " << this->maxy << std::endl;
     }
 
     void Polygon::PollEvents()

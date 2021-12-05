@@ -4,12 +4,12 @@
 #include "Objects/Crosshair.h"
 #include "Views/MainScene.h"
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 namespace eke
 {
     class Crosshair;
     class MainScene;
-    // class Crosshair;
     class Timer
     {
     private:
@@ -17,13 +17,8 @@ namespace eke
         bool expired;
         bool started;
         bool repeatonexpire;
-        void (*expiredcallback)();
-        void (*startcallback)();
-        // do not invoke delete on crosshairptr!!!
-        eke::Crosshair *crosshairptr;
-        eke::MainScene *mainscene;
-        eke::MainScene *generator;
-        eke::MainScene *scored;
+        std::function<void()> *startcallback;
+        std::function<void()> *expiredcallback;
 
     private:
         void
@@ -38,12 +33,8 @@ namespace eke
         void Start();
         void Stop();
         void Restart();
-        void SetStartCallback(void (*startcallback)());
-        void SetExpiredCallback(void (*expiredcallback)());
-        void SetExiredCallback(eke::Crosshair *obj);
-        void SetMainSceneRestartBtnExpiredCallback(eke::MainScene *obj);
-        void SetMainSceneGeneratorExpiredCallback(eke::MainScene *obj);
-        void MainSceneCallback();
+        void SetStartCallback(std::function<void()> *callbackstart);
+        void SetExpiredCallback(std::function<void()> *callbackexpired);
         float GetRemainingTime();
         float GetElapsedTime();
     };

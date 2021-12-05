@@ -3,6 +3,7 @@
 
 #include "Controller.h"
 #include "Core.h"
+#include <functional>
 #include <vector>
 
 namespace eke
@@ -21,7 +22,6 @@ namespace eke
 
         eke::MenuScene *GetInstance() const;
         eke::SceneId GetSceneId() const;
-        // TODO: polling events in reverse order of drawing then break
         void PollEvents();
         void Update();
         void Draw();

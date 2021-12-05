@@ -4,11 +4,8 @@ namespace eke
 {
     void Timer::InitCallbackPtrs()
     {
-        this->expiredcallback = nullptr;
         this->startcallback = nullptr;
-        this->crosshairptr = nullptr;
-        this->mainscene = nullptr;
-        this->generator = nullptr;
+        this->expiredcallback = nullptr;
     }
 
     eke::Timer::Timer(const float &timer)
@@ -33,29 +30,13 @@ namespace eke
         // this->Start();
     }
 
-    void Timer::SetStartCallback(void (*startcallback)())
+    void Timer::SetStartCallback(std::function<void()> *cllbkstart)
     {
-        this->startcallback = startcallback;
+        this->startcallback = cllbkstart;
     }
-
-    void Timer::SetExpiredCallback(void (*expiredcallback)())
+    void Timer::SetExpiredCallback(std::function<void()> *cllbkexpired)
     {
-        this->expiredcallback = expiredcallback;
-    }
-
-    void Timer::SetExiredCallback(eke::Crosshair *obj)
-    {
-        this->crosshairptr = obj;
-    }
-
-    void Timer::SetMainSceneRestartBtnExpiredCallback(eke::MainScene *obj)
-    {
-        this->mainscene = obj;
-    }
-
-    void Timer::SetMainSceneGeneratorExpiredCallback(eke::MainScene *obj)
-    {
-        this->generator = obj;
+        this->expiredcallback = cllbkexpired;
     }
 
     // Starts the timer if it is not started yet
@@ -66,7 +47,7 @@ namespace eke
             this->started = true;
             if (this->startcallback != nullptr)
             {
-                this->startcallback();
+                (*this->startcallback)();
             }
         }
     }
@@ -98,27 +79,7 @@ namespace eke
                 this->expired = true;
                 if (this->expiredcallback != nullptr)
                 {
-                    this->expiredcallback();
-                }
-                if (this->mainscene != nullptr)
-                {
-                    this->mainscene->entities.clear();
-                    this->mainscene->isplaying = false;
-                }
-                if (this->generator != nullptr)
-                {
-                    if (this->generator->isplaying && this->generator->entities.size() < 20)
-                    {
-                        this->generator->GenEntities();
-                    }
-                }
-                if (this->crosshairptr != nullptr)
-                {
-                    if ((unsigned int)this->crosshairptr->posindicator == this->crosshairptr->track.size() - 1)
-                    {
-                        this->crosshairptr->posindicator = 0;
-                    }
-                    this->crosshairptr->posindicator++;
+                    (*this->expiredcallback)();
                 }
                 if (this->repeatonexpire)
                 {
@@ -141,5 +102,4 @@ namespace eke
     Timer::~Timer()
     {
     }
-
 }

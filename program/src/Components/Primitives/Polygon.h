@@ -6,15 +6,21 @@
 #include "Pixel.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <thread>
 #include <vector>
 
 namespace eke
 {
     class Polygon : public Entity
     {
-    public:
-        // std::vector<eke::Line *> lines;
+    private:
+        // Initial entity values
+        unsigned int minx;
+        unsigned int maxx;
+        unsigned int miny;
+        unsigned int maxy;
+        sf::Color outlinecolor;
+        sf::Color fillcolor;
+        sf::Vector2f center;
 
     public:
         Polygon(const std::vector<sf::Vector2f> &points, const sf::Color &color, bool closed = false);
@@ -29,8 +35,6 @@ namespace eke
         // Set poli position by calling Move on each line in linearr
         void SetPosition(const float &posx, const float &posy);
         sf::FloatRect GetGlobalBounds() const override;
-        // Simple ToString :)
-        void ToString();
         void PollEvents() override;
         void Update() override;
         void Draw() override;
@@ -39,16 +43,6 @@ namespace eke
         // Basic methods to create sprite and texture from existing verticies
         void InitInitialImgVals();
         void CreateEntity(const sf::Color &color);
-
-    private:
-        // Initial entity values
-        unsigned int minx;
-        unsigned int maxx;
-        unsigned int miny;
-        unsigned int maxy;
-        sf::Color outlinecolor;
-        sf::Color fillcolor;
-        sf::Vector2f center;
 
     public:
         Polygon() = delete;
