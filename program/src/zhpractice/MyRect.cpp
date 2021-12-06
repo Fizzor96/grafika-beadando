@@ -124,10 +124,10 @@ namespace eke
         if (this->grabTopLeft)
         {
             this->r->setPosition(eke::Globals::MousePosition.x, eke::Globals::MousePosition.y);
+            instance->ReCalcHermites();
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabTopLeft = false;
-                instance->ReCalcHermites();
             }
         }
     }
@@ -141,10 +141,10 @@ namespace eke
         if (this->grabTopRight)
         {
             this->r->setPosition(eke::Globals::MousePosition.x - this->r->getSize().x, eke::Globals::MousePosition.y);
+            instance->ReCalcHermites();
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabTopRight = false;
-                instance->ReCalcHermites();
             }
         }
     }
@@ -158,10 +158,10 @@ namespace eke
         if (this->grabBotRight)
         {
             this->r->setPosition(eke::Globals::MousePosition.x - this->r->getSize().x, eke::Globals::MousePosition.y - this->r->getSize().y);
+            instance->ReCalcHermites();
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabBotRight = false;
-                instance->ReCalcHermites();
             }
         }
     }
@@ -175,10 +175,10 @@ namespace eke
         if (this->grabBotLeft)
         {
             this->r->setPosition(eke::Globals::MousePosition.x, eke::Globals::MousePosition.y - this->r->getSize().y);
+            instance->ReCalcHermites();
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabBotLeft = false;
-                instance->ReCalcHermites();
             }
         }
     }
@@ -195,10 +195,10 @@ namespace eke
             diff.x = eke::Globals::MousePosition.x - GetBotRightP().x;
             diff.y = eke::Globals::MousePosition.y - GetBotRightP().y;
             this->r->setSize(sf::Vector2f(this->r->getSize().x + diff.x, this->r->getSize().y + diff.y));
+            instance->ReCalcHermites();
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabBotRight = false;
-                instance->ReCalcHermites();
             }
         }
     }

@@ -18,9 +18,11 @@
 #include "Primitives/Ellipse.h"
 #include "Primitives/Hermite2Arc.h"
 #include "Primitives/Line.h"
+#include "Primitives/Matrix4.h"
 #include "Primitives/Pixel.h"
 #include "Primitives/Polygon.h"
 #include "Primitives/Rectangle.h"
+#include "Primitives/Vector4.h"
 
 // UI elements
 #include "UI/Button.h"
