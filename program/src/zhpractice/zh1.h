@@ -16,10 +16,12 @@ namespace eke
     {
     public:
         std::vector<MyRect *> rectvec;
+        std::vector<Hermite2Arc *> hermites;
 
     public:
         void Update();
         void Draw();
+        void ReCalcHermites();
 
     public:
         zh1();
@@ -28,7 +30,7 @@ namespace eke
     private:
         bool isgrabbed;
         void CreateSetRect();
-        void ClearRecVec();
+        void Clear();
     };
 }
 

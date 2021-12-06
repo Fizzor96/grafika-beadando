@@ -31,8 +31,20 @@ namespace eke
         this->weight = weight;
     }
 
+    Hermite2Arc::Hermite2Arc(const sf::Color &color, const Hermite &arc, int n)
+    {
+        this->curve = new eke::Curve2(
+            color,
+            [&arc](double t)
+            { return eke::Hermite::H0(t) * arc.p0.x + eke::Hermite::H1(t) * arc.p1.x + eke::Hermite::H2(t) * arc.q0.x + eke::Hermite::H3(t) * arc.q1.x; },
+            [&arc](double t)
+            { return eke::Hermite::H0(t) * arc.p0.y + eke::Hermite::H1(t) * arc.p1.y + eke::Hermite::H2(t) * arc.q0.y + eke::Hermite::H3(t) * arc.q1.y; },
+            0, 1, n);
+    }
+
     Hermite2Arc::Hermite2Arc(const sf::Color &color, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n)
     {
+        // Usage:
         // sf::Vector2f p0(200, 300);
         // sf::Vector2f q0(400, 50);
         // sf::Vector2f p1(500, 250);
@@ -50,14 +62,27 @@ namespace eke
             0, 1, n);
     }
 
-    Hermite2Arc::Hermite2Arc(const sf::Color &color, const Hermite &arc, int n)
+    Hermite2Arc::Hermite2Arc(const sf::Color &begincolor, const sf::Color &endcolor, const Hermite &arc, int n)
     {
         this->curve = new eke::Curve2(
-            color,
+            begincolor,
+            endcolor,
             [&arc](double t)
             { return eke::Hermite::H0(t) * arc.p0.x + eke::Hermite::H1(t) * arc.p1.x + eke::Hermite::H2(t) * arc.q0.x + eke::Hermite::H3(t) * arc.q1.x; },
             [&arc](double t)
             { return eke::Hermite::H0(t) * arc.p0.y + eke::Hermite::H1(t) * arc.p1.y + eke::Hermite::H2(t) * arc.q0.y + eke::Hermite::H3(t) * arc.q1.y; },
+            0, 1, n);
+    }
+
+    Hermite2Arc::Hermite2Arc(const sf::Color &begincolor, const sf::Color &endcolor, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n)
+    {
+        this->curve = new eke::Curve2(
+            begincolor,
+            endcolor,
+            [&p0, &p1, &q0, &q1](double t)
+            { return eke::Hermite::H0(t) * p0.x + eke::Hermite::H1(t) * p1.x + eke::Hermite::H2(t) * q0.x + eke::Hermite::H3(t) * q1.x; },
+            [&p0, &p1, &q0, &q1](double t)
+            { return eke::Hermite::H0(t) * p0.y + eke::Hermite::H1(t) * p1.y + eke::Hermite::H2(t) * q0.y + eke::Hermite::H3(t) * q1.y; },
             0, 1, n);
     }
 

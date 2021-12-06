@@ -28,8 +28,11 @@ namespace eke
         Curve2 *curve;
 
     public:
-        Hermite2Arc(const sf::Color &color, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n = 255);
         Hermite2Arc(const sf::Color &color, const Hermite &arc, int n = 255);
+        Hermite2Arc(const sf::Color &color, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n = 255);
+        Hermite2Arc(const sf::Color &begincolor, const sf::Color &endcolor, const Hermite &arc, int n = 255);
+        Hermite2Arc(const sf::Color &begincolor, const sf::Color &endcolor, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n = 255);
+
         ~Hermite2Arc();
         void Draw();
     };

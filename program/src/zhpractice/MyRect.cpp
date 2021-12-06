@@ -4,6 +4,8 @@ namespace eke
 {
     MyRect::MyRect(const sf::Vector2f &size, const sf::Color &color)
     {
+        this->instance = nullptr;
+
         this->grabBotLeft = false;
         this->grabBotRight = false;
         this->grabTopLeft = false;
@@ -88,6 +90,11 @@ namespace eke
         return this->r->getSize();
     }
 
+    sf::Color MyRect::GetColor() const
+    {
+        return this->r->getFillColor();
+    }
+
     sf::Vector2f MyRect::GetTopLeftP()
     {
         return this->r->getPosition();
@@ -120,6 +127,7 @@ namespace eke
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabTopLeft = false;
+                instance->ReCalcHermites();
             }
         }
     }
@@ -136,6 +144,7 @@ namespace eke
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabTopRight = false;
+                instance->ReCalcHermites();
             }
         }
     }
@@ -152,6 +161,7 @@ namespace eke
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabBotRight = false;
+                instance->ReCalcHermites();
             }
         }
     }
@@ -168,6 +178,7 @@ namespace eke
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabBotLeft = false;
+                instance->ReCalcHermites();
             }
         }
     }
@@ -187,6 +198,7 @@ namespace eke
             if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 this->grabBotRight = false;
+                instance->ReCalcHermites();
             }
         }
     }
