@@ -13,9 +13,10 @@
 #include "Objects/Fire.h"
 
 // Primitives
+#include "Primitives/Bezier2Arc.h"
 #include "Primitives/Curve2.h"
 #include "Primitives/Ellipse.h"
-#include "Primitives/Hermite2.h"
+#include "Primitives/Hermite2Arc.h"
 #include "Primitives/Line.h"
 #include "Primitives/Pixel.h"
 #include "Primitives/Polygon.h"
@@ -30,6 +31,7 @@
 #include "UI/Textfield.h"
 
 // Algorithms
+#include "Algo/Binomial.h"
 #include "Algo/Clip.h"
 
 #endif

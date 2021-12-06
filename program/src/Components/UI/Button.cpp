@@ -261,6 +261,6 @@ namespace eke
 
     sf::FloatRect Button::GetGlobalBounds() const
     {
-        return sf::FloatRect(0, 0, 0, 0);
+        return this->sprite->getGlobalBounds();
     }
 }

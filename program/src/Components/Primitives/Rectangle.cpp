@@ -19,6 +19,10 @@ namespace eke
         this->lines.push_back(new eke::Line(this->lines[0]->GetEndPos(), sf::Vector2f(this->lines[0]->GetEndPos().x, this->lines[0]->GetEndPos().y + size.y), color));
         this->lines.push_back(new eke::Line(this->lines[1]->GetEndPos(), sf::Vector2f(this->lines[1]->GetEndPos().x - size.x, this->lines[1]->GetEndPos().y), color));
         this->lines.push_back(new eke::Line(this->lines[2]->GetEndPos(), sf::Vector2f(this->lines[0]->GetBeginPos()), color));
+        for (size_t i = 0; i < this->lines.size(); i++)
+        {
+            this->lines[i]->SetColor(color, color);
+        }
     }
 
     Rectangle::Rectangle(const float &width, const float &height, const float &centerx, const float &centery, const sf::Color &color)
@@ -36,6 +40,10 @@ namespace eke
         this->lines.push_back(new eke::Line(this->lines[0]->GetEndPos(), sf::Vector2f(this->lines[0]->GetEndPos().x, this->lines[0]->GetEndPos().y + height), color));
         this->lines.push_back(new eke::Line(this->lines[1]->GetEndPos(), sf::Vector2f(this->lines[1]->GetEndPos().x - width, this->lines[1]->GetEndPos().y), color));
         this->lines.push_back(new eke::Line(this->lines[2]->GetEndPos(), sf::Vector2f(this->lines[0]->GetBeginPos()), color));
+        for (size_t i = 0; i < this->lines.size(); i++)
+        {
+            this->lines[i]->SetColor(color, color);
+        }
     }
 
     Rectangle::~Rectangle()

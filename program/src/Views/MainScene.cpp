@@ -6,24 +6,30 @@ namespace eke
 
     void MainScene::GenEntities()
     {
-        auto rnd = rand() % 2;
+        int rnd = rand() % 2;
         if (rnd == 0)
         {
+            const int radius = 30;
+            const int minradius = 20;
             this->entities.push_back(new Ellipse(
-                rand() % 30 + 18,
-                rand() % 30 + 18,
-                rand() % (int)eke::Globals::RenderWindow->getView().getSize().x,
-                rand() % (int)eke::Globals::RenderWindow->getView().getSize().y + this->buttons[0]->GetGlobalBounds().height + 48 * 2,
-                sf::Color::Yellow));
+                rand() % radius + minradius,
+                rand() % radius + minradius,
+                rand() % ((int)eke::Globals::RenderWindow->getView().getSize().x - (radius + minradius) * 2) + (radius + minradius),
+                rand() % ((int)eke::Globals::RenderWindow->getView().getSize().y - (radius + minradius) * 2 - (int)this->rectangles[0]->getGlobalBounds().height) + (this->rectangles[0]->getGlobalBounds().height + (radius + minradius)),
+                sf::Color(rand() % 255, rand() % 255, rand() % 255, 255)));
         }
         else
         {
+            const int width = 60;
+            const int minwidth = 30;
+            const int height = 60;
+            const int minheight = 30;
             this->entities.push_back(new eke::Rectangle(
-                rand() % 60 + 30,
-                rand() % 60 + 30,
-                rand() % (int)eke::Globals::RenderWindow->getView().getSize().x,
-                rand() % (int)eke::Globals::RenderWindow->getView().getSize().y + this->buttons[0]->GetGlobalBounds().height + 120,
-                sf::Color::Green));
+                rand() % width + minwidth,
+                rand() % height + minheight,
+                rand() % ((int)eke::Globals::RenderWindow->getView().getSize().x - (width + minwidth)) + (width + minwidth) / 2,
+                rand() % ((int)eke::Globals::RenderWindow->getView().getSize().y - (height + minheight) - (int)this->rectangles[0]->getGlobalBounds().height) + (this->rectangles[0]->getGlobalBounds().height + (height + minheight) / 2),
+                sf::Color(rand() % 255, rand() % 255, rand() % 255, 255)));
         }
     }
 
@@ -33,9 +39,13 @@ namespace eke
         this->score = 0;
         this->isplaying = false;
 
-        this->generatetimer = new eke::Timer(0.3f, true);
+        this->generatetimer = new eke::Timer(0.5f, true);
         this->generatetimer->SetExpiredCallback(new std::function<void()>([this]()
-                                                                          { this->GenEntities(); }));
+                                                                          {
+                                                                              if (this->entities.size() < 50)
+                                                                              {
+                                                                                  this->GenEntities();
+                                                                              } }));
 
         this->gametimer = new eke::Timer(60.f, false);
         this->gametimer->SetExpiredCallback(new std::function<void()>([this]()
@@ -128,6 +138,9 @@ namespace eke
         {
             this->buttons[i]->Draw();
         }
+
+        this->cr->Draw();
+
         for (size_t i = 0; i < this->entities.size(); i++)
         {
             for (size_t j = 0; j < this->entities[i]->lines.size(); j++)
@@ -135,10 +148,14 @@ namespace eke
                 eke::Clip::CohenShutter(cr->GetGlobalBounds(), *this->entities[i]->lines[j]);
             }
         }
+
+        // for (size_t i = 0; i < this->entities.size(); i++)
+        // {
+        //     this->entities[i]->Draw();
+        // }
+
         this->scorelbl->Draw();
         this->timerlbl->Draw();
-
-        this->cr->Draw();
     }
 
     MainScene::MainScene()

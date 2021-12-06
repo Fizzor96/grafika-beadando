@@ -1,4 +1,4 @@
-#include "Hermite2.h"
+#include "Hermite2Arc.h"
 
 namespace eke
 {
@@ -31,7 +31,7 @@ namespace eke
         this->weight = weight;
     }
 
-    Hermite2::Hermite2(const sf::Color &color, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n)
+    Hermite2Arc::Hermite2Arc(const sf::Color &color, const sf::Vector2f &p0, const sf::Vector2f &p1, const sf::Vector2f &q0, const sf::Vector2f &q1, int n)
     {
         // sf::Vector2f p0(200, 300);
         // sf::Vector2f q0(400, 50);
@@ -50,7 +50,7 @@ namespace eke
             0, 1, n);
     }
 
-    Hermite2::Hermite2(const sf::Color &color, const Hermite &arc, int n)
+    Hermite2Arc::Hermite2Arc(const sf::Color &color, const Hermite &arc, int n)
     {
         this->curve = new eke::Curve2(
             color,
@@ -61,12 +61,12 @@ namespace eke
             0, 1, n);
     }
 
-    Hermite2::~Hermite2()
+    Hermite2Arc::~Hermite2Arc()
     {
         delete curve;
     }
 
-    void Hermite2::Draw()
+    void Hermite2Arc::Draw()
     {
         this->curve->Draw();
     }
