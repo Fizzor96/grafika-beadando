@@ -123,7 +123,7 @@ namespace eke
     {
         if (this->vectorsize < this->positions.size())
         {
-            std::cout << this->positions[this->positions.size() - 1].x << " " << this->positions[this->positions.size() - 1].y << " " << this->positions.size() << std::endl;
+            // std::cout << this->positions[this->positions.size() - 1].x << " " << this->positions[this->positions.size() - 1].y << " " << this->positions.size() << std::endl;
 
             // Set stored size
             this->vectorsize = this->positions.size();
@@ -172,7 +172,7 @@ namespace eke
 
         if (this->vectorsize < vectors.size())
         {
-            std::cout << vectors[vectors.size() - 1].x << " " << vectors[vectors.size() - 1].y << " " << vectors.size() << std::endl;
+            // std::cout << vectors[vectors.size() - 1].x << " " << vectors[vectors.size() - 1].y << " " << vectors.size() << std::endl;
 
             // Set stored size
             this->vectorsize = vectors.size();

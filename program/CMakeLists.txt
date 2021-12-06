@@ -26,6 +26,10 @@ file(GLOB App_SRC
 		"src/Controllers/*.cpp"
 		"src/Views/*.h"
 		"src/Views/*.cpp"
+		"src/zh/*.h"
+		"src/zh/*.cpp"
+		"src/zhpractice/*.h"
+		"src/zhpractice/*.cpp"
 		)
 
 IF (WIN32 AND MINGW)
@@ -39,6 +43,8 @@ IF (WIN32 AND MINGW)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Components)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Views)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Controllers)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/zh)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/zhpractice)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ELSE()
 	add_compile_options(-O3 -g -Wall)
@@ -50,5 +56,7 @@ ELSE()
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Components)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Views)
 	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/Controllers)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/zh)
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src/zhpractice)
 	target_link_libraries(${CMAKE_PROJECT_NAME} sfml-graphics sfml-system sfml-audio sfml-window)
 ENDIF()

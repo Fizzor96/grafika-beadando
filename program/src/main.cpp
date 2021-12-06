@@ -8,8 +8,8 @@ using namespace std;
 int main()
 {
     eke::Globals::Init();
-    eke::Controller::Init();
-    // eke::Bezier2Arc *bez = new eke::Bezier2Arc(sf::Color::Yellow);
+    eke::zh1 *zh1 = new eke::zh1();
+    // eke::Controller::Init();
 
     while (eke::Globals::RenderWindow->isOpen())
     {
@@ -18,17 +18,16 @@ int main()
         while (eke::Globals::RenderWindow->pollEvent(*eke::Globals::Event))
         {
             eke::Globals::PollEvents();
-            eke::Controller::PollEvents();
-            // bez->PollEvents();
+            // eke::Controller::PollEvents();
         }
 
         eke::Globals::Update();
-        eke::Controller::Update();
-        // bez->Update();
+        // eke::Controller::Update();
+        zh1->Update();
 
         eke::Globals::RenderWindow->clear(sf::Color(54, 49, 60, 255));
-        eke::Controller::Draw();
-        // bez->Draw();
+        // eke::Controller::Draw();
+        zh1->Draw();
 
         eke::Globals::RenderWindow->display();
     }

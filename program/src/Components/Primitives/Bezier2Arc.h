@@ -37,6 +37,7 @@ namespace eke
         std::vector<sf::Vector2f> positions;
 
     public:
+        // Use this ctor with noparam Update() and Draw()
         Bezier2Arc(const sf::Color &color);
         Bezier2Arc(const sf::Color &color, const Bezier &arc);
         Bezier2Arc(const sf::Color &color, const std::vector<sf::Vector2f> &vectors);
